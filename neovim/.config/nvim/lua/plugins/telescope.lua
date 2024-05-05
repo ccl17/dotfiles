@@ -144,6 +144,11 @@ return {
             'filename_first',
           },
         },
+        extensions = {
+          file_browser = {
+            hidden = { file_browser = true, folder_browser = true },
+          },
+        },
       })
 
       telescope.load_extension('fzf')
