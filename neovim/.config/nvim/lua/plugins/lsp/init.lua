@@ -41,5 +41,8 @@ return {
       },
     },
   },
-  config = function() require('plugins.lsp.lsp').setup() end,
+  config = function()
+    require('plugins.lsp.lsp').setup()
+    require('lspconfig').solargraph.setup(require('plugins.lsp.servers')('solargraph'))
+  end,
 }
