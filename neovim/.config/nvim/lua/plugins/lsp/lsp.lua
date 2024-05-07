@@ -57,8 +57,6 @@ local function next_diagnostic(lvl)
   return function() diagnostic.goto_next({ float = false, severity = { min = lvl } }) end
 end
 
--- TODO: compare with telescope.builtin functions, example:
--- noremap("n", "gd", require("telescope.builtin").lsp_definitions, "definition", { silent = true })
 local function setup_mappings(client, bufnr)
   local t = require('telescope.builtin')
 
