@@ -25,9 +25,14 @@ return {
         'yaml',
       },
       auto_install = true,
+      -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1501
+      indent = {
+        enable = true,
+        disable = { 'ruby' },
+      },
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = false,
+        additional_vim_regex_highlighting = { 'ruby' },
       },
       incremental_selection = {
         enable = true,
@@ -39,7 +44,6 @@ return {
         },
       },
       endwise = { enabled = true },
-      indent = { enable = true },
       autopair = { enable = true },
       textobjects = {
         select = {
