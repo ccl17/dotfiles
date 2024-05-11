@@ -1,2 +1,12 @@
+# neovim
 neovim/.config/nvim/lazy-lock.json
+
+# starship
+starship/.config/starship/cache
+
+# tmux
 tmux/.config/tmux/plugins/
+
+# zsh
+zsh/.config/zsh/plugins/
+zsh/.config/zsh/.zsh_history
