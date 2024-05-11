@@ -1,5 +1,5 @@
 # environment
-export PATH=/opt/nvim-linux64/bin:/usr/local/go/bin:$HOME/go/bin:$PATH
+export PATH=$HOME/.local/bin:/opt/nvim-linux64/bin:/usr/local/go/bin:$HOME/go/bin:$PATH
 
 # text editor
 export EDITOR=nvim
