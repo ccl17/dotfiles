@@ -1,5 +1,5 @@
 # environment
-export PATH=$PATH
+export PATH=/opt/nvim-linux64/bin:/usr/local/go/bin:$HOME/go/bin:$PATH
 
 # text editor
 export EDITOR=nvim
@@ -27,3 +27,9 @@ source "$ZDOTDIR/plugins/catppuccin/zsh-syntax-highlighting/themes/catppuccin_mo
 
 # syntax highlighting
 source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# aliases
+alias vim=nvim
+
+# zoxide
+eval "$(zoxide init zsh)"

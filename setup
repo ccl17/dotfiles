@@ -4,9 +4,7 @@ mkdir "$HOME/.config/starship"
 
 ZSH_PLUGINS_DIR="$ZDOTDIR/plugins"
 
-mkdir -p $ZSH_PLUGINS
-
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_PLUGINS_DIR}/zsh-autosuggestions
+mkdir -p $ZSH_PLUGINS_DIR
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_PLUGINS_DIR}/zsh-autosuggestions
 
@@ -15,3 +13,5 @@ git clone https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_PLUGINS_DI
 git clone https://github.com/catppuccin/zsh-syntax-highlighting.git ${ZSH_PLUGINS_DIR}/catppuccin/zsh-syntax-highlighting
 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_PLUGINS_DIR}/zsh-syntax-highlighting
+
+stow neovim starship tmux zsh -t $HOME
