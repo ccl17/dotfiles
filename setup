@@ -14,4 +14,6 @@ git clone https://github.com/catppuccin/zsh-syntax-highlighting.git ${ZSH_PLUGIN
 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_PLUGINS_DIR}/zsh-syntax-highlighting
 
+chmod +x $ZDOTDIR/scripts/fzf_preview.sh
+
 stow neovim starship tmux zsh -t $HOME

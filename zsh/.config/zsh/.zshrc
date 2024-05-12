@@ -17,16 +17,23 @@ source "$ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$ZDOTDIR/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
 # case insensitive matching
+autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
 
 # syntax highlighting colortheme
 source "$ZDOTDIR/plugins/catppuccin/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 
-# syntax highlighting
-source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
 # aliases
 alias vim=nvim
+alias ff="fzf --preview '$ZDOTDIR/scripts/fzf_preview.sh {}'"
+
+# git
+alias ga="git add"
+alias gb="git branch"
+alias gcm="git commit -m"
+alias gco="git checkout"
+alias gp="git push"
+alias gst="git status"
 
 # ZSH only and most performant way to check existence of an executable
 # https://www.topbug.net/blog/2016/10/11/speed-test-check-the-existence-of-a-command-in-bash-and-zsh/
@@ -63,3 +70,7 @@ if exists pyenv; then
   [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
 fi
+
+# syntax highlighting
+# needs to be sourced last
+source "$ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
