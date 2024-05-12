@@ -57,6 +57,7 @@ if exists nvm; then
   [ -s "NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # this load nvm bash completion
 fi
 
+# pyenv
 if exists pyenv; then
   export PYENV_ROOT="$HOME/.pyenv"
   [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
