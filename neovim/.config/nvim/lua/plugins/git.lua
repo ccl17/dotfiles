@@ -38,6 +38,12 @@ return {
             numhl = 'GitSignsChangeNr',
             linehl = 'GitSignsChangeLn',
           },
+          untracked = {
+            hl = 'GitSignsChange',
+            text = icons.separators.right_thin_block,
+            numhl = 'GitSignsChangeNr',
+            linehl = 'GitSignsChangeLn',
+          },
         },
         signcolumn = true,
         numhl = false,
@@ -81,5 +87,20 @@ return {
     'sindrets/diffview.nvim',
     event = 'VeryLazy',
     cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles' },
+    keys = {
+      { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'diffview open', mode = 'n' },
+    },
+    opts = {
+      keymaps = {
+        view = { q = '<cmd>DiffviewClose<cr>' },
+        file_panel = { q = '<cmd>DiffviewClose<cr>' },
+        file_history_panel = { q = '<cmd>DiffviewClose<cr>' },
+      },
+    },
+  },
+  {
+    'akinsho/git-conflict.nvim',
+    version = '*',
+    config = true,
   },
 }
