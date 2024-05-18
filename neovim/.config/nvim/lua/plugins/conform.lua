@@ -32,6 +32,7 @@ return {
             'rubocop',
             '-f',
             'quiet',
+            '--auto-correct',
             '--fix-layout',
             '--stderr',
             '--stdin',
