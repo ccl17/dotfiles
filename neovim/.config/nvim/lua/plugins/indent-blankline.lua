@@ -1,9 +1,12 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
-  version = '2.20.8',
+  version = 'v3.5.4',
+  main = 'ibl',
   event = { 'BufReadPost', 'BufNewFile' },
   opts = {
-    char_list = { '|', '¦', '┆', '┊' },
+    indent = {
+      char = { '|', '¦', '┆', '┊' },
+    },
     scope = { enabled = false },
   },
 }
