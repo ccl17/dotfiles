@@ -1,3 +1,4 @@
+local fn = vim.fn
 local f = require('util/functions')
 local noremap, toggle_autoformat = f.noremap, f.toggle_autoformat
 
@@ -5,7 +6,8 @@ local noremap, toggle_autoformat = f.noremap, f.toggle_autoformat
 noremap('n', '<tab>', ':bn<cr>', 'next buffer')
 noremap('n', '<s-tab>', ':bp<cr>', 'prev buffer')
 noremap('n', '<leader>bD', '<cmd>%bd|e#|bd#<cr>', 'close all but the current buffer')
-noremap('n', '<leader>rp', "<cmd>:let @+ = expand('%')<cr>", 'copy buffer file path')
+-- noremap('n', '<leader>rp', "<cmd>:let @+ = expand('%')<cr>", 'copy buffer file path')
+noremap('n', '<leader>rp', function() fn.setreg('+', fn.expand('%')) end, 'copy buffer file path')
 
 -- json pretty print
 noremap('n', '<leader>j', ':%!jq .<cr>', 'jq format')
