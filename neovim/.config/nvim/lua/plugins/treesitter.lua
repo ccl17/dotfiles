@@ -21,6 +21,7 @@ return {
         'ruby',
         'scss',
         'terraform',
+        'textproto',
         'vue',
         'yaml',
       },
