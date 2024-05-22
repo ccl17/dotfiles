@@ -107,3 +107,6 @@ opt.splitright = true
 
 -- clipboard
 opt.clipboard = 'unnamedplus'
+
+-- don't announce modes
+opt.showmode = false
