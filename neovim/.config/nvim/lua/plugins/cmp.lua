@@ -4,7 +4,7 @@ return {
   event = 'InsertEnter',
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
-    { 'L3MON4D3/LuaSnip' },
+    { 'L3MON4D3/LuaSnip', version = 'v2.*', build = 'make install_jsregexp' },
     { 'saadparwaiz1/cmp_luasnip' },
 
     -- Adds LSP completion capabilities
@@ -38,11 +38,22 @@ return {
       mapping = cmp.mapping.preset.insert({
         ['<c-b>'] = cmp.mapping.scroll_docs(-4),
         ['<c-f>'] = cmp.mapping.scroll_docs(4),
-        ['<c-space>'] = cmp.mapping.complete({}),
-        ['<cr>'] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        }),
+        ['<c-c>'] = cmp.mapping.complete({}),
+        ['<c-e>'] = cmp.mapping.abort(),
+        ['<cr>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            if luasnip.expandable() then
+              luasnip.expand()
+            else
+              cmp.confirm({
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = true,
+              })
+            end
+          else
+            fallback()
+          end
+        end),
         ['<tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -63,18 +74,14 @@ return {
         end, { 'i', 's' }),
       }),
       sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path' },
-        { name = 'treesitter' },
+        { name = 'nvim_lsp', group_index = 1 },
+        { name = 'luasnip', group_index = 1 },
+        { name = 'buffer', group_index = 2 },
+        { name = 'treesitter', group_index = 2 },
+        { name = 'path', group_index = 3 },
       },
       formatting = {
-        format = function(entry, vim_item)
-          local lspkind = require('lspkind')
-          -- From lspkind
-          return lspkind.cmp_format()(entry, vim_item)
-        end,
+        format = require('lspkind').cmp_format(),
       },
       experimental = {
         ghost_text = true,
