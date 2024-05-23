@@ -19,7 +19,6 @@ return {
     { 'onsails/lspkind.nvim' },
 
     { 'windwp/nvim-autopairs', event = 'InsertEnter', opts = {} },
-    { 'abecodes/tabout.nvim', event = 'InsertCharPre' },
   },
   config = function()
     local cmp = require('cmp')
@@ -103,7 +102,5 @@ return {
         { name = 'buffer' },
       },
     })
-
-    require('tabout').setup({ completion = false })
   end,
 }
