@@ -1,4 +1,4 @@
-local f = require('util/functions')
+local f = require('util.functions')
 local api = vim.api
 
 return {

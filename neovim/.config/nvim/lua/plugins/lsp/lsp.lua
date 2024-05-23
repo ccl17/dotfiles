@@ -1,5 +1,5 @@
 local lsp, fn, diagnostic = vim.lsp, vim.fn, vim.diagnostic
-local f, icons = require('util/functions'), require('util/icons')
+local f, icons = require('util.functions'), require('util.icons')
 local augroup, noremap = f.augroup, f.noremap
 
 local provider = {

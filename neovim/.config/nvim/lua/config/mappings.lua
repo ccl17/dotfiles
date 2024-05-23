@@ -1,5 +1,5 @@
 local fn = vim.fn
-local f = require('util/functions')
+local f = require('util.functions')
 local noremap, toggle_autoformat = f.noremap, f.toggle_autoformat
 
 -- buffers

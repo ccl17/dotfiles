@@ -1,4 +1,4 @@
-local f = require('util/functions')
+local f = require('util.functions')
 local autoformat_enabled = f.autoformat_enabled
 local slow_formatters_filetypes = {}
 

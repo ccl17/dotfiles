@@ -1,4 +1,4 @@
-local f = require('util/functions')
+local f = require('util.functions')
 local augroup = f.augroup
 
 augroup('TextYankHighlight', {

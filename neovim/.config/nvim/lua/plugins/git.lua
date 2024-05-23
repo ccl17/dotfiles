@@ -1,5 +1,5 @@
-local f = require('util/functions')
-local icons = require('util/icons')
+local f = require('util.functions')
+local icons = require('util.icons')
 
 return {
   {
