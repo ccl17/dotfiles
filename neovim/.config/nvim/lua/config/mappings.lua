@@ -19,8 +19,8 @@ noremap('n', '<esc><esc>', ':nohlsearch<cr>', 'remove highlighting', { silent = 
 noremap('n', 'Q', '<nop>', '')
 
 -- move blocks
-noremap('v', 'J', ":m '>+1<CR>gv=gv", 'move block up')
-noremap('v', 'K', ":m '<-2<CR>gv=gv", 'move block down')
+noremap('x', 'J', ":m '>+1<CR>gv=gv", 'move block up')
+noremap('x', 'K', ":m '<-2<CR>gv=gv", 'move block down')
 
 -- focus scrolling
 noremap('n', '<C-d>', '<C-d>zz', 'scroll down')
