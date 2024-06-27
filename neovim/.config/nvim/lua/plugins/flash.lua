@@ -3,18 +3,21 @@ return {
   keys = {
     {
       's',
-      function() require('flash').jump() end,
       mode = { 'n', 'x', 'o' },
+      function() require('flash').jump() end,
       desc = 'Flash',
     },
     {
       'S',
-      function() require('flash').treesitter() end,
       mode = { 'n', 'x', 'o' },
+      function() require('flash').treesitter() end,
       desc = 'Flash Treesitter',
     },
-  },
-  opts = {
-    jump = { nohlsearch = true },
+    {
+      'r',
+      mode = 'o',
+      function() require('flash').remote() end,
+      desc = 'Remote Flash',
+    },
   },
 }
