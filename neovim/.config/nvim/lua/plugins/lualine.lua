@@ -40,6 +40,7 @@ return {
         { autoformat_enabled, padding = 1 },
         { 'fancy_lsp_servers', icon = '󰆧' },
         { 'progress' },
+        { 'fancy_location' },
       },
       lualine_y = {},
       lualine_z = {},
