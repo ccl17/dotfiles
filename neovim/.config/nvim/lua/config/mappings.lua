@@ -31,11 +31,11 @@ noremap('n', 'n', 'nzzzv', 'next match')
 noremap('n', 'N', 'Nzzzv', 'prev match')
 
 -- Paste without yanking
-noremap('v', 'p', '"_dP')
+noremap('x', 'p', '"_dP')
 
 -- Indent visual blocks
-noremap('v', '<', '<gv')
-noremap('v', '>', '>gv')
+noremap('x', '<', '<gv')
+noremap('x', '>', '>gv')
 
 -- Zero should go to the first non-blank character not to the first column (which could be blank)
 -- but if already at the first character then jump to the beginning
