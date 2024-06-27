@@ -23,7 +23,7 @@ return {
       go = { 'golangcilint' },
       javascript = { 'eslintd' },
       ruby = { 'rubocop' },
-      vue = { 'eslintd' },
+      vue = { 'eslint_d' },
     }
     f.augroup('Linter', {
       event = { 'BufEnter', 'TextChanged', 'TextChangedI' },
