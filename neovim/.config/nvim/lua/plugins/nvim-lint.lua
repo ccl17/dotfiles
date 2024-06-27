@@ -21,7 +21,7 @@ return {
     })
     require('lint').linters_by_ft = {
       go = { 'golangcilint' },
-      javascript = { 'eslintd' },
+      javascript = { 'eslint_d' },
       ruby = { 'rubocop' },
       vue = { 'eslint_d' },
     }
