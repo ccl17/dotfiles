@@ -70,7 +70,6 @@ return {
             '%.jar',
             '%.jpeg',
             '%.jpg',
-            '%.lock',
             '%.mkv',
             '%.mov',
             '%.mp4',
@@ -140,9 +139,6 @@ return {
             -- find a way to cancel without throwing error
             return window_id or 0
           end,
-          path_display = {
-            'filename_first',
-          },
         },
         extensions = {
           file_browser = {
