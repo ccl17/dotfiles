@@ -18,6 +18,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
       -- adapters
       'olimorris/neotest-rspec',
+      'nvim-neotest/neotest-go',
     },
     keys = {
       { '<leader>ts', toggle_summary, desc = 'neotest: toggle summary' },
@@ -33,6 +34,7 @@ return {
       require('neotest').setup({
         adapters = {
           require('neotest-rspec'),
+          require('neotest-go'),
         },
       })
     end,
