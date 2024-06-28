@@ -94,7 +94,6 @@ return {
             CursorLineNr = { fg = colors.red },
             FloatBorder = { bg = colors.base, fg = colors.surface0 },
             FlashLabel = { fg = colors.subtext1, bg = colors.surface2, style = { 'bold', 'italic' } },
-            GitSignsChange = { fg = colors.peach },
             LineNr = { fg = colors.overlay0 },
             LspInfoBorder = { link = 'FloatBorder' },
             NeoTreeDirectoryIcon = { fg = colors.subtext1 },

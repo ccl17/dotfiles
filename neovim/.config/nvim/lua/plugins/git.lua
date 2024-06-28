@@ -8,42 +8,12 @@ return {
     config = function()
       require('gitsigns').setup({
         signs = {
-          add = {
-            hl = 'GitSignsAdd',
-            text = icons.separators.right_thin_block,
-            numhl = 'GitSignsAddNr',
-            linehl = 'GitSignsAddLn',
-          },
-          change = {
-            hl = 'GitSignsChange',
-            text = icons.separators.right_thin_block,
-            numhl = 'GitSignsChangeNr',
-            linehl = 'GitSignsChangeLn',
-          },
-          delete = {
-            hl = 'GitSignsDelete',
-            text = icons.separators.right_thin_block,
-            numhl = 'GitSignsDeleteNr',
-            linehl = 'GitSignsDeleteLn',
-          },
-          topdelete = {
-            hl = 'GitSignsDelete',
-            text = icons.separators.right_thin_block,
-            numhl = 'GitSignsDeleteNr',
-            linehl = 'GitSignsDeleteLn',
-          },
-          changedelete = {
-            hl = 'GitSignsChange',
-            text = icons.separators.right_thin_block,
-            numhl = 'GitSignsChangeNr',
-            linehl = 'GitSignsChangeLn',
-          },
-          untracked = {
-            hl = 'GitSignsChange',
-            text = icons.separators.right_thin_block,
-            numhl = 'GitSignsChangeNr',
-            linehl = 'GitSignsChangeLn',
-          },
+          add = { text = icons.separators.right_thin_block },
+          change = { text = icons.separators.right_thin_block },
+          delete = { text = icons.separators.right_thin_block },
+          topdelete = { text = icons.separators.right_thin_block },
+          changedelete = { text = icons.separators.right_thin_block },
+          untracked = { text = icons.separators.right_thin_block },
         },
         signcolumn = true,
         numhl = false,
@@ -73,8 +43,6 @@ return {
           row = 0,
           col = 1,
         },
-        yadm = { enable = false },
-
         on_attach = function(bufnr)
           f.noremap('n', '<leader>H', require('gitsigns').preview_hunk, 'Preview git hunk', { buffer = bufnr })
           f.noremap('n', ']h', require('gitsigns').next_hunk, 'Next git hunk', { buffer = bufnr })
