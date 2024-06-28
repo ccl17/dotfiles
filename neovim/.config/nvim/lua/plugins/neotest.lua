@@ -19,6 +19,7 @@ return {
       -- adapters
       'olimorris/neotest-rspec',
       'nvim-neotest/neotest-go',
+      'nvim-neotest/neotest-jest',
     },
     keys = {
       { '<leader>ts', toggle_summary, desc = 'neotest: toggle summary' },
@@ -35,6 +36,9 @@ return {
         adapters = {
           require('neotest-rspec'),
           require('neotest-go'),
+          require('neotest-jest')({
+            jestCommand = 'npm test',
+          }),
         },
       })
     end,
