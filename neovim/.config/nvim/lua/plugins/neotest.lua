@@ -1,5 +1,5 @@
 local function neotest() return require('neotest') end
-local function open() neotest().output.open({ enter = true, short = false }) end
+local function output() neotest().output_panel.toggle() end
 local function run_file() neotest().run.run(vim.fn.expand('%')) end
 local function run_file_sync() neotest().run.run({ vim.fn.expand('%'), concurrent = false }) end
 local function nearest() neotest().run.run() end
@@ -21,7 +21,7 @@ return {
     },
     keys = {
       { '<leader>ts', toggle_summary, desc = 'neotest: toggle summary' },
-      { '<leader>to', open, desc = 'neotest: output' },
+      { '<leader>to', output, desc = 'neotest: output' },
       { '<leader>tn', nearest, desc = 'neotest: run' },
       { '<leader>tf', run_file, desc = 'neotest: run file' },
       { '<leader>tF', run_file_sync, desc = 'neotest: run file synchronously' },
