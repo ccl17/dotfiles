@@ -55,6 +55,3 @@ noremap({ 'n', 'i', 'v' }, '<c-s>', '<cmd>w<cr><esc>', 'Save File')
 -- toggles
 noremap('n', '<leader>uf', function() toggle_autoformat() end, 'Toggle Auto Format (Global)')
 noremap('n', '<leader>uF', function() toggle_autoformat(true) end, 'Toggle Auto Format (Buffer)')
-
--- restore session
-noremap('n', '<leader>rr', function() require('persistence').load() end, 'restore previous session')
