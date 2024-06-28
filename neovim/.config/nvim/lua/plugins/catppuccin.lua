@@ -77,6 +77,7 @@ return {
         gitsigns = true,
         native_lsp = { enabled = true, inlay_hints = { background = true } },
         neogit = true,
+        neotest = true,
         semantic_tokens = true,
         telescope = {
           enabled = true,
