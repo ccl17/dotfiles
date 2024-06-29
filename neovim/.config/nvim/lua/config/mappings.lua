@@ -16,9 +16,6 @@ noremap('n', '<leader>j', ':%!jq .<cr>', 'jq format')
 -- remove highlighting
 noremap('n', '<esc><esc>', ':nohlsearch<cr>', 'remove highlighting', { silent = true })
 
--- the worst place in the universe
-noremap('n', 'Q', '<nop>', '')
-
 -- move blocks
 noremap('x', 'J', ":m '>+1<CR>gv=gv", 'move block up')
 noremap('x', 'K', ":m '<-2<CR>gv=gv", 'move block down')
