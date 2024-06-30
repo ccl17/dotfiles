@@ -14,11 +14,24 @@ opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup('plugins', {
   defaults = { lazy = true },
+  change_detection = {
+    enabled = true,
+    notify = false,
+  },
   performance = {
     rtp = {
-      disabled_plugins = { 'netrw', 'netrwPlugin' },
+      disabled_plugins = {
+        'gzip',
+        'matchit',
+        'matchparen',
+        'netrwPlugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+      },
     },
   },
 })
 
-vim.keymap.set('n', '<leader>pm', '<Cmd>Lazy<CR>', { desc = 'manage' })
+vim.keymap.set('n', '<leader>pm', '<cmd>Lazy<cr>', { desc = 'manage' })
