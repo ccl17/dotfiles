@@ -1,9 +1,12 @@
 return {
   'famiu/bufdelete.nvim',
   keys = {
-    '<c-w>',
-    '<cmd>Bdelete<cr>',
-    desc = 'close current buffer',
-    nowait = true,
+    {
+      '<c-w>',
+      function() require('bufdelete').bufdelete() end,
+      desc = 'close current buffer',
+      nowait = true,
+      remap = false,
+    },
   },
 }

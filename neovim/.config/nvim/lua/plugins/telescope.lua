@@ -4,7 +4,6 @@ return {
     event = 'VeryLazy',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-file-browser.nvim',
       { 'nvim-telescope/telescope-live-grep-args.nvim', version = '^1.0.0' },
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
@@ -12,7 +11,6 @@ return {
       -- files
       { '<leader>ff', '<cmd>Telescope find_files<cr>' },
       { '<leader>fb', '<cmd>Telescope buffers<cr>' },
-      { '<leader>fe', '<cmd>Telescope file_browser<cr>' },
       -- search
       { '<leader>sf', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>" },
       {
@@ -140,16 +138,10 @@ return {
             return window_id or 0
           end,
         },
-        extensions = {
-          file_browser = {
-            hidden = { file_browser = true, folder_browser = true },
-          },
-        },
       })
 
       telescope.load_extension('fzf')
       telescope.load_extension('live_grep_args')
-      telescope.load_extension('file_browser')
       telescope.load_extension('persisted')
     end,
   },
