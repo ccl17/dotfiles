@@ -102,9 +102,10 @@ local function setup_mappings(client, bufnr)
   }
 
   for _, m in ipairs(mappings) do
-    if not m.capability or (m.capability and client.server_capabilities[m.capability]) then
-      noremap(m[1], m[2], m[3], m[4], vim.tbl_deep_extend('force', { buffer = bufnr }, m[5] or {}))
-    end
+    -- if not m.capability or (m.capability and client.server_capabilities[m.capability]) then
+    --   noremap(m[1], m[2], m[3], m[4], vim.tbl_deep_extend('force', { buffer = bufnr }, m[5] or {}))
+    -- end
+    noremap(m[1], m[2], m[3], m[4], vim.tbl_deep_extend('force', { buffer = bufnr }, m[5] or {}))
   end
 end
 
