@@ -94,6 +94,7 @@ return {
           return {
             CmpItemMenu = { fg = colors.surface2 },
             CursorLineNr = { fg = colors.red },
+            DapStopped = { fg = colors.green },
             FloatBorder = { bg = colors.base, fg = colors.surface0 },
             FlashLabel = { fg = colors.subtext1, bg = colors.surface2, style = { 'bold', 'italic' } },
             LineNr = { fg = colors.overlay0 },

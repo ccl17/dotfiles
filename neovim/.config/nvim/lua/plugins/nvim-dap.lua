@@ -1,6 +1,5 @@
 return {
   'mfussenegger/nvim-dap',
-  lazy = false,
   keys = {
     {
       '<leader>db',
@@ -63,5 +62,19 @@ return {
     dap.listeners.after.event_initialized['dapui_config'] = ui.open
     dap.listeners.before.event_terminated['dapui_config'] = ui.close
     dap.listeners.before.event_exited['dapui_config'] = ui.close
+
+    local dap_signs = {
+      { 'DapBreakpoint', text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' },
+      { 'DapBreakpointCondition', text = '', texthl = 'DapBreakpointCondition', linehl = '', numhl = '' },
+      { 'DapLogPoint', text = '◆', texthl = 'DapLogPoint', linehl = '', numhl = '' },
+      { 'DapStopped', text = '', texthl = 'DapStopped', linehl = '', numhl = '' },
+    }
+
+    for _, signs in pairs(dap_signs) do
+      vim.fn.sign_define(
+        signs[1],
+        { text = signs.text or '', texthl = signs.texthl or '', linehl = signs.linehl or '', numhl = signs.numhl or '' }
+      )
+    end
   end,
 }
