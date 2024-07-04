@@ -2,30 +2,6 @@ local api, keymap = vim.api, vim.keymap
 
 local M = {}
 
-function M.augroup(name, ...)
-  local commands = { ... }
-  local id = api.nvim_create_augroup(name, { clear = true })
-  for _, autocmd in ipairs(commands) do
-    local is_callback = type(autocmd.command) == 'function'
-    api.nvim_create_autocmd(autocmd.event, {
-      group = name,
-      pattern = autocmd.pattern,
-      desc = autocmd.desc,
-      callback = is_callback and autocmd.command or nil,
-      command = not is_callback and autocmd.command or nil,
-      once = autocmd.once,
-      nested = autocmd.nested,
-      buffer = autocmd.buffer,
-    })
-  end
-  return id
-end
-
-function M.command(name, rhs, opts)
-  opts = opts or {}
-  api.nvim_create_user_command(name, rhs, opts)
-end
-
 function M.map(type, input, output, description, options)
   options = options or {}
   keymap.set(type, input, output, vim.tbl_deep_extend('force', { remap = true, desc = description }, options))

@@ -1,6 +1,3 @@
-local f = require('util.functions')
-local api = vim.api
-
 return {
   'mfussenegger/nvim-lint',
   event = 'BufReadPre',
@@ -16,7 +13,7 @@ return {
         'json',
         '--force-exclusion',
         '--stdin',
-        function() return api.nvim_buf_get_name(0) end,
+        function() return vim.api.nvim_buf_get_name(0) end,
       },
     })
     require('lint').linters_by_ft = {
@@ -25,9 +22,9 @@ return {
       ruby = { 'rubocop' },
       vue = { 'eslint_d' },
     }
-    f.augroup('Linter', {
-      event = { 'BufEnter', 'TextChanged', 'TextChangedI' },
-      command = function() require('lint').try_lint() end,
+    vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave' }, {
+      group = vim.api.nvim_create_augroup('NvimLint', { clear = true }),
+      callback = function() require('lint').try_lint() end,
     })
   end,
 }
