@@ -73,6 +73,8 @@ return {
       integration_default = false,
       integrations = {
         cmp = true,
+        dap = true,
+        dap_ui = true,
         flash = true,
         gitsigns = true,
         native_lsp = { enabled = true, inlay_hints = { background = true } },
