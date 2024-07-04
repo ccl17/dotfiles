@@ -64,10 +64,10 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = ui.close
 
     local dap_signs = {
-      { 'DapBreakpoint', text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' },
-      { 'DapBreakpointCondition', text = '', texthl = 'DapBreakpointCondition', linehl = '', numhl = '' },
+      { 'DapBreakpoint', text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' },
+      { 'DapBreakpointCondition', text = '', texthl = 'DapBreakpointCondition', linehl = '', numhl = '' },
       { 'DapLogPoint', text = '◆', texthl = 'DapLogPoint', linehl = '', numhl = '' },
-      { 'DapStopped', text = '', texthl = 'DapStopped', linehl = '', numhl = '' },
+      { 'DapStopped', text = '', texthl = 'DapStopped', linehl = '', numhl = '' },
     }
 
     for _, signs in pairs(dap_signs) do
