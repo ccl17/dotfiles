@@ -214,7 +214,7 @@ return {
 
       local ensure_installed = {}
       for server, _ in ipairs(servers) do
-        if vim.tbl_contains(all_mlsp_servers, server) then
+        if not vim.tbl_contains(all_mlsp_servers, server) then
           -- run manual setup if server is not installed via mason-lspconfig
           setup(server)
         else
