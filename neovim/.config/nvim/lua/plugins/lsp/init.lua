@@ -1,4 +1,4 @@
-local f, icons = require('util.functions'), require('util.icons')
+local icons = require('util.icons')
 
 local Lsp = {}
 
@@ -11,6 +11,59 @@ function Lsp.on_attach(on_attach)
       if client then return on_attach(client, buffer) end
     end,
   })
+end
+
+-- Hook to allow custom callbacks on dynamic capabilities
+---@param fn fun(client:vim.lsp.Client, buffer):boolean?
+---@param opts? {group?: integer}
+function Lsp.on_dynamic_capability(fn, opts)
+  return vim.api.nvim_create_autocmd('User', {
+    pattern = 'LspDynamicCapability',
+    group = opts and opts.group or nil,
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      local buffer = args.data.buffer
+      if client then return fn(client, buffer) end
+    end,
+  })
+end
+
+-- Hook to allow custom callbacks on support method
+function Lsp.on_supports_method(method, fn)
+  Lsp._supports_method[method] = Lsp._supports_method[method] or setmetatable({}, { __mode = 'k' })
+  return vim.api.nvim_create_autocmd('User', {
+    pattern = 'LspSupportsMethod',
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      local buffer = args.data.buffer
+      if client and method == args.data.method then return fn(client, buffer) end
+    end,
+  })
+end
+
+---@type table<string, table<vim.lsp.Client, table<number, boolean>>>
+Lsp._supports_method = {}
+
+-- executes LspSupportsMethod callback for all attached buffers of a client when a new method is supported
+function Lsp._check_methods(client, buffer)
+  -- don't trigger on invalid buffers
+  if not vim.api.nvim_buf_is_valid(buffer) then return end
+  -- don't trigger on non-listed buffers
+  if not vim.bo[buffer].buflisted then return end
+  -- don't trigger on nofile buffers
+  if vim.bo[buffer].buftype == 'nofile' then return end
+  for method, clients in pairs(Lsp._supports_method) do
+    clients[client] = clients[client] or {}
+    if not clients[client][buffer] then
+      if client.supports_method and client.supports_method(method, { bufnr = buffer }) then
+        clients[client][buffer] = true
+        vim.api.nvim_exec_autocmds('User', {
+          pattern = 'LspSupportsMethod',
+          data = { client_id = client.id, buffer = buffer, method = method },
+        })
+      end
+    end
+  end
 end
 
 function Lsp.document_highlight(_, buffer)
@@ -27,46 +80,86 @@ function Lsp.document_highlight(_, buffer)
   })
 end
 
-function Lsp.setup_keymaps(_, buffer)
-  local mappings = {
-    {
-      'n',
-      'gr',
-      vim.lsp.buf.references,
-      'goto references',
-      { silent = true },
-    },
-    {
-      'n',
-      'gd',
-      vim.lsp.buf.definition,
-      'goto definition',
-      { silent = true },
-    },
-    {
-      'n',
-      'gt',
-      vim.lsp.buf.type_definition,
-      'goto type definition',
-      { silent = true },
-    },
-    {
-      'n',
-      'gi',
-      vim.lsp.buf.implementation,
-      'goto implementations',
-      { silent = true },
-    },
-    { 'n', 'K', vim.lsp.buf.hover, 'hover', { silent = true } },
-    { 'n', 'ga', vim.lsp.buf.code_action, 'code action', { silent = true } },
-    { 'n', 'gs', vim.lsp.buf.signature_help, 'signature help', { silent = true } },
-    { 'n', '<leader>rn', ':IncRename', 'rename' },
-  }
+Lsp._keys = {
+  {
+    'n',
+    'gd',
+    vim.lsp.buf.definition,
+    { desc = 'goto definition', has = 'definition' },
+  },
+  {
+    'n',
+    'gr',
+    vim.lsp.buf.references,
+    { desc = 'goto references' },
+  },
+  {
+    'n',
+    'gt',
+    vim.lsp.buf.type_definition,
+    { desc = 'goto type definition' },
+  },
+  {
+    'n',
+    'gi',
+    vim.lsp.buf.implementation,
+    { desc = 'goto implementations' },
+  },
+  {
+    'n',
+    'gD',
+    vim.lsp.buf.declaration,
+    { desc = 'goto declaration' },
+  },
+  { 'n', 'K', vim.lsp.buf.hover, { desc = 'hover' } },
+  { 'n', 'gs', vim.lsp.buf.signature_help, { desc = 'signature help' } },
+  { 'n', 'ga', vim.lsp.buf.code_action, { desc = 'code action', has = 'codeAction' } },
+  { 'n', '<leader>rn', vim.lsp.buf.rename, { desc = 'rename', has = 'rename' } },
+}
 
-  for _, m in ipairs(mappings) do
-    -- migrate away from built-in
-    f.noremap(m[1], m[2], m[3], m[4], vim.tbl_deep_extend('force', { buffer = buffer }, m[5] or {}))
+---@param method string
+function Lsp.has(buffer, method)
+  method = method:find('/') and method or 'textDocument/' .. method
+  local clients = vim.lsp.get_clients({ bufnr = buffer })
+  for _, client in ipairs(clients) do
+    if client.supports_method(method) then return true end
   end
+end
+
+function Lsp.setup_keymaps(_, buffer)
+  for _, keys in ipairs(Lsp._keys) do
+    if not keys.has or Lsp.has(buffer, keys.has) then
+      local opts = keys[4]
+      opts.has = nil
+      opts.silent = opts.silent ~= false
+      opts.buffer = buffer
+      vim.keymap.set(keys[1], keys[2], keys[3], opts)
+    end
+  end
+end
+
+function Lsp.setup()
+  -- keymaps
+  Lsp.on_attach(Lsp.setup_keymaps)
+
+  -- handle dynamic capability with user event
+  local register_capability = vim.lsp.handlers['client/registerCapability']
+  vim.lsp.handlers['client/registerCapability'] = function(err, res, ctx)
+    local ret = register_capability(err, res, ctx)
+    local client = vim.lsp.get_client_by_id(ctx.client_id)
+    if client then
+      for buffer in ipairs(client.attached_buffers) do
+        vim.api.nvim_exec_autocmds('User', {
+          pattern = 'LspDynamicCapability',
+          data = { client_id = client.id, buffer = buffer },
+        })
+      end
+    end
+    return ret
+  end
+  Lsp.on_attach(Lsp._check_methods)
+  Lsp.on_dynamic_capability(Lsp._check_methods)
+  Lsp.on_dynamic_capability(Lsp.setup_keymaps)
 end
 
 return {
@@ -99,7 +192,7 @@ return {
       return {
         -- diagnostics
         ---@type vim.diagnostic.Opts
-        {
+        diagnostics = {
           signs = {
             text = {
               [vim.diagnostic.severity.ERROR] = icons.diagnostics.error,
@@ -110,6 +203,10 @@ return {
           },
         },
         -- inlay hints
+        inlay_hints = {
+          enabled = true,
+          exclude = {},
+        },
         -- codelens
         -- cursor word highlighting
         document_highlight = { enabled = true },
@@ -174,21 +271,54 @@ return {
           },
           yamlls = {},
         },
+
+        -- override lsp servers
+        setup = {
+          gopls = function(server, server_opts)
+            Lsp.on_attach(function(client, _)
+              if client.name == 'gopls' and not client.server_capabilities.semanticTokensProvider then
+                local semantic = client.config.capabilities.textDocument.semanticTokens
+                client.server_capabilities.semanticTokensProvider = {
+                  full = true,
+                  legend = { tokenModifiers = semantic.tokenModifiers, tokenTypes = semantic.tokenTypes },
+                  range = true,
+                }
+              end
+            end)
+          end,
+        },
       }
     end,
     config = function(_, opts)
-      -- keymaps
-      Lsp.on_attach(Lsp.setup_keymaps)
+      Lsp.setup()
 
       -- diagnostics
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
       -- inlay hints
+      if opts.inlay_hints.enabled then
+        Lsp.on_supports_method('textDocument/inlayHint', function(client, buffer)
+          if
+            vim.api.nvim_buf_is_valid(buffer)
+            and vim.bo[buffer].buftype == ''
+            and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+          then
+            local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+            if type(ih) == 'function' then
+              ih(buffer, true)
+            elseif type(ih) == 'table' and ih.enable then
+              ih.enable(true, { bufnr = buffer })
+            end
+          end
+        end)
+      end
 
       -- codelens
 
       -- cursor word highlighting
-      if opts.document_highlight.enabled then Lsp.on_attach(Lsp.document_highlight) end
+      if opts.document_highlight.enabled then
+        Lsp.on_supports_method('textDocument/documentHighlight', Lsp.document_highlight)
+      end
 
       -- global capabilities
 
@@ -216,6 +346,9 @@ return {
 
       local ensure_installed = {}
       for server, server_opts in pairs(servers) do
+        -- if setup function returns true, skip mason-lspconfig setup
+        if opts.setup[server] and opts.setup[server](server, server_opts) then return end
+
         if server_opts.mason == false or not vim.tbl_contains(all_mlsp_servers, server) then
           -- run manual setup if server is not installed via mason-lspconfig
           setup(server)
