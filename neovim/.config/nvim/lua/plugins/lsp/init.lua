@@ -226,6 +226,11 @@ return {
                 usePlaceholders = true,
                 analyses = { unusedparams = true },
                 staticcheck = true,
+                hints = {
+                  compositeLiteralFields = true,
+                  constantValues = true,
+                  parameterNames = true,
+                },
               },
             },
           },

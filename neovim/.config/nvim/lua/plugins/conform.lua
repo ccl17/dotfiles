@@ -1,7 +1,3 @@
-local f = require('util.functions')
-local autoformat_enabled = f.autoformat_enabled
-local slow_formatters_filetypes = {}
-
 return {
   'stevearc/conform.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
@@ -42,16 +38,10 @@ return {
           require_cwd = true,
         },
       },
-      format_on_save = function(bufnr)
-        if slow_formatters_filetypes[vim.bo[bufnr].filetype] then return end
-        local function on_format(err)
-          if err and err:match('timeout$') then slow_formatters_filetypes[vim.bo[bufnr].filetype] = true end
-        end
-        if autoformat_enabled(bufnr) then return { timeout_ms = 1000, lsp_fallback = true }, on_format end
-      end,
-      format_after_save = function(bufnr)
-        if slow_formatters_filetypes[vim.bo[bufnr].filetype] then return { lsp_fallback = true } end
-      end,
+      format_on_save = {
+        timeout_ms = 3000,
+        lsp_format = 'fallback',
+      },
       init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
     })
   end,
