@@ -164,6 +164,8 @@ return {
                 diagnostics = false,
               },
             },
+            -- using rbenv managed solargraph
+            mason = false,
           },
           terraformls = {},
           tsserver = {},
@@ -213,8 +215,8 @@ return {
       local all_mlsp_servers = vim.tbl_keys(require('mason-lspconfig.mappings.server').lspconfig_to_package)
 
       local ensure_installed = {}
-      for server, _ in ipairs(servers) do
-        if not vim.tbl_contains(all_mlsp_servers, server) then
+      for server, server_opts in pairs(servers) do
+        if server_opts.mason == false or not vim.tbl_contains(all_mlsp_servers, server) then
           -- run manual setup if server is not installed via mason-lspconfig
           setup(server)
         else
