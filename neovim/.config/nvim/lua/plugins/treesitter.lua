@@ -2,6 +2,20 @@ return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    {
+      'windwp/nvim-ts-autotag',
+      config = true,
+    },
+    'RRethy/nvim-treesitter-endwise',
+    {
+      'windwp/nvim-autopairs',
+      event = 'InsertEnter',
+      opts = {
+        close_triple_quotes = true,
+        check_ts = true,
+        enable_moveright = true,
+      },
+    },
   },
   event = { 'BufReadPost', 'BufNewFile' },
   lazy = false,
