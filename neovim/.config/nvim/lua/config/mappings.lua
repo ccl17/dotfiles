@@ -1,6 +1,6 @@
 local fn = vim.fn
 local f = require('util.functions')
-local noremap, toggle_autoformat = f.noremap, f.toggle_autoformat
+local noremap = f.noremap
 
 -- buffers
 noremap('n', '<tab>', ':bn<cr>', 'next buffer')
@@ -48,7 +48,3 @@ noremap('n', '<c-q>', '<cmd>:close<cr>', 'close current window')
 
 -- save file
 noremap({ 'n', 'i', 'v' }, '<c-s>', '<cmd>w<cr><esc>', 'Save File')
-
--- toggles
-noremap('n', '<leader>uf', function() toggle_autoformat() end, 'Toggle Auto Format (Global)')
-noremap('n', '<leader>uF', function() toggle_autoformat(true) end, 'Toggle Auto Format (Buffer)')

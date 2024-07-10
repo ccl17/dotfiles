@@ -1,15 +1,8 @@
+local f = require('util.functions')
+
 return {
   'stevearc/conform.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
-  keys = {
-    {
-      -- Customize or remove this keymap to your liking
-      '<leader>F',
-      function() require('conform').format({ async = true, lsp_fallback = true }) end,
-      mode = 'n',
-      desc = 'Format buffer',
-    },
-  },
   config = function()
     require('conform').setup({
       formatters_by_ft = {
@@ -38,11 +31,13 @@ return {
           require_cwd = true,
         },
       },
-      format_on_save = {
-        timeout_ms = 3000,
-        lsp_format = 'fallback',
-      },
-      init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
+      format_on_save = function(bufnr)
+        if f.enabled(bufnr) then return { timeout_ms = 1000, lsp_format = 'fallback' } end
+      end,
     })
+
+    vim.keymap.set('n', '<leader>uf', function() f.toggle(true) end, { desc = 'toggle buffer autoformat' })
+    vim.keymap.set('n', '<leader>uF', function() f.toggle() end, { desc = 'toggle global autoformat' })
   end,
+  init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
 }

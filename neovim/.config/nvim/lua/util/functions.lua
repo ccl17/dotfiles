@@ -1,4 +1,4 @@
-local api, keymap = vim.api, vim.keymap
+local keymap = vim.keymap
 
 local M = {}
 
@@ -12,21 +12,25 @@ function M.noremap(type, input, output, description, options)
   M.map(type, input, output, description, vim.tbl_deep_extend('force', { remap = false }, options))
 end
 
-function M.autoformat_enabled(buf)
-  buf = (buf == nil or buf == 0) and api.nvim_get_current_buf() or buf
-  local g = vim.g.autoformat
-  local b = vim.b[buf].autoformat
+---@param buf? number
+function M.enabled(buf)
+  buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
+  local gaf = vim.g.autoformat
+  local baf = vim.b[buf].autoformat
+
   -- If the buffer has a local value, use that
-  if b ~= nil then return b end
+  if baf ~= nil then return baf end
+
   -- Otherwise use the global value if set, or true by default
-  return g == nil or g
+  return gaf == nil or gaf
 end
 
-function M.toggle_autoformat(buf)
+---@param buf? boolean
+function M.toggle(buf)
   if buf then
-    vim.b.autoformat = not M.autoformat_enabled()
+    vim.b.autoformat = not M.enabled()
   else
-    vim.g.autoformat = not M.autoformat_enabled()
+    vim.g.autoformat = not M.enabled()
     vim.b.autoformat = nil
   end
 end

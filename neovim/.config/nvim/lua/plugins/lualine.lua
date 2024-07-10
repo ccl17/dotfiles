@@ -1,6 +1,5 @@
 local f, icons = require('util.functions'), require('util.icons')
-
-local function autoformat_enabled() return f.autoformat_enabled() and '󱪚' or '󱪘' end
+local function autoformat_enabled() return f.enabled() and '󱪚' or '󱪘' end
 
 return {
   'nvim-lualine/lualine.nvim',
