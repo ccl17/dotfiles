@@ -201,6 +201,7 @@ return {
               [vim.diagnostic.severity.INFO] = icons.diagnostics.information,
             },
           },
+          update_in_insert = true,
         },
         -- inlay hints
         inlay_hints = {

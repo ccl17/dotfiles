@@ -23,9 +23,7 @@ return {
   config = function()
     local cmp = require('cmp')
     local luasnip = require('luasnip')
-
     require('luasnip.loaders.from_vscode').lazy_load()
-    luasnip.config.setup({})
 
     cmp.setup({
       snippet = {
@@ -34,25 +32,15 @@ return {
       completion = {
         completeopt = 'menu,menuone,noinsert',
       },
-      mapping = cmp.mapping.preset.insert({
+      mapping = {
         ['<c-b>'] = cmp.mapping.scroll_docs(-4),
         ['<c-f>'] = cmp.mapping.scroll_docs(4),
-        ['<c-c>'] = cmp.mapping.complete({}),
+        ['<c-c>'] = cmp.mapping.complete(),
         ['<c-e>'] = cmp.mapping.abort(),
-        ['<cr>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            if luasnip.expandable() then
-              luasnip.expand()
-            else
-              cmp.confirm({
-                behavior = cmp.ConfirmBehavior.Replace,
-                select = true,
-              })
-            end
-          else
-            fallback()
-          end
-        end),
+        ['<cr>'] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        }),
         ['<tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -71,7 +59,7 @@ return {
             fallback()
           end
         end, { 'i', 's' }),
-      }),
+      },
       sources = {
         { name = 'nvim_lsp', group_index = 1 },
         { name = 'luasnip', group_index = 1 },
