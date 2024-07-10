@@ -7,15 +7,6 @@ return {
       config = true,
     },
     'RRethy/nvim-treesitter-endwise',
-    {
-      'windwp/nvim-autopairs',
-      event = 'InsertEnter',
-      opts = {
-        close_triple_quotes = true,
-        check_ts = true,
-        enable_moveright = true,
-      },
-    },
   },
   event = { 'BufReadPost', 'BufNewFile' },
   lazy = false,
@@ -59,7 +50,6 @@ return {
         },
       },
       endwise = { enabled = true },
-      autopair = { enable = true },
       textobjects = {
         select = {
           enable = true,

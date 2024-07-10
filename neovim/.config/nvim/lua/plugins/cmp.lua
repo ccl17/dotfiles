@@ -18,7 +18,11 @@ return {
     -- Adds vscode-like pictograms
     { 'onsails/lspkind.nvim' },
 
-    { 'windwp/nvim-autopairs', event = 'InsertEnter', opts = {} },
+    {
+      'windwp/nvim-autopairs',
+      event = 'InsertEnter',
+      opts = { check_ts = true },
+    },
   },
   config = function()
     local cmp = require('cmp')
