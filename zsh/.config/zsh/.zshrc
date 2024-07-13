@@ -41,41 +41,17 @@ alias gco="git checkout"
 alias gp="git push"
 alias gst="git status"
 
-# ZSH only and most performant way to check existence of an executable
-# https://www.topbug.net/blog/2016/10/11/speed-test-check-the-existence-of-a-command-in-bash-and-zsh/
-exists() { (( $+commands[$1] )); }
-
-# prompt
-if exists starship; then
-  export STARSHIP_HOME="$HOME/.config/starship"
-  export STARSHIP_CONFIG="$STARSHIP_HOME/starship.toml"
-  export STARSHIP_CACHE="$STARSHIP_HOME/cache"
-  eval "$(starship init zsh)"
-fi
+# starship
+export STARSHIP_HOME="$HOME/.config/starship"
+export STARSHIP_CONFIG="$STARSHIP_HOME/starship.toml"
+export STARSHIP_CACHE="$STARSHIP_HOME/cache"
+eval "$(starship init zsh)"
 
 # zoxide
-if exists zoxide; then
-  eval "$(zoxide init zsh)"
-fi
+eval "$(zoxide init zsh)"
 
-# rbenv
-if exists rbenv; then
-  eval "$(rbenv init - zsh)"
-fi
-
-# nvm
-if exists nvm; then
-  export NVIM_DIR="$HOME/.nvm"
-  [ -s "$NVIM_DIR/nvm.sh" ] && \. $"NVM_DIR/nvm.sh" # this loads nvm
-  [ -s "NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # this load nvm bash completion
-fi
-
-# pyenv
-if exists pyenv; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
-fi
+# load all env specific configs
+for config (${ZDOTDIR}/*.zsh) source $config
 
 # syntax highlighting
 # needs to be sourced last
