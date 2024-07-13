@@ -17,10 +17,11 @@ return {
       },
     })
     require('lint').linters_by_ft = {
-      go = { 'golangcilint' },
+      go = { 'golangcilint', 'gofumpt' },
       javascript = { 'eslint_d' },
       ruby = { 'rubocop' },
       vue = { 'eslint_d' },
+      dockerfile = { 'hadolint' },
     }
     vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave' }, {
       group = vim.api.nvim_create_augroup('NvimLint', { clear = true }),
