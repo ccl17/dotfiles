@@ -1,6 +1,3 @@
-# neovim
-neovim/.config/nvim/lazy-lock.json
-
 # starship
 starship/.config/starship/cache
 

@@ -29,7 +29,7 @@ noremap('n', 'n', 'nzzzv', 'next match')
 noremap('n', 'N', 'Nzzzv', 'prev match')
 
 -- Paste without yanking
-noremap('x', 'p', '"_dP')
+noremap('x', 'p', 'P')
 
 -- Indent visual blocks
 noremap('x', '<', '<gv')

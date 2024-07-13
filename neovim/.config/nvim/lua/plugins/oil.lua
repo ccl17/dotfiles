@@ -13,7 +13,7 @@ return {
       ['q'] = 'actions.close',
       ['<cr>'] = 'actions.select',
       ['<c-v>'] = { 'actions.select', opts = { vertical = true }, desc = 'open vertical split' },
-      ['<c-b>'] = { 'actions.select', opts = { horizontal = true }, desc = 'open horizontal split' },
+      ['<c-x>'] = { 'actions.select', opts = { horizontal = true }, desc = 'open horizontal split' },
       ['-'] = 'actions.parent',
     },
     use_default_keymaps = false,
