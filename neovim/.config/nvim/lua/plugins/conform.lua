@@ -7,9 +7,11 @@ return {
     require('conform').setup({
       formatters_by_ft = {
         go = { 'goimports' },
+        javascript = { 'prettier' },
         json = { 'prettier' },
         lua = { 'stylua' },
         ruby = { 'rubocop' },
+        vue = { 'prettier' },
         yaml = { 'yamlfmt' },
       },
       formatters = {
