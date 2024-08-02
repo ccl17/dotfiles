@@ -48,7 +48,7 @@ return {
     },
   },
   dependencies = {
-    'rcarriga/nvim-dap-ui',
+    { 'rcarriga/nvim-dap-ui', dependencies = { 'nvim-neotest/nvim-nio' } },
     'theHamsta/nvim-dap-virtual-text',
     'suketa/nvim-dap-ruby',
     'leoluz/nvim-dap-go',
