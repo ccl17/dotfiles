@@ -1,3 +1,16 @@
+local debounce = function(ms, fn)
+  local timer = vim.uv.new_timer()
+  return function(...)
+    local argv = { ... }
+    timer:start(ms, 0, function()
+      timer:stop()
+      vim.schedule_wrap(fn)(unpack(argv))
+    end)
+  end
+end
+
+local try_lint = function() require('lint').try_lint() end
+
 return {
   'mfussenegger/nvim-lint',
   event = 'BufReadPre',
@@ -23,9 +36,9 @@ return {
       vue = { 'eslint_d' },
       dockerfile = { 'hadolint' },
     }
-    vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave' }, {
+    vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave', 'TextChanged', 'TextChangedI' }, {
       group = vim.api.nvim_create_augroup('NvimLint', { clear = true }),
-      callback = function() require('lint').try_lint() end,
+      callback = debounce(100, try_lint),
     })
   end,
 }
