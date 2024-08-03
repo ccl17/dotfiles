@@ -108,8 +108,6 @@ return {
               ['<PageDown>'] = actions.results_scrolling_down,
               ['<c-u>'] = actions.preview_scrolling_up,
               ['<c-d>'] = actions.preview_scrolling_down,
-              ['<c-h'] = actions.results_scrolling_left,
-              ['<c-l'] = actions.results_scrolling_right,
               ['<c-k>'] = actions.move_selection_previous,
               ['<c-j>'] = actions.move_selection_next,
               ['<cr>'] = actions.select_default,
