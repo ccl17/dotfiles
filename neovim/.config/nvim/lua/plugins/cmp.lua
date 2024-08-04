@@ -3,14 +3,15 @@ return {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
-    -- Snippet Engine & its associated nvim-cmp source
     { 'L3MON4D3/LuaSnip', version = 'v2.*', build = 'make install_jsregexp' },
-    { 'saadparwaiz1/cmp_luasnip' },
 
-    -- Adds LSP completion capabilities
+    -- cmp sources
+    { 'saadparwaiz1/cmp_luasnip' },
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/cmp-path' },
     { 'hrsh7th/cmp-cmdline' },
+    { 'rcarriga/cmp-dap' },
+    { 'lukas-reineke/cmp-rg' },
 
     -- Adds a number of user-friendly snippets
     { 'rafamadriz/friendly-snippets' },
@@ -36,6 +37,7 @@ return {
       completion = {
         completeopt = 'menu,menuone,noinsert',
       },
+      preselect = cmp.PreselectMode.Item,
       mapping = {
         ['<c-b>'] = cmp.mapping.scroll_docs(-4),
         ['<c-f>'] = cmp.mapping.scroll_docs(4),
@@ -65,9 +67,10 @@ return {
         end, { 'i', 's' }),
       },
       sources = {
-        { name = 'luasnip', group_index = 1 },
         { name = 'nvim_lsp', group_index = 1 },
-        { name = 'buffer', group_index = 2 },
+        { name = 'luasnip', group_index = 1 },
+        { name = 'rg', group_index = 1, keyword_length = 4, option = { additional_arguments = '--max-depth 8' } },
+        { name = 'buffer', group_index = 2, options = { get_bufnrs = function() return vim.api.nvim_list_bufs() end } },
         { name = 'treesitter', group_index = 2 },
         { name = 'path', group_index = 3 },
       },
@@ -88,12 +91,22 @@ return {
       }),
     })
 
+    cmp.setup.cmdline({ '/', '?' }, {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = 'buffer' },
+        { name = 'cmdline' },
+      },
+    })
+
     cmp.setup.filetype('sql', {
       sources = {
         { name = 'vim-dadbod-completion' },
         { name = 'buffer' },
       },
     })
+
+    cmp.setup.filetype({ 'dap-repl', 'dapui_watches' }, { sources = { { name = 'dap' } } })
 
     local autopairs = require('nvim-autopairs.completion.cmp')
     cmp.event:on('confirm_done', autopairs.on_confirm_done())

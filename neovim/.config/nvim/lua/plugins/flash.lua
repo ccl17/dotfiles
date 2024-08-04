@@ -20,4 +20,11 @@ return {
       desc = 'Remote Flash',
     },
   },
+  opts = {
+    modes = {
+      search = {
+        enabled = false,
+      },
+    },
+  },
 }
