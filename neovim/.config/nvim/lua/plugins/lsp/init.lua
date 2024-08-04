@@ -84,36 +84,36 @@ Lsp._keys = {
   {
     'n',
     'gd',
-    vim.lsp.buf.definition,
+    '<cmd>FzfLua lsp_definitions jump_to_single_result=true ignore_current_line=true<cr>',
     { desc = 'goto definition', has = 'definition' },
   },
   {
     'n',
     'gr',
-    vim.lsp.buf.references,
+    '<cmd>FzfLua lsp_references jump_to_single_result=true ignore_current_line=true<cr>',
     { desc = 'goto references' },
   },
   {
     'n',
     'gt',
-    vim.lsp.buf.type_definition,
+    '<cmd>FzfLua lsp_typedefs jump_to_single_result=true ignore_current_line=true<cr>',
     { desc = 'goto type definition' },
   },
   {
     'n',
     'gi',
-    vim.lsp.buf.implementation,
+    '<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>',
     { desc = 'goto implementations' },
   },
   {
     'n',
     'gD',
-    vim.lsp.buf.declaration,
+    '<cmd>FzfLua lsp_declarations jump_to_single_result=true ignore_current_line=true<cr>',
     { desc = 'goto declaration' },
   },
   { 'n', 'K', vim.lsp.buf.hover, { desc = 'hover' } },
   { 'n', 'gs', vim.lsp.buf.signature_help, { desc = 'signature help' } },
-  { 'n', 'ga', vim.lsp.buf.code_action, { desc = 'code action', has = 'codeAction' } },
+  { 'n', 'ga', '<cmd>FzfLua lsp_code_actions<cr>', { desc = 'code action', has = 'codeAction' } },
   { 'n', '<leader>rn', vim.lsp.buf.rename, { desc = 'rename', has = 'rename' } },
 }
 
