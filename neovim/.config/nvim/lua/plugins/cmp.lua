@@ -8,6 +8,7 @@ return {
     -- cmp sources
     { 'saadparwaiz1/cmp_luasnip' },
     { 'hrsh7th/cmp-nvim-lsp' },
+    { 'hrsh7th/cmp-buffer' },
     { 'hrsh7th/cmp-path' },
     { 'hrsh7th/cmp-cmdline' },
     { 'rcarriga/cmp-dap' },
@@ -66,14 +67,14 @@ return {
           end
         end, { 'i', 's' }),
       },
-      sources = {
+      sources = cmp.config.sources({
         { name = 'nvim_lsp', group_index = 1 },
         { name = 'luasnip', group_index = 1 },
         { name = 'rg', group_index = 1, keyword_length = 4, option = { additional_arguments = '--max-depth 8' } },
         { name = 'buffer', group_index = 2, options = { get_bufnrs = function() return vim.api.nvim_list_bufs() end } },
         { name = 'treesitter', group_index = 2 },
         { name = 'path', group_index = 3 },
-      },
+      }),
       formatting = {
         format = require('lspkind').cmp_format(),
       },
