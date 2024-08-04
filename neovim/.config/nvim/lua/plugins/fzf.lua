@@ -19,6 +19,7 @@ return {
 
     -- override highlights
     profile.hls.preview_title = nil
+    profile.fzf_colors.gutter = '-1'
 
     fzf.setup({
       winopts = {
