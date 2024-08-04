@@ -6,19 +6,21 @@ return {
     'nvim-tree/nvim-web-devicons',
   },
   keys = {
+    { '<leader>/', function() require('fzf-lua').live_grep() end, desc = 'live grep' },
+    { '<leader>/', function() require('fzf-lua').grep_visual() end, mode = 'v', desc = 'grep visual selection' },
     { '<leader>ff', function() require('fzf-lua').files() end, desc = 'Find files' },
-    { '<leader>fb', function() require('fzf-lua').buffers() end, desc = 'buffers' },
-    { '<leader>fs', function() require('fzf-lua').live_grep() end, desc = 'live grep' },
+    { '<leader>fb', '<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>', desc = 'buffers' },
     { '<leader>fo', function() require('fzf-lua').oldfiles() end, desc = 'live grep' },
   },
   config = function()
+    local fzf = require('fzf-lua')
     local profile = vim.deepcopy(require('fzf-lua.profiles.telescope'))
     local prompt = ' 🔍' .. ' '
 
     -- override highlights
     profile.hls.preview_title = nil
 
-    require('fzf-lua').setup({
+    fzf.setup({
       winopts = {
         preview = {
           wrap = 'wrap',
@@ -71,5 +73,7 @@ return {
         },
       },
     })
+
+    fzf.register_ui_select()
   end,
 }
