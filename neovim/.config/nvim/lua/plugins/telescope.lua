@@ -8,25 +8,36 @@ return {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
     keys = {
-      -- files
-      { '<leader>ff', '<cmd>Telescope find_files<cr>' },
-      { '<leader>fb', '<cmd>Telescope buffers<cr>' },
-      -- search
-      { '<leader>sf', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>" },
-      {
-        '<leader>sF',
-        ":lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()<cr>",
-      },
-      { '<leader>sg', '<cmd>Telescope live_grep<cr>' },
-      { '<leader>sG', '<cmd>Telescope grep_string<cr>' },
+      -- -- files
+      -- { '<leader>ff', '<cmd>Telescope find_files<cr>' },
+      -- { '<leader>fb', '<cmd>Telescope buffers<cr>' },
+      -- -- search
+      -- { '<leader>sf', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>" },
+      -- {
+      --   '<leader>sF',
+      --   ":lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()<cr>",
+      -- },
+      -- { '<leader>sg', '<cmd>Telescope live_grep<cr>' },
+      -- { '<leader>sG', '<cmd>Telescope grep_string<cr>' },
     },
     config = function()
       local telescope, config, actions = require('telescope'), require('telescope.config'), require('telescope.actions')
       local vimgrep_arguments = { unpack(config.values.vimgrep_arguments) }
       table.insert(vimgrep_arguments, '--hidden')
       table.insert(vimgrep_arguments, '--trim') -- trim the indentation at the beginning of presented line
+      local lga_actions = require('telescope-live-grep-args.actions')
 
       telescope.setup({
+        extensions = {
+          live_grep_args = {
+            auto_quoting = true,
+            mappings = {
+              i = {
+                ['<c-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob ' }),
+              },
+            },
+          },
+        },
         pickers = {
           find_files = {
             hidden = true,
