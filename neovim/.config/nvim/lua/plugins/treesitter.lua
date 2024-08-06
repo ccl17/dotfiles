@@ -6,7 +6,22 @@ return {
       'windwp/nvim-ts-autotag',
       config = true,
     },
-    'RRethy/nvim-treesitter-endwise',
+    {
+      'abecodes/tabout.nvim',
+      lazy = false,
+      config = function()
+        require('tabout').setup({
+          tabkey = '<tab>',
+          backwards_tabkey = '<s-tab>',
+          act_as_tab = true,
+          act_as_shift_tab = true,
+          completion = true,
+          ignore_beginning = true,
+        })
+      end,
+      event = 'InsertCharPre',
+      priority = 1000,
+    },
   },
   event = { 'BufReadPost', 'BufNewFile' },
   lazy = false,
@@ -49,7 +64,6 @@ return {
           node_decremental = '<S-TAB>',
         },
       },
-      endwise = { enabled = true },
       textobjects = {
         select = {
           enable = true,

@@ -1,7 +1,7 @@
 return {
   -- Autocompletion
   'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
+  event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     { 'L3MON4D3/LuaSnip', version = 'v2.*', build = 'make install_jsregexp' },
 
