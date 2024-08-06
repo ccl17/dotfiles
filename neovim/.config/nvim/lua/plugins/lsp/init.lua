@@ -128,8 +128,8 @@ end
 
 function Lsp.setup_keymaps(_, buffer)
   for _, keys in ipairs(Lsp._keys) do
-    if not keys.has or Lsp.has(buffer, keys.has) then
-      local opts = keys[4]
+    local opts = keys[4]
+    if not opts.has or Lsp.has(buffer, opts.has) then
       opts.has = nil
       opts.silent = opts.silent ~= false
       opts.buffer = buffer
