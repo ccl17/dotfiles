@@ -96,6 +96,16 @@ return {
             [']c'] = { query = '@class.outer', desc = 'Next class' },
             [']p'] = { query = '@parameter.inner', desc = 'Next parameter' },
           },
+          goto_next = {
+            [']]'] = {
+              query = { '@block.*', '@class.*', '@conditional.*', '@function.*', '@loop.*' },
+            },
+          },
+          goto_prev = {
+            ['[['] = {
+              query = { '@block.*', '@class.*', '@conditional.*', '@function.*', '@loop.*' },
+            },
+          },
         },
       },
     })
