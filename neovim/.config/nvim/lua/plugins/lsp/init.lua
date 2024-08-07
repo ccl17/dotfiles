@@ -91,34 +91,40 @@ Lsp._keys = {
     'n',
     'gr',
     '<cmd>FzfLua lsp_references jump_to_single_result=true ignore_current_line=true<cr>',
-    { desc = 'goto references' },
+    { desc = 'goto references', has = 'references' },
   },
   {
     'n',
     'gt',
     '<cmd>FzfLua lsp_typedefs jump_to_single_result=true ignore_current_line=true<cr>',
-    { desc = 'goto type definition' },
+    { desc = 'goto type definition', has = 'typeDefinition' },
   },
   {
     'n',
     'gi',
     '<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>',
-    { desc = 'goto implementations' },
+    { desc = 'goto implementations', has = 'implementation' },
   },
   {
     'n',
     'gD',
     '<cmd>FzfLua lsp_declarations jump_to_single_result=true ignore_current_line=true<cr>',
-    { desc = 'goto declaration' },
+    { desc = 'goto declaration', has = 'declaration' },
   },
-  { 'n', 'K', vim.lsp.buf.hover, { desc = 'hover' } },
-  { 'n', 'gs', vim.lsp.buf.signature_help, { desc = 'signature help' } },
+  { 'n', 'K', vim.lsp.buf.hover, { desc = 'hover', has = 'hover' } },
+  { 'n', 'gs', vim.lsp.buf.signature_help, { desc = 'signature help', has = 'signatureHelp' } },
   { 'n', 'ga', '<cmd>FzfLua lsp_code_actions<cr>', { desc = 'code action', has = 'codeAction' } },
   { 'n', '<leader>rn', vim.lsp.buf.rename, { desc = 'rename', has = 'rename' } },
 }
 
----@param method string
+---@param method string|string[]
 function Lsp.has(buffer, method)
+  if type(method) == 'table' then
+    for _, m in ipairs(method) do
+      if not Lsp.has(buffer, m) then return false end
+    end
+    return true
+  end
   method = method:find('/') and method or 'textDocument/' .. method
   local clients = vim.lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
@@ -148,7 +154,7 @@ function Lsp.setup()
     local ret = register_capability(err, res, ctx)
     local client = vim.lsp.get_client_by_id(ctx.client_id)
     if client then
-      for buffer in ipairs(client.attached_buffers) do
+      for buffer in pairs(client.attached_buffers) do
         vim.api.nvim_exec_autocmds('User', {
           pattern = 'LspDynamicCapability',
           data = { client_id = client.id, buffer = buffer },
