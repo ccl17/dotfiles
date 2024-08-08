@@ -55,7 +55,7 @@ opt.backspace = 'indent,eol,start'
 
 -- searching
 opt.hlsearch = true
-opt.incsearch = true
+opt.incsearch = false
 opt.inccommand = 'split'
 
 -- use indents of 2
