@@ -200,7 +200,7 @@ return {
     -- diagnostics
     local signs = {
       Hint = icons.diagnostics.hint,
-      Info = icons.diagnostics.info,
+      Info = icons.diagnostics.information,
       Warn = icons.diagnostics.warning,
       Error = icons.diagnostics.error,
     }
