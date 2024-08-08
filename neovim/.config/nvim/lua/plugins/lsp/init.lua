@@ -173,6 +173,7 @@ return {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
+      'dgagn/diagflow.nvim',
       {
         'folke/neodev.nvim',
         ft = 'lua',
@@ -196,19 +197,6 @@ return {
     },
     opts = function()
       return {
-        -- diagnostics
-        ---@type vim.diagnostic.Opts
-        diagnostics = {
-          signs = {
-            text = {
-              [vim.diagnostic.severity.ERROR] = icons.diagnostics.error,
-              [vim.diagnostic.severity.WARN] = icons.diagnostics.warning,
-              [vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
-              [vim.diagnostic.severity.INFO] = icons.diagnostics.information,
-            },
-          },
-          update_in_insert = true,
-        },
         -- inlay hints
         inlay_hints = {
           enabled = true,
@@ -292,7 +280,21 @@ return {
       Lsp.setup()
 
       -- diagnostics
-      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+      Lsp.on_attach(function(_, _)
+        local signs = {
+          Hint = icons.diagnostics.hint,
+          Info = icons.diagnostics.info,
+          Warn = icons.diagnostics.warning,
+          Error = icons.diagnostics.error,
+        }
+
+        for sev, text in pairs(signs) do
+          local level = 'DiagnosticSign' .. sev
+          vim.fn.sign_define(level, { text = text, texthl = level })
+        end
+
+        require('diagflow').setup({ scope = 'line', show_sign = true })
+      end)
 
       -- inlay hints
       if opts.inlay_hints.enabled then
