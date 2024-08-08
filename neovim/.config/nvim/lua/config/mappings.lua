@@ -48,3 +48,9 @@ noremap('n', '<c-q>', '<cmd>:close<cr>', 'close current window')
 
 -- save file
 noremap({ 'n', 'i', 'v' }, '<c-s>', '<cmd>w<cr><esc>', 'Save File')
+
+-- quickfix
+noremap('n', '<leader>xq', '<cmd>copen<cr>', 'open quickfixlist')
+noremap('n', '<leader>xQ', '<cmd>cclose<cr>', 'close quickfixlist')
+noremap('n', '[q', '<cmd>cprev<cr>', 'previous quickfix')
+noremap('n', ']q', '<cmd>cnext<cr>', 'next quickfix')

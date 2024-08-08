@@ -169,199 +169,150 @@ function Lsp.setup()
 end
 
 return {
-  {
-    'neovim/nvim-lspconfig',
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      'dgagn/diagflow.nvim',
-      {
-        'folke/neodev.nvim',
-        ft = 'lua',
-        opts = { library = { plugins = { 'nvim-dap-ui' } } },
-      },
-      {
-        'folke/neoconf.nvim',
-        cmd = { 'Neoconf' },
-        opts = { local_settings = '.nvim.json', global_settings = 'nvim.json' },
-      },
-      {
-        'williamboman/mason.nvim',
-        cmd = 'Mason',
-        build = ':MasonUpdate',
-        opts = {},
-      },
-      {
-        'williamboman/mason-lspconfig.nvim',
-        config = function() end,
-      },
+  'neovim/nvim-lspconfig',
+  event = { 'BufReadPre', 'BufNewFile' },
+  dependencies = {
+    'dgagn/diagflow.nvim',
+    {
+      'folke/neodev.nvim',
+      ft = 'lua',
+      opts = { library = { plugins = { 'nvim-dap-ui' } } },
     },
-    opts = function()
-      return {
-        -- inlay hints
-        inlay_hints = {
-          enabled = true,
-          exclude = {},
-        },
-        -- codelens
-        -- cursor word highlighting
-        document_highlight = { enabled = true },
-        -- global capabilities
-        capabilities = {},
-        -- formatting
-        -- lsp servers
-        servers = {
-          bashls = {},
-          dockerls = {},
-          gopls = {
-            settings = {
-              gopls = {
-                directoryFilters = { '-node_modules', '-vendor' },
-                gofumpt = true,
-                semanticTokens = true,
-                usePlaceholders = true,
-                analyses = { unusedparams = true },
-                staticcheck = true,
-                hints = {
-                  compositeLiteralFields = true,
-                  constantValues = true,
-                  parameterNames = true,
-                },
-              },
-            },
-          },
-          jsonls = {},
-          lua_ls = {
-            settings = {
-              Lua = {
-                codeLens = { enable = true },
-                hint = {
-                  enable = true,
-                  arrayIndex = 'Disable',
-                  setType = false,
-                  paramName = 'Disable',
-                  paramType = true,
-                },
-                format = { enable = false },
-                diagnostics = {
-                  globals = { 'vim', 'P', 'describe', 'it', 'before_each', 'after_each', 'packer_plugins', 'pending' },
-                },
-                completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
-                workspace = { checkThirdParty = false },
-                telemetry = { enable = false },
-              },
-            },
-          },
-          solargraph = {
-            cmd = { os.getenv('HOME') .. '/.rbenv/shims/solargraph', 'stdio' },
-            init_options = {
-              formatting = false,
-            },
-            settings = {
-              solargraph = {
-                diagnostics = false,
-              },
-            },
-            -- using rbenv managed solargraph
-            mason = false,
-          },
-          terraformls = {},
-          tsserver = {},
-          vuels = {
-            filetypes = { 'javascript', 'vue' },
-          },
-          yamlls = {},
-        },
-
-        -- override lsp servers
-        setup = {},
-      }
-    end,
-    config = function(_, opts)
-      Lsp.setup()
-
-      -- diagnostics
-      Lsp.on_attach(function(_, _)
-        local signs = {
-          Hint = icons.diagnostics.hint,
-          Info = icons.diagnostics.info,
-          Warn = icons.diagnostics.warning,
-          Error = icons.diagnostics.error,
-        }
-
-        for sev, text in pairs(signs) do
-          local level = 'DiagnosticSign' .. sev
-          vim.fn.sign_define(level, { text = text, texthl = level })
-        end
-
-        require('diagflow').setup({ scope = 'line', show_sign = true })
-      end)
-
-      -- inlay hints
-      if opts.inlay_hints.enabled then
-        Lsp.on_supports_method('textDocument/inlayHint', function(client, buffer)
-          if
-            vim.api.nvim_buf_is_valid(buffer)
-            and vim.bo[buffer].buftype == ''
-            and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
-          then
-            local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-            if type(ih) == 'function' then
-              ih(buffer, true)
-            elseif type(ih) == 'table' and ih.enable then
-              ih.enable(true, { bufnr = buffer })
-            end
-          end
-        end)
-      end
-
-      -- codelens
-
-      -- cursor word highlighting
-      if opts.document_highlight.enabled then
-        Lsp.on_supports_method('textDocument/documentHighlight', Lsp.document_highlight)
-      end
-
-      -- global capabilities
-
-      -- formatting
-
-      -- lsp servers
-      local servers = opts.servers
-      local cmp_nvim_lsp = require('cmp_nvim_lsp')
-      local capabilities = vim.tbl_deep_extend(
-        'force',
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        cmp_nvim_lsp.default_capabilities(),
-        opts.capabilities or {}
-      )
-
-      local function setup(server)
-        local server_opts =
-          vim.tbl_deep_extend('force', { capabilities = vim.deepcopy(capabilities) }, servers[server] or {})
-        require('lspconfig')[server].setup(server_opts)
-      end
-
-      local mlsp = require('mason-lspconfig')
-      local all_mlsp_servers = vim.tbl_keys(require('mason-lspconfig.mappings.server').lspconfig_to_package)
-
-      local ensure_installed = {}
-      for server, server_opts in pairs(servers) do
-        -- if setup function returns true, skip mason-lspconfig setup
-        if opts.setup[server] and opts.setup[server](server, server_opts) then return end
-
-        if server_opts.mason == false or not vim.tbl_contains(all_mlsp_servers, server) then
-          -- run manual setup if server is not installed via mason-lspconfig
-          setup(server)
-        else
-          ensure_installed[#ensure_installed + 1] = server
-        end
-      end
-
-      mlsp.setup({
-        ensure_installed = ensure_installed,
-        handlers = { setup },
-      })
-    end,
+    {
+      'folke/neoconf.nvim',
+      cmd = { 'Neoconf' },
+      opts = { local_settings = '.nvim.json', global_settings = 'nvim.json' },
+    },
+    {
+      'williamboman/mason.nvim',
+      cmd = 'Mason',
+      build = ':MasonUpdate',
+      opts = {},
+    },
+    {
+      'williamboman/mason-lspconfig.nvim',
+      config = function() end,
+    },
   },
+  config = function()
+    Lsp.setup()
+
+    -- diagnostics
+    local signs = {
+      Hint = icons.diagnostics.hint,
+      Info = icons.diagnostics.info,
+      Warn = icons.diagnostics.warning,
+      Error = icons.diagnostics.error,
+    }
+    for sev, text in pairs(signs) do
+      local level = 'DiagnosticSign' .. sev
+      vim.fn.sign_define(level, { text = text, texthl = level })
+    end
+
+    require('diagflow').setup({ scope = 'line', show_sign = true })
+
+    -- inlay hints
+    Lsp.on_supports_method('textDocument/inlayHint', function(_, buffer)
+      if vim.api.nvim_buf_is_valid(buffer) and vim.bo[buffer].buftype == '' then
+        vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+      end
+    end)
+
+    -- codeactions
+    -- codelens
+
+    -- cursor word highlighting
+    Lsp.on_supports_method('textDocument/documentHighlight', Lsp.document_highlight)
+
+    -- lsp servers
+    local servers = {
+      bashls = {},
+      dockerls = {},
+      gopls = {
+        settings = {
+          gopls = {
+            directoryFilters = { '-node_modules', '-vendor' },
+            gofumpt = true,
+            semanticTokens = true,
+            usePlaceholders = true,
+            analyses = { unusedparams = true },
+            staticcheck = true,
+            hints = {
+              compositeLiteralFields = true,
+              constantValues = true,
+              parameterNames = true,
+            },
+          },
+        },
+      },
+      jsonls = {},
+      lua_ls = {
+        settings = {
+          Lua = {
+            codeLens = { enable = true },
+            hint = {
+              enable = true,
+              arrayIndex = 'Disable',
+              setType = false,
+              paramName = 'Disable',
+              paramType = true,
+            },
+            format = { enable = false },
+            diagnostics = {
+              globals = { 'vim', 'P', 'describe', 'it', 'before_each', 'after_each', 'packer_plugins', 'pending' },
+            },
+            completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+          },
+        },
+      },
+      solargraph = {
+        cmd = { os.getenv('HOME') .. '/.rbenv/shims/solargraph', 'stdio' },
+        init_options = {
+          formatting = false,
+        },
+        settings = {
+          solargraph = {
+            diagnostics = false,
+          },
+        },
+        -- using rbenv managed solargraph
+        mason = false,
+      },
+      terraformls = {},
+      tsserver = {},
+      vuels = {
+        filetypes = { 'javascript', 'vue' },
+      },
+      yamlls = {},
+    }
+    local cmp_nvim_lsp = require('cmp_nvim_lsp')
+    local capabilities =
+      vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(), cmp_nvim_lsp.default_capabilities())
+
+    local function setup(server)
+      local server_opts =
+        vim.tbl_deep_extend('force', { capabilities = vim.deepcopy(capabilities) }, servers[server] or {})
+      require('lspconfig')[server].setup(server_opts)
+    end
+
+    local mlsp = require('mason-lspconfig')
+    local all_mlsp_servers = vim.tbl_keys(require('mason-lspconfig.mappings.server').lspconfig_to_package)
+
+    local ensure_installed = {}
+    for server, server_opts in pairs(servers) do
+      if server_opts.mason == false or not vim.tbl_contains(all_mlsp_servers, server) then
+        -- run manual setup if server is not installed via mason-lspconfig
+        setup(server)
+      else
+        ensure_installed[#ensure_installed + 1] = server
+      end
+    end
+
+    mlsp.setup({
+      ensure_installed = ensure_installed,
+      handlers = { setup },
+    })
+  end,
 }
