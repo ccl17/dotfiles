@@ -45,6 +45,11 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.infercase = true
 
+opt.grepprg = 'rg --vimgrep'
+opt.virtualedit = 'block'
+opt.updatetime = 200
+opt.timeoutlen = 300
+
 -- make backspace behave in a sane manner
 opt.backspace = 'indent,eol,start'
 

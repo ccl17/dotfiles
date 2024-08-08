@@ -14,7 +14,7 @@ noremap('n', '<leader>rp', function() fn.setreg('+', fn.expand('%')) end, 'copy 
 noremap('n', '<leader>j', ':%!jq .<cr>', 'jq format')
 
 -- remove highlighting
-noremap('n', '<esc><esc>', ':nohlsearch<cr>', 'remove highlighting', { silent = true })
+noremap('n', '<esc>', ':nohlsearch<cr>', 'remove highlighting', { silent = true })
 
 -- move blocks
 noremap('x', 'J', ":m '>+1<CR>gv=gv", 'move block up')
