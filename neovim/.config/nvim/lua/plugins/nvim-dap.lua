@@ -16,6 +16,7 @@ return {
       function() require('dap').continue() end,
       desc = 'continue or start debugger',
     },
+    { '<leader>dC', function() require('dap').run_to_cursor() end, desc = 'Run to Cursor' },
     {
       '<leader>de',
       function() require('dap').step_out() end,

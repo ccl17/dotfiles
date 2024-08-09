@@ -10,9 +10,6 @@ noremap('n', '<leader>bD', '<cmd>%bd|e#|bd#<cr>', 'close all but the current buf
 -- noremap('n', '<leader>rp', "<cmd>:let @+ = expand('%')<cr>", 'copy buffer file path')
 noremap('n', '<leader>rp', function() fn.setreg('+', fn.expand('%')) end, 'copy buffer file path')
 
--- json pretty print
-noremap('n', '<leader>j', ':%!jq .<cr>', 'jq format')
-
 -- remove highlighting
 noremap('n', '<esc>', ':nohlsearch<cr>', 'remove highlighting', { silent = true })
 
