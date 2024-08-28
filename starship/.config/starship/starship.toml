@@ -11,6 +11,7 @@ $kubernetes\
 $ruby\
 $golang\
 $nodejs\
+$python\
 $cmd_duration\
 $line_break\
 $shell\
