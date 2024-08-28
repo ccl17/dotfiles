@@ -2,7 +2,19 @@
 
 palette = "catppuccin_mocha"
 
-format = "$all"
+format = """
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$kubernetes\
+$ruby\
+$golang\
+$nodejs\
+$cmd_duration\
+$line_break\
+$shell\
+$character"""
 
 [character]
 success_symbol = ' [➜](bold green) '
