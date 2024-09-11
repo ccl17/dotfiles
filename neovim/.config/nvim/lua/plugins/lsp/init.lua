@@ -267,6 +267,11 @@ return {
           },
         },
       },
+      rubocop = {
+        cmd = { os.getenv('HOME') .. '/.rbenv/shims/rubocop', '--lsp' },
+        -- using rbenv managed rubocop
+        mason = false,
+      },
       solargraph = {
         cmd = { os.getenv('HOME') .. '/.rbenv/shims/solargraph', 'stdio' },
         init_options = {
@@ -281,7 +286,7 @@ return {
         mason = false,
       },
       terraformls = {},
-      tsserver = {},
+      ts_ls = {},
       vuels = {
         filetypes = { 'javascript', 'vue' },
       },
