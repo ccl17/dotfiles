@@ -68,11 +68,9 @@ return {
         end, { 'i', 's' }),
       },
       sources = cmp.config.sources({
+        { name = 'luasnip', group_index = 1, max_item_count = 5 },
         { name = 'nvim_lsp', group_index = 1 },
-        { name = 'luasnip', group_index = 1 },
-        { name = 'rg', group_index = 1, keyword_length = 4, option = { additional_arguments = '--max-depth 8' } },
-        { name = 'buffer', group_index = 2, options = { get_bufnrs = function() return vim.api.nvim_list_bufs() end } },
-        { name = 'treesitter', group_index = 2 },
+        { name = 'buffer', group_index = 2, max_item_count = 5 },
         { name = 'path', group_index = 3 },
       }),
       formatting = {
