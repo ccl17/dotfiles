@@ -108,6 +108,6 @@ return {
     cmp.setup.filetype({ 'dap-repl', 'dapui_watches' }, { sources = { { name = 'dap' } } })
 
     local autopairs = require('nvim-autopairs.completion.cmp')
-    cmp.event:on('confirm_done', autopairs.on_confirm_done())
+    cmp.event:on('confirm_done', autopairs.on_confirm_done({ filetypes = { ruby = false } }))
   end,
 }
