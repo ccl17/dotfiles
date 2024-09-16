@@ -55,15 +55,6 @@ return {
         enable = true,
         additional_vim_regex_highlighting = { 'ruby' },
       },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = '<cr>',
-          scope_incremental = '<CR>',
-          node_incremental = '<TAB>',
-          node_decremental = '<S-TAB>',
-        },
-      },
       textobjects = {
         select = {
           enable = true,
@@ -96,15 +87,14 @@ return {
             [']c'] = { query = '@class.outer', desc = 'Next class' },
             [']p'] = { query = '@parameter.inner', desc = 'Next parameter' },
           },
-          goto_next = {
-            [']]'] = {
-              query = { '@block.*', '@class.*', '@conditional.*', '@function.*', '@loop.*' },
-            },
+        },
+        swap = {
+          enable = true,
+          swap_next = {
+            ['<leader>a'] = '@parameter.inner',
           },
-          goto_prev = {
-            ['[['] = {
-              query = { '@block.*', '@class.*', '@conditional.*', '@function.*', '@loop.*' },
-            },
+          swap_previous = {
+            ['<leader>A'] = '@parameter.inner',
           },
         },
       },
