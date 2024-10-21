@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "codeLens": {
+    "enabled": true
+  },
+  "completion": {
+    "callSnippet": "Replace",
+    "keywordSnippet": "Replace"
+  },
+  "diagnostics": {
+    "globals": [
+      "vim"
+    ]
+  },
+  "format": {
+    "enable": false
+  },
+  "hint": {
+    "enable": true,
+    "arrayIndex": "Disable",
+    "setType": false
+  },
+  "runtime": {
+    "version": "LuaJIT"
+  }
+}
