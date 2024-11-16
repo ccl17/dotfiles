@@ -75,7 +75,7 @@ return {
         numhl = '',
       },
       { 'DapLogPoint', text = icons.dap.log, texthl = 'DapLogPoint', linehl = '', numhl = '' },
-      { 'DapStopped', text = icons.dap.bug, texthl = 'DapStopped', linehl = '', numhl = '' },
+      { 'DapStopped', text = icons.dap.point, texthl = 'DapStopped', linehl = '', numhl = '' },
     }
 
     for _, signs in pairs(dap_signs) do

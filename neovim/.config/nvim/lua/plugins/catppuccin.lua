@@ -52,6 +52,8 @@ return {
             GitSignsChange = { fg = colors.peach },
             LineNr = { fg = colors.overlay0 },
             LspInfoBorder = { link = 'FloatBorder' },
+            -- dap
+            DapStopped = { fg = colors.green },
 
             NormalFloat = { bg = colors.base },
             Pmenu = { bg = colors.mantle, fg = '' },
@@ -279,6 +281,8 @@ return {
       default_integrations = false,
       integrations = {
         cmp = true,
+        dap = true,
+        dap_ui = true,
         dropbar = { enabled = true },
         diffview = true,
         fidget = true,

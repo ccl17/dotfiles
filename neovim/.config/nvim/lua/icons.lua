@@ -29,7 +29,7 @@ M.misc = {
 M.dap = {
   breakpoint = '',
   log = '◆',
-  bug = '',
+  bug = '',
 }
 
 return M
