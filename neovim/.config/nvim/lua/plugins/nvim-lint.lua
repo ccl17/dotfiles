@@ -17,11 +17,13 @@ return {
     lint.linters_by_ft = {
       dockerfile = { 'hadolint' },
       go = { 'golangcilint' },
-      -- lua = { 'selene' },
       sh = { 'shellcheck' },
       yaml = { 'yamllint' },
       zsh = { 'shellcheck', 'zsh' },
     }
+    -- go
+    local golangcilint = require('lint').linters.golangcilint
+    golangcilint.args = { '--out-format=json' }
     local try_lint = debounce(100, function() lint.try_lint() end)
 
     vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave', 'TextChanged', 'TextChangedI' }, {
