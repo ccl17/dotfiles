@@ -11,7 +11,7 @@ return {
         lsp_format = 'fallback',
       },
       formatters_by_ft = {
-        go = { 'goimports', 'gofumpt', lsp_format = 'never' },
+        go = {},
         lua = { 'stylua' },
       },
       format_on_save = function(bufnr)
