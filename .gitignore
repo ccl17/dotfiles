@@ -7,5 +7,6 @@ tmux/.config/tmux/plugins/
 # zsh
 zsh/.config/zsh/plugins/
 zsh/.config/zsh/.zsh_history
-zsh/.config/zsh/.zcompdump
+zsh/.config/zsh/.zcompdump*
 zsh/.config/zsh/*.zsh
+zsh/.config/zsh/.zsh_sessions/
