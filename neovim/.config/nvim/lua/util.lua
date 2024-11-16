@@ -3,9 +3,9 @@ local M = {}
 ---@param buf? boolean
 function M.toggle_autoformat(buf)
   if buf then
-    vim.b.autoformat = not autoformat_enabled(buf)
+    vim.b.autoformat = not M.autoformat_enabled()
   else
-    vim.g.autoformat = not autoformat_enabled(buf)
+    vim.g.autoformat = not M.autoformat_enabled()
     vim.b.autoformat = nil
   end
 end
