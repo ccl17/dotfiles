@@ -2,6 +2,7 @@ local icons = require('icons')
 
 return {
   'mfussenegger/nvim-dap',
+  lazy = true,
   keys = {
     {
       '<leader>db',
