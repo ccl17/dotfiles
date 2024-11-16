@@ -56,18 +56,6 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = false
 vim.opt.inccommand = 'split'
 
--- use indents of 2
-vim.opt.shiftwidth = 2
-
--- tabs are tabs
-vim.opt.expandtab = true
-
--- an indentation every 2 columns
-vim.opt.tabstop = 2
-
--- let backspace delete indent
-vim.opt.softtabstop = 2
-
 -- enable auto indentation
 vim.opt.autoindent = true
 
