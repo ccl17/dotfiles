@@ -2,7 +2,6 @@ local icons = require('icons')
 return {
   {
     'lukas-reineke/indent-blankline.nvim',
-    version = 'v3.5.4',
     main = 'ibl',
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
