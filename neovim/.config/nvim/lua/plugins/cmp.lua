@@ -63,8 +63,8 @@ return {
         end, { 'i', 's' }),
       },
       sources = cmp.config.sources({
-        { name = 'luasnip' },
         { name = 'nvim_lsp', keyword_length = 2 },
+        { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
       }),
@@ -73,11 +73,6 @@ return {
         format = lspkind.cmp_format({
           mode = 'symbol',
           preset = 'codicons',
-          menu = {
-            buffer = '[Buf]',
-            luasnip = '[Snip]',
-            path = '[Path]',
-          },
         }),
       },
       window = {

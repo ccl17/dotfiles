@@ -22,7 +22,7 @@ M.diagnostics = {
 M.misc = {
   ellipsis = '…',
   search = '🔍',
-  vertical_bar = '│',
+  vertical_bar = '▏',
   lsp_icon = '󰆧',
 }
 
