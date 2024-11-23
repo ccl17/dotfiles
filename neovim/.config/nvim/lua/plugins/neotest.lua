@@ -11,7 +11,7 @@ return {
   keys = {
     { '<leader>tf', function() require('neotest').run.run(vim.fn.expand('%')) end, desc = 'Run File' },
     { '<leader>tF', function() require('neotest').run.run(vim.uv.cwd()) end, desc = 'Run All Test Files' },
-    { '<leader>tn', function() require('neotest').run.run() end, desc = 'Run Nearest' },
+    { '<leader>tc', function() require('neotest').run.run() end, desc = 'Run test at Cursor' },
     { '<leader>tl', function() require('neotest').run.run_last() end, desc = 'Run Last' },
     { '<leader>ts', function() require('neotest').summary.toggle() end, desc = 'Toggle Summary' },
     {
@@ -25,11 +25,21 @@ return {
     { ']t', function() require('neotest').jump.prev({ status = 'failed' }) end, desc = 'jump to next failed test' },
     { '[t', function() require('neotest').jump.next({ status = 'failed' }) end, desc = 'jump to previous failed test' },
   },
-  config = function()
-    require('neotest').setup({
+  opts = function()
+    return {
       adapters = {
         require('neotest-go'),
       },
-    })
+      discovery = {
+        enabled = false,
+        concurrent = 1,
+      },
+      running = {
+        concurrent = false,
+      },
+      summary = {
+        animated = false,
+      },
+    }
   end,
 }
