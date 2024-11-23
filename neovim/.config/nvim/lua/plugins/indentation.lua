@@ -5,7 +5,7 @@ return {
     main = 'ibl',
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
-      local tabchar = require('ibl.config').default_config.indent_char
+      local tabchar = require('ibl.config').default_config.indent.char
       require('ibl').setup({
         indent = {
           char = {
