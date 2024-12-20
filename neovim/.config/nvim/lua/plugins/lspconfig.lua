@@ -20,7 +20,14 @@ local servers = {
     },
   },
   jsonls = {},
-  lua_ls = {},
+  lua_ls = {
+    settings = {
+      Lua = {
+        format = { enable = false },
+        hint = { enable = true, arrayIndex = 'Disable' },
+      },
+    },
+  },
   terraformls = {},
   yamlls = {},
 }

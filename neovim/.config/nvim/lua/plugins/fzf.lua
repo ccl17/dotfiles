@@ -7,10 +7,10 @@ return {
     { 'onsails/lspkind.nvim' },
   },
   keys = {
-    { '<leader>/', function() require('fzf-lua').live_grep() end, desc = 'Live grep' },
-    { '<leader>/', function() require('fzf-lua').grep_visual() end, mode = 'v', desc = 'grep visual selection' },
     -- find
-    { '<leader>ff', function() require('fzf-lua').files() end, desc = 'Find files' },
+    { '<leader>fg', function() require('fzf-lua').live_grep_glob() end, desc = 'grep' },
+    { '<leader>fg', function() require('fzf-lua').grep_visual() end, mode = 'x', desc = 'grep visual selection' },
+    { '<leader>ff', function() require('fzf-lua').files() end, desc = 'find files' },
     { '<leader>fb', '<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>', desc = 'buffers' },
     { '<leader>fo', function() require('fzf-lua').oldfiles() end, desc = 'live grep' },
     -- git

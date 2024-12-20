@@ -6,7 +6,6 @@ return {
   init = function() vim.o.formatexpr = "v:lua.require'conform'.formatexpr()" end,
   config = function()
     require('conform').setup({
-      log_level = vim.log.levels.DEBUG,
       formatters_by_ft = {
         lua = { 'stylua' },
       },
@@ -26,7 +25,7 @@ return {
     vim.keymap.set('n', '<leader>xF', function() util.toggle_autoformat() end, { desc = 'Toggle global autoformat' })
 
     -- gopls formatting with auto import
-    vim.api.nvim_create_autocmd('BufWritePre', {
+    vim.api.nvim_create_autocmd({ 'BufWritePre', 'BufNewFile' }, {
       pattern = '*.go',
       callback = function(args)
         local params = vim.lsp.util.make_range_params()
