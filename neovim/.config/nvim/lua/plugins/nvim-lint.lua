@@ -1,13 +1,4 @@
-local debounce = function(ms, fn)
-  local timer = vim.uv.new_timer()
-  return function(...)
-    local argv = { ... }
-    timer:start(ms, 0, function()
-      timer:stop()
-      vim.schedule_wrap(fn)(unpack(argv))
-    end)
-  end
-end
+local util = require('util')
 
 return {
   'mfussenegger/nvim-lint',
@@ -24,7 +15,7 @@ return {
     -- go
     local golangcilint = require('lint').linters.golangcilint
     golangcilint.args = { '--out-format=json' }
-    local try_lint = debounce(100, function() lint.try_lint() end)
+    local try_lint = util.debounce(100, function() lint.try_lint() end)
 
     vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave', 'TextChanged', 'TextChangedI' }, {
       group = vim.api.nvim_create_augroup('sc/lint', { clear = true }),
