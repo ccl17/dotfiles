@@ -8,7 +8,6 @@ return {
     { 'saadparwaiz1/cmp_luasnip' },
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/cmp-buffer' },
-    { 'hrsh7th/cmp-path' },
     { 'hrsh7th/cmp-cmdline' },
     { 'rcarriga/cmp-dap' },
 
@@ -64,9 +63,19 @@ return {
       },
       sources = cmp.config.sources({
         { name = 'nvim_lsp', keyword_length = 2 },
-        { name = 'luasnip' },
+        {
+          name = 'luasnip',
+          -- Don't show snippet completions in comments or strings.
+          entry_filter = function()
+            local ctx = require('cmp.config.context')
+            local in_string = ctx.in_syntax_group('String') or ctx.in_treesitter_capture('string')
+            local in_comment = ctx.in_syntax_group('Comment') or ctx.in_treesitter_capture('comment')
+
+            return not in_string and not in_comment
+          end,
+        },
+      }, {
         { name = 'buffer' },
-        { name = 'path' },
       }),
       formatting = {
         fields = { 'kind', 'abbr', 'menu' },
