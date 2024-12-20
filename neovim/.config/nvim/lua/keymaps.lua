@@ -38,3 +38,8 @@ vim.keymap.set({ 'n', 'i', 'v' }, '<c-s>', '<esc><cmd>w<cr><esc>', { desc = 'Sav
 
 -- plugin manager
 vim.keymap.set('n', '<leader>pm', '<cmd>Lazy<cr>', { desc = 'Lazy' })
+
+-- neovim
+vim.keymap.set('n', '<space><space>x', '<cmd>source %<cr>')
+vim.keymap.set('n', '<space>x', ':.lua<cr>')
+vim.keymap.set('v', '<space>x', ':lua<cr>')
