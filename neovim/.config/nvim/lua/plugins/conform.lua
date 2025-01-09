@@ -9,6 +9,8 @@ return {
       formatters_by_ft = {
         -- fix imports, then format using lsp (organize import groups)
         go = { 'goimports', lsp_format = 'last' },
+        javascript = { 'prettier' },
+        json = { 'jq' },
         lua = { 'stylua' },
       },
       format_on_save = function(bufnr)

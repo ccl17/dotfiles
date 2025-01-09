@@ -67,7 +67,7 @@ return {
       },
       grep = {
         prompt = prompt,
-        rg_opts = '--column --hidden --line-number --no-heading --color=never --smart-case --max-columns=4096 -e',
+        rg_opts = '--column --line-number --no-heading --color=never --smart-case --max-columns=4096 -e',
         rg_glob = true,
       },
       hls = {
