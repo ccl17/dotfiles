@@ -1,3 +1,26 @@
+local function clear_output_and_run(fn)
+  local neotest = require('neotest')
+  neotest.output_panel.clear()
+  neotest.output_panel.open()
+  fn()
+end
+
+local function run_file()
+  clear_output_and_run(function() require('neotest').run.run(vim.fn.expand('%')) end)
+end
+
+local function run_all_files()
+  clear_output_and_run(function() require('neotest').run.run(vim.uv.cwd()) end)
+end
+
+local function run_cursor()
+  clear_output_and_run(function() require('neotest').run.run() end)
+end
+
+local function run_last()
+  clear_output_and_run(function() require('neotest').run.run_last() end)
+end
+
 return {
   'nvim-neotest/neotest',
   dependencies = {
@@ -9,17 +32,11 @@ return {
     'nvim-neotest/neotest-go',
   },
   keys = {
-    { '<leader>tf', function() require('neotest').run.run(vim.fn.expand('%')) end, desc = 'Run File' },
-    { '<leader>tF', function() require('neotest').run.run(vim.uv.cwd()) end, desc = 'Run All Test Files' },
-    { '<leader>tc', function() require('neotest').run.run() end, desc = 'Run test at Cursor' },
-    { '<leader>tl', function() require('neotest').run.run_last() end, desc = 'Run Last' },
-    { '<leader>ts', function() require('neotest').summary.toggle() end, desc = 'Toggle Summary' },
-    {
-      '<leader>to',
-      function() require('neotest').output.open({ enter = true, auto_close = true }) end,
-      desc = 'Show Output',
-    },
-    { '<leader>tO', function() require('neotest').output_panel.toggle() end, desc = 'Toggle Output Panel' },
+    { '<leader>tf', run_file, desc = 'Run File' },
+    { '<leader>tF', run_all_files, desc = 'Run All Test Files' },
+    { '<leader>tc', run_cursor, desc = 'Run test at Cursor' },
+    { '<leader>tl', run_last, desc = 'Run Last' },
+    { '<leader>to', function() require('neotest').output_panel.toggle() end, desc = 'Toggle Output Panel' },
     { '<leader>tS', function() require('neotest').run.stop() end, desc = 'Stop' },
     { '<leader>tw', function() require('neotest').watch.toggle(vim.fn.expand('%')) end, desc = 'Toggle Watch' },
     { ']t', function() require('neotest').jump.prev({ status = 'failed' }) end, desc = 'jump to next failed test' },
@@ -37,8 +54,11 @@ return {
       running = {
         concurrent = false,
       },
+      output_panel = {
+        open = string.format('botright split | resize %d', math.floor(vim.o.lines * 0.4)),
+      },
       summary = {
-        animated = false,
+        enabled = false,
       },
     }
   end,
