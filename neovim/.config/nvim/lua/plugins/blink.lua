@@ -30,7 +30,7 @@ return {
         enabled = true,
       },
       menu = { border = 'single' },
-      documentation = { enabled = true, window = { border = 'single' } },
+      documentation = { auto_show = true, auto_show_delay_ms = 500, window = { border = 'single' } },
     },
     signature = { enabled = true, window = { border = 'single' } },
   },
