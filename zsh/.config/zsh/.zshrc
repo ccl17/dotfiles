@@ -7,6 +7,7 @@ export VISUAL=nvim
 
 # aliases
 alias vim=nvim
+alias t=tmux
 
 # starship
 export STARSHIP_HOME="$HOME/.config/starship"
@@ -17,14 +18,21 @@ eval "$(starship init zsh)"
 # zoxide
 eval "$(zoxide init zsh)"
 
+# exclude path separator from wordchars
+export WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
 # load all env specific configs
 for config (${ZDOTDIR}/*.zsh) source $config
+
+# load catppuccin zsh-syntax-highlighting
+source "$ZDOTDIR/scripts/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -93,9 +101,12 @@ ZSH_THEME=""
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  fzf
   git
   kubectl
   nvm
+  tmux
+  zoxide
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
