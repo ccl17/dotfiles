@@ -9,6 +9,9 @@ export VISUAL=nvim
 alias vim=nvim
 alias t=tmux
 
+# ripgrep
+export RIPGREP_CONFIG_PATH="$HOME/.config/.ripgreprc"
+
 # starship
 export STARSHIP_HOME="$HOME/.config/starship"
 export STARSHIP_CONFIG="$STARSHIP_HOME/starship.toml"

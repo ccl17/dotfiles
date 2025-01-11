@@ -55,7 +55,6 @@ return {
         },
       },
       fzf_opts = {
-        -- ['--no-scrollbar'] = true,
         ['--layout'] = 'default',
       },
       fzf_colors = {
@@ -68,10 +67,6 @@ return {
       grep = {
         prompt = prompt,
         rg_opts = '--column --line-number --no-heading --color=never --smart-case --max-columns=4096 -e',
-        rg_glob = true,
-      },
-      hls = {
-        -- cursor = { link = 'FloatCursor' },
       },
       oldfiles = {
         prompt = prompt,
