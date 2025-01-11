@@ -2,7 +2,12 @@ return {
   'hrsh7th/nvim-cmp',
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
-    { 'L3MON4D3/LuaSnip', version = 'v2.*', build = 'make install_jsregexp' },
+    {
+      'L3MON4D3/LuaSnip',
+      version = 'v2.*',
+      build = 'make install_jsregexp',
+      dependencies = { 'rafamadriz/friendly-snippets' },
+    },
 
     -- cmp sources
     { 'saadparwaiz1/cmp_luasnip' },
@@ -10,9 +15,6 @@ return {
     { 'hrsh7th/cmp-buffer' },
     { 'hrsh7th/cmp-cmdline' },
     { 'rcarriga/cmp-dap' },
-
-    -- Adds a number of user-friendly snippets
-    { 'rafamadriz/friendly-snippets' },
 
     { 'onsails/lspkind.nvim' },
   },
@@ -87,6 +89,8 @@ return {
       window = {
         completion = {
           winhighlight = winhighlight,
+          max_height = math.floor(vim.o.lines * 0.5),
+          max_width = math.floor(vim.o.columns * 0.4),
         },
         documentation = {
           winhighlight = winhighlight,

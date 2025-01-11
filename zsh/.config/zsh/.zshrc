@@ -95,6 +95,7 @@ ZSH_THEME=""
 plugins=(
   git
   kubectl
+  nvm
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
