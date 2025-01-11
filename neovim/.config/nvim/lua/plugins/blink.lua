@@ -30,9 +30,9 @@ return {
         enabled = true,
       },
       menu = { border = 'single' },
-      documentation = { window = { border = 'single' } },
+      documentation = { enabled = true, window = { border = 'single' } },
     },
-    signature = { window = { border = 'single' } },
+    signature = { enabled = true, window = { border = 'single' } },
   },
   opts_extend = { 'sources.default' },
 }
