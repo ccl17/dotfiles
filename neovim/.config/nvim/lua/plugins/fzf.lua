@@ -67,6 +67,7 @@ return {
       grep = {
         prompt = prompt,
         rg_opts = '--column --line-number --no-heading --color=never --smart-case --max-columns=4096 -e',
+        RIPGREP_CONFIG_PATH = vim.env.RIPGREP_CONFIG_PATH,
       },
       oldfiles = {
         prompt = prompt,

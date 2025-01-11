@@ -158,6 +158,7 @@ return {
       },
     },
     { 'dgagn/diagflow.nvim', lazy = true },
+    { 'saghen/blink.cmp' },
   },
   config = function()
     local on_dynamic_capability = function(fn, opts)
@@ -200,9 +201,8 @@ return {
     local mlsp, lspconfig = require('mason-lspconfig'), require('lspconfig')
     local ensure_installed = vim.tbl_keys(servers or {})
 
-    local cmp_nvim_lsp = require('cmp_nvim_lsp')
-    local capabilities =
-      vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), cmp_nvim_lsp.default_capabilities())
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
     mlsp.setup({
       ensure_installed = ensure_installed,
