@@ -4,7 +4,11 @@ vim.keymap.set('n', '<s-tab>', ':bp<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', '<leader>bd', '<cmd>%bd!<cr>', { desc = 'Close all buffers' })
 
 -- remove highlighting
-vim.keymap.set('n', '<esc>', ':nohlsearch<cr>', { desc = 'Clear hlsearch', silent = true })
+vim.keymap.set({ 'i', 's', 'n' }, '<esc>', function()
+  vim.cmd('noh')
+  vim.snippet.stop()
+  return '<esc>'
+end, { desc = 'Clear hlsearch', silent = true, expr = true })
 
 -- move blocks
 vim.keymap.set('x', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move visual block up' })
