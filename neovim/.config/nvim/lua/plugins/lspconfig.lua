@@ -157,7 +157,19 @@ return {
         },
       },
     },
-    { 'dgagn/diagflow.nvim', lazy = true },
+    {
+      'dgagn/diagflow.nvim',
+      config = function()
+        vim.print('diagflow called!!!')
+        -- diagnostics
+        local diagnostic_icons = require('icons').diagnostics
+        for sev, icon in pairs(diagnostic_icons) do
+          local hl = 'DiagnosticSign' .. sev:sub(1, 1) .. sev:sub(2):lower()
+          vim.fn.sign_define(hl, { text = icon, texthl = hl })
+        end
+        require('diagflow').setup({ show_sign = true })
+      end,
+    },
     { 'saghen/blink.cmp' },
   },
   config = function()
@@ -214,13 +226,5 @@ return {
         end,
       },
     })
-
-    -- diagnostics
-    local diagnostic_icons = require('icons').diagnostics
-    for sev, icon in pairs(diagnostic_icons) do
-      local hl = 'DiagnosticSign' .. sev:sub(1, 1) .. sev:sub(2):lower()
-      vim.fn.sign_define(hl, { text = icon, texthl = hl })
-    end
-    require('diagflow').setup({ show_sign = true })
   end,
 }
