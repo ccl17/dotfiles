@@ -37,8 +37,6 @@ source "$ZDOTDIR/scripts/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
-zstyle ':omz:plugins:nvm' lazy yes
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -106,10 +104,10 @@ ZSH_THEME=""
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  asdf
   fzf
   git
   kubectl
-  nvm
   tmux
   zoxide
   zsh-autosuggestions
