@@ -74,7 +74,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
 vim.api.nvim_create_user_command('Cppath', function()
   local path = vim.fn.expand('%')
   vim.fn.setreg('+', path)
-  vim.notify('"' .. path .. '" copied to the clipboard!')
+  vim.notify('"' .. path .. '" copied to the clipboard')
 end, {})
 
-vim.keymap.set('n', '<leader>yp', '<cmd>Cppath<cr>', { desc = 'Yank current file path' })
+vim.keymap.set('n', '<leader>fy', '<cmd>Cppath<cr>', { desc = 'Yank current file path' })
