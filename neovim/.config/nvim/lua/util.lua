@@ -23,7 +23,7 @@ function M.autoformat_enabled(buf)
   return gaf == nil or gaf
 end
 
----@param ms milliseconds
+---@param ms integer
 ---@param fn function
 function M.debounce(ms, fn)
   local timer = vim.uv.new_timer()

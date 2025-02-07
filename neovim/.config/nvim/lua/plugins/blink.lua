@@ -7,7 +7,8 @@ return {
   ---@type blink.cmp.Config
   opts = {
     keymap = {
-      ['<c-d>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      ['<c-c>'] = { 'show_documentation', 'hide_documentation' },
+      ['<c-d>'] = { 'show' },
       ['<cr>'] = { 'accept', 'fallback' },
       ['<c-e>'] = { 'hide', 'fallback' },
       ['<tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
@@ -17,12 +18,18 @@ return {
       ['<c-b>'] = { 'scroll_documentation_up', 'fallback' },
       ['<c-f>'] = { 'scroll_documentation_down', 'fallback' },
     },
-    appearance = {
-      use_nvim_cmp_as_default = true,
-      nerd_font_variant = 'mono',
-    },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      default = function()
+        local sources = { 'lsp', 'buffer' }
+        local ok, node = pcall(vim.treesitter.get_node)
+
+        if ok and node and vim.tbl_contains({ 'string', 'comment', 'line_comment', 'block_comment' }, node:type()) then
+          table.insert(sources, 'snippets')
+          table.insert(sources, 'path')
+        end
+
+        return sources
+      end,
       cmdline = {},
     },
     completion = {
@@ -31,7 +38,6 @@ return {
       },
       documentation = { auto_show = true, auto_show_delay_ms = 500 },
     },
-    signature = { enabled = true },
   },
   opts_extend = { 'sources.default' },
 }
