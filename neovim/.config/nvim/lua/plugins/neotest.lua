@@ -13,6 +13,7 @@ return {
     { '<leader>tF', function() require('neotest').run.run(vim.uv.cwd()) end, desc = 'Run All Test Files' },
     { '<leader>tc', function() require('neotest').run.run() end, desc = 'Run test at Cursor' },
     { '<leader>tS', function() require('neotest').run.stop() end, desc = 'Stop' },
+    { '<leader>to', function() require('neotest').output_panel.toggle() end, desc = 'Toggle test output' },
     { '<leader>tw', function() require('neotest').watch.toggle(vim.fn.expand('%')) end, desc = 'Toggle Watch' },
     { ']t', function() require('neotest').jump.prev({ status = 'failed' }) end, desc = 'jump to next failed test' },
     { '[t', function() require('neotest').jump.next({ status = 'failed' }) end, desc = 'jump to previous failed test' },
