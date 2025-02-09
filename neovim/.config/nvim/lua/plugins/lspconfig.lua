@@ -7,7 +7,7 @@ local servers = {
     settings = {
       gopls = {
         directoryFilters = { '-.git', '-node_modules', '-vendor' },
-        gofumpt = true,
+        gofumpt = false,
         semanticTokens = true,
         usePlaceholders = true,
         analyses = { unusedparams = true },

@@ -94,7 +94,7 @@ vim.opt.breakindent = true
 vim.opt.cursorline = true
 
 -- show invisibles
-vim.opt.listchars = { tab = '  ', trail = '·', extends = '»', precedes = '«', nbsp = '░' }
+vim.opt.listchars = { tab = '▸ ', trail = '·', extends = '»', precedes = '«', nbsp = '░' }
 vim.opt.list = true
 
 -- split style
