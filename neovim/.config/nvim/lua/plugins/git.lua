@@ -7,12 +7,12 @@ return {
     config = function()
       require('gitsigns').setup({
         signs = {
-          add = { text = icons.misc.vertical_bar },
-          change = { text = icons.misc.vertical_bar },
-          delete = { text = icons.misc.vertical_bar },
-          topdelete = { text = icons.misc.vertical_bar },
-          changedelete = { text = icons.misc.vertical_bar },
-          untracked = { text = icons.misc.vertical_bar },
+          add = { text = icons.misc.dashed_bar },
+          change = { text = icons.misc.dashed_bar },
+          delete = { text = icons.misc.dashed_bar },
+          topdelete = { text = icons.misc.dashed_bar },
+          changedelete = { text = icons.misc.dashed_bar },
+          untracked = { text = icons.misc.dashed_bar },
         },
         signs_staged = {
           add = { text = icons.misc.vertical_bar },
@@ -31,11 +31,11 @@ return {
           follow_files = true,
         },
         attach_to_untracked = true,
-        current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+        current_line_blame = true,
         current_line_blame_opts = {
           virt_text = true,
           virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-          delay = 1000,
+          delay = 500,
           ignore_whitespace = false,
         },
         current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',

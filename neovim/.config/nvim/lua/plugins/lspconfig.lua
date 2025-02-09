@@ -115,15 +115,31 @@ local on_attach = function(client, buffer)
 
   -- inlay hint
   if client.supports_method(methods.textDocument_inlayHint) then
-    if not vim.lsp.inlay_hint.is_enabled({ bufnr = buffer }) then
-      vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-    end
-    vim.keymap.set(
-      'n',
-      '<leader>xi',
-      function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = buffer })) end,
-      { desc = 'Toggle inlay hint' }
-    )
+    vim.g.inlay_hints = true
+    local inlay_hints_group = vim.api.nvim_create_augroup('sc/inlay_hints', { clear = false })
+
+    vim.defer_fn(function()
+      local mode = vim.api.nvim_get_mode().mode
+      vim.lsp.inlay_hint.enable(mode == 'n' or mode == 'v', { bufnr = buffer })
+    end, 500)
+
+    vim.api.nvim_create_autocmd('InsertEnter', {
+      group = inlay_hints_group,
+      desc = 'Enable inlay hints',
+      buffer = buffer,
+      callback = function()
+        if vim.g.inlay_hints then vim.lsp.inlay_hint.enable(false, { bufnr = buffer }) end
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('InsertLeave', {
+      group = inlay_hints_group,
+      desc = 'Disable inlay hints',
+      buffer = buffer,
+      callback = function()
+        if vim.g.inlay_hints then vim.lsp.inlay_hint.enable(true, { bufnr = buffer }) end
+      end,
+    })
   end
 end
 

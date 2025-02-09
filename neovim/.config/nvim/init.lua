@@ -19,6 +19,7 @@ local plugins = 'plugins'
 
 require('settings')
 require('keymaps')
+require('commands')
 require('autocmds')
 
 require('lazy').setup(plugins, {

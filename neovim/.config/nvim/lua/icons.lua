@@ -23,6 +23,7 @@ M.misc = {
   ellipsis = '…',
   search = '🔍',
   vertical_bar = '▏',
+  dashed_bar = '┊',
   lsp_icon = '󰆧',
 }
 
