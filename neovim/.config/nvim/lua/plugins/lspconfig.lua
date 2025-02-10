@@ -1,36 +1,60 @@
 local methods = vim.lsp.protocol.Methods
 
-local servers = {
-  bashls = {},
-  dockerls = {},
-  gopls = {
-    settings = {
-      gopls = {
-        directoryFilters = { '-.git', '-node_modules', '-vendor' },
-        gofumpt = false,
-        semanticTokens = true,
-        usePlaceholders = true,
-        analyses = { unusedparams = true },
-        staticcheck = true,
-        hints = {
-          compositeLiteralFields = true,
-          parameterNames = true,
-        },
-      },
-    },
-  },
-  jsonls = {},
-  lua_ls = {
-    settings = {
-      Lua = {
-        format = { enable = false },
-        hint = { enable = true, arrayIndex = 'Disable' },
-      },
-    },
-  },
-  terraformls = {},
-  yamlls = {},
-}
+-- local servers = {
+--   bashls = {},
+--   dockerls = {},
+--   gopls = {
+--     settings = {
+--       gopls = {
+--         directoryFilters = { '-.git', '-node_modules', '-vendor' },
+--         gofumpt = false,
+--         semanticTokens = true,
+--         usePlaceholders = true,
+--         analyses = { unusedparams = true },
+--         staticcheck = true,
+--         hints = {
+--           compositeLiteralFields = true,
+--           parameterNames = true,
+--         },
+--       },
+--     },
+--   },
+--   jsonls = {
+--     init_options = {
+--       provideFormatter = false,
+--     },
+--     settings = {
+--       json = {
+--         -- schemas = require('schemastore').json.schemas(),
+--         validate = { enable = true },
+--       },
+--     },
+--   },
+--   lua_ls = {
+--     settings = {
+--       Lua = {
+--         format = { enable = false },
+--         hint = { enable = true, arrayIndex = 'Disable' },
+--       },
+--     },
+--   },
+--   terraformls = {},
+--   yamlls = {
+--     settings = {
+--       yaml = {
+--         schemaStore = {
+--           enable = false,
+--           url = '',
+--         },
+--         -- schemas = require('schemastore').yaml.schemas(),
+--         validate = true,
+--         format = {
+--           enable = false,
+--         },
+--       },
+--     },
+--   },
+-- }
 
 -- LSP keymaps, autocommands
 ---@param client vim.lsp.Client
@@ -126,17 +150,43 @@ local on_attach = function(client, buffer)
   end
 end
 
+local on_dynamic_capability = function(fn, opts)
+  return vim.api.nvim_create_autocmd('User', {
+    pattern = 'LspDynamicCapability',
+    group = opts and opts.group or nil,
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      local buffer = args.data.buffer
+      if client then return fn(client, buffer) end
+    end,
+  })
+end
+
 return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     {
-      'williamboman/mason.nvim',
-      cmd = 'Mason',
-      build = ':MasonUpdate',
-      config = true,
+      'williamboman/mason-lspconfig.nvim',
+      dependencies = {
+        {
+          'williamboman/mason.nvim',
+          cmd = 'Mason',
+          config = function(_, opts)
+            require('mason').setup(opts)
+            local registry = require('mason-registry')
+            registry.refresh(function()
+              if opts.ensure_installed == nil then return end
+
+              for _, pkg_name in ipairs(opts.ensure_installed) do
+                local pkg = registry.get_package(pkg_name)
+                if not pkg:is_installed() then pkg:install() end
+              end
+            end)
+          end,
+        },
+      },
     },
-    { 'williamboman/mason-lspconfig.nvim' },
     {
       'j-hui/fidget.nvim',
       opts = {
@@ -157,20 +207,68 @@ return {
       },
     },
     { 'saghen/blink.cmp' },
+    { 'b0o/schemastore.nvim', version = false },
   },
-  config = function()
-    local on_dynamic_capability = function(fn, opts)
-      return vim.api.nvim_create_autocmd('User', {
-        pattern = 'LspDynamicCapability',
-        group = opts and opts.group or nil,
-        callback = function(args)
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          local buffer = args.data.buffer
-          if client then return fn(client, buffer) end
-        end,
-      })
-    end
-
+  opts = function(_, opts)
+    return vim.tbl_deep_extend('force', {}, opts.servers or {}, {
+      servers = {
+        bashls = {},
+        dockerls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              directoryFilters = { '-.git', '-node_modules', '-vendor' },
+              gofumpt = false,
+              semanticTokens = true,
+              usePlaceholders = true,
+              analyses = { unusedparams = true },
+              staticcheck = true,
+              hints = {
+                compositeLiteralFields = true,
+                parameterNames = true,
+              },
+            },
+          },
+        },
+        jsonls = {
+          init_options = {
+            provideFormatter = false,
+          },
+          settings = {
+            json = {
+              schemas = require('schemastore').json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
+        lua_ls = {
+          settings = {
+            Lua = {
+              format = { enable = false },
+              hint = { enable = true, arrayIndex = 'Disable' },
+            },
+          },
+        },
+        terraformls = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              schemaStore = {
+                enable = false,
+                url = '',
+              },
+              schemas = require('schemastore').yaml.schemas(),
+              validate = true,
+              format = {
+                enable = false,
+              },
+            },
+          },
+        },
+      },
+    })
+  end,
+  config = function(_, opts)
     vim.api.nvim_create_autocmd('LspAttach', {
       desc = 'Configure LSP',
       group = vim.api.nvim_create_augroup('sc/lsp_attach', { clear = true }),
@@ -194,10 +292,8 @@ return {
       end,
     })
 
-    -- LSP servers
-    require('mason').setup()
     local mlsp, lspconfig = require('mason-lspconfig'), require('lspconfig')
-    local ensure_installed = vim.tbl_keys(servers or {})
+    local ensure_installed = vim.tbl_keys(opts.servers or {})
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
@@ -206,7 +302,7 @@ return {
       ensure_installed = ensure_installed,
       handlers = {
         function(server_name)
-          local server = servers[server_name] or {}
+          local server = opts.servers[server_name] or {}
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
           lspconfig[server_name].setup(server)
         end,

@@ -3,6 +3,18 @@ local util = require('util')
 return {
   'mfussenegger/nvim-lint',
   event = 'BufReadPre',
+  dependencies = {
+    {
+      'williamboman/mason.nvim',
+      opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
+        vim.list_extend(
+          opts.ensure_installed,
+          { 'golangci-lint', 'hadolint', 'shellcheck', 'tflint', 'tfsec', 'yamllint' }
+        )
+      end,
+    },
+  },
   config = function()
     local lint = require('lint')
     lint.linters_by_ft = {
