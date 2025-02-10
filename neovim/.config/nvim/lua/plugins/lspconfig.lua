@@ -32,23 +32,6 @@ local servers = {
   yamlls = {},
 }
 
---- HACK: Override `vim.lsp.util.stylize_markdown` to use Treesitter.
----@param bufnr integer
----@param contents string[]
----@param opts table
----@return string[]
----@diagnostic disable-next-line: duplicate-set-field
-vim.lsp.util.stylize_markdown = function(bufnr, contents, opts)
-  contents = vim.lsp.util._normalize_markdown(contents, {
-    width = vim.lsp.util._make_floating_popup_size(contents, opts),
-  })
-  vim.bo[bufnr].filetype = 'markdown'
-  vim.treesitter.start(bufnr)
-  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, contents)
-
-  return contents
-end
-
 -- LSP keymaps, autocommands
 ---@param client vim.lsp.Client
 ---@param buffer integer
@@ -172,19 +155,6 @@ return {
           { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
         },
       },
-    },
-    {
-      'dgagn/diagflow.nvim',
-      config = function()
-        vim.print('diagflow called!!!')
-        -- diagnostics
-        local diagnostic_icons = require('icons').diagnostics
-        for sev, icon in pairs(diagnostic_icons) do
-          local hl = 'DiagnosticSign' .. sev:sub(1, 1) .. sev:sub(2):lower()
-          vim.fn.sign_define(hl, { text = icon, texthl = hl })
-        end
-        require('diagflow').setup({ show_sign = true })
-      end,
     },
     { 'saghen/blink.cmp' },
   },
