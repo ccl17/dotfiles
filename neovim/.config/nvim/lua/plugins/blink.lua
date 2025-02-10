@@ -23,7 +23,11 @@ return {
         local sources = { 'lsp', 'buffer' }
         local ok, node = pcall(vim.treesitter.get_node)
 
-        if ok and node and vim.tbl_contains({ 'string', 'comment', 'line_comment', 'block_comment' }, node:type()) then
+        if
+          ok
+          and node
+          and not vim.tbl_contains({ 'string', 'comment', 'line_comment', 'block_comment' }, node:type())
+        then
           table.insert(sources, 'snippets')
           table.insert(sources, 'path')
         end
