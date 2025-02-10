@@ -37,6 +37,13 @@ source "$ZDOTDIR/scripts/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' $ZSH_COMPDUMP 2>/dev/null)" ]; then
+    compinit
+else
+    compinit -C
+fi
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
