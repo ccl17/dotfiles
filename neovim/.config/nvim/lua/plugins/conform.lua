@@ -15,6 +15,9 @@ return {
         javascript = { 'prettier' },
         json = { 'jq' },
         lua = { 'stylua' },
+        terraform = { 'terraform_fmt' },
+        tf = { 'terraform_fmt' },
+        ['terraform-vars'] = { 'terraform_fmt' },
       },
       format_on_save = function(bufnr)
         if not util.autoformat_enabled(bufnr) then return end

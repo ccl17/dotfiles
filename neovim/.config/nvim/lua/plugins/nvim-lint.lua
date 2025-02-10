@@ -9,8 +9,10 @@ return {
       dockerfile = { 'hadolint' },
       go = { 'golangcilint' },
       sh = { 'shellcheck' },
+      terraform = { 'terraform_validate', 'tflint', 'tfsec' },
+      tf = { 'terraform_validate', 'tflint', 'tfsec' },
       yaml = { 'yamllint' },
-      zsh = { 'shellcheck', 'zsh' },
+      zsh = { 'shellcheck' },
     }
     local try_lint = util.debounce(100, function() lint.try_lint() end)
     vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave', 'TextChanged', 'TextChangedI' }, {
