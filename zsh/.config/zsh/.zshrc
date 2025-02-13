@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 # environment
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:/opt/nvim-linux64/bin:/usr/local/go/bin:$HOME/go/bin:$PATH
 
@@ -95,6 +96,12 @@ ZSH_THEME=""
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+setopt hist_expire_dups_first
+
+setopt SHARE_HISTORY
+
+setopt hist_ignore_dups
+
 # load catppuccin zsh-syntax-highlighting
 source "$ZDOTDIR/scripts/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 
@@ -143,3 +150,4 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+# zprof
