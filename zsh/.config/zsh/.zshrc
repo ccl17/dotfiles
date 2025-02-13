@@ -27,22 +27,12 @@ export WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 # load all env specific configs
 for config (${ZDOTDIR}/*.zsh) source $config
 
-# load catppuccin zsh-syntax-highlighting
-source "$ZDOTDIR/scripts/catppuccin_mocha-zsh-syntax-highlighting.zsh"
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
-
-autoload -Uz compinit
-if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' $ZSH_COMPDUMP 2>/dev/null)" ]; then
-    compinit
-else
-    compinit -C
-fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -105,13 +95,15 @@ ZSH_THEME=""
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# load catppuccin zsh-syntax-highlighting
+source "$ZDOTDIR/scripts/catppuccin_mocha-zsh-syntax-highlighting.zsh"
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  asdf
   fzf
   git
   kubectl
