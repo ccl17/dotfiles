@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 })
 
 local cursorline = vim.api.nvim_create_augroup('sc/cursorline', { clear = true })
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.api.nvim_create_autocmd({ 'WinEnter', 'FocusGained' }, {
   group = cursorline,
   pattern = { '*' },
   callback = function(args)
@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
       and vim.bo[args.buf].filetype ~= ''
   end,
 })
-vim.api.nvim_create_autocmd('BufLeave', {
+vim.api.nvim_create_autocmd({ 'WinLeave', 'FocusLost' }, {
   group = cursorline,
   pattern = { '*' },
   callback = function() vim.wo.cursorline = false end,

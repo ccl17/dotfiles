@@ -34,13 +34,15 @@ return {
 
         return sources
       end,
-      cmdline = {},
     },
     completion = {
       ghost_text = {
         enabled = true,
       },
       documentation = { auto_show = true, auto_show_delay_ms = 500 },
+    },
+    cmdline = {
+      enabled = false,
     },
   },
   opts_extend = { 'sources.default' },
