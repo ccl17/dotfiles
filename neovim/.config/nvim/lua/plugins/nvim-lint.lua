@@ -26,10 +26,13 @@ return {
       yaml = { 'yamllint' },
       zsh = { 'shellcheck' },
     }
-    local try_lint = util.debounce(100, function() lint.try_lint() end)
-    vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave', 'TextChanged', 'TextChangedI' }, {
-      group = vim.api.nvim_create_augroup('sc/lint', { clear = true }),
-      callback = try_lint,
-    })
+    local try_lint = util.debounce(200, function() lint.try_lint() end)
+    vim.api.nvim_create_autocmd(
+      { 'BufWritePost', 'BufReadPost', 'InsertLeave', 'TextChanged', 'TextChangedI', 'CursorMoved', 'CursorMovedI' },
+      {
+        group = vim.api.nvim_create_augroup('sc/lint', { clear = true }),
+        callback = try_lint,
+      }
+    )
   end,
 }
