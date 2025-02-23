@@ -1,7 +1,7 @@
 {
   "if err != nil return": {
-    "prefix": "ife",
-    "body": "if err != nil {\n\treturn ${1:err}\n}",
+    "prefix": "iferr",
+    "body": "if err != nil {\n\t${1:return err}\n}",
     "description": "Snippet for if err != nil with return"
   }
 }
