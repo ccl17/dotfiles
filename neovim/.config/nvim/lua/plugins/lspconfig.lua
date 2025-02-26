@@ -40,30 +40,6 @@ local on_attach = function(client, buffer)
   vim.keymap.set('n', 'ga', '<cmd>FzfLua lsp_code_actions<cr>', { desc = 'Code action' })
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename' })
 
-  -- cursor highlight
-  if client.supports_method(methods.textDocument_documentHighlight) then
-    local highlight_group = vim.api.nvim_create_augroup('sc/cursor_highlight_attach', { clear = true })
-
-    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-      buffer = buffer,
-      group = highlight_group,
-      callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-      buffer = buffer,
-      group = highlight_group,
-      callback = vim.lsp.buf.clear_references,
-    })
-
-    vim.api.nvim_create_autocmd('LspDetach', {
-      group = vim.api.nvim_create_augroup('sc/cursor_highlight_detach', { clear = true }),
-      callback = function()
-        vim.lsp.buf.clear_references()
-        vim.api.nvim_clear_autocmds({ group = 'sc/cursor_highlight_attach', buffer = buffer })
-      end,
-    })
-  end
-
   -- inlay hint
   if client.supports_method(methods.textDocument_inlayHint) then
     vim.g.inlay_hints = true
