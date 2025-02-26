@@ -8,31 +8,31 @@ local on_attach = function(client, buffer)
   vim.keymap.set(
     'n',
     'gd',
-    '<cmd>FzfLua lsp_definitions jump_to_single_result=true ignore_current_line=true<cr>',
+    '<cmd>FzfLua lsp_definitions jump1=true ignore_current_line=true<cr>',
     { desc = 'Goto definition' }
   )
   vim.keymap.set(
     'n',
     'gr',
-    '<cmd>FzfLua lsp_references jump_to_single_result=true ignore_current_line=true<cr>',
+    '<cmd>FzfLua lsp_references jump1=true ignore_current_line=true<cr>',
     { desc = 'Goto references' }
   )
   vim.keymap.set(
     'n',
     'gt',
-    '<cmd>FzfLua lsp_typedefs jump_to_single_result=true ignore_current_line=true<cr>',
+    '<cmd>FzfLua lsp_typedefs jump1=true ignore_current_line=true<cr>',
     { desc = 'Goto type definition' }
   )
   vim.keymap.set(
     'n',
     'gi',
-    '<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>',
+    '<cmd>FzfLua lsp_implementations jump1=true ignore_current_line=true<cr>',
     { desc = 'Goto implementations' }
   )
   vim.keymap.set(
     'n',
     'gD',
-    '<cmd>FzfLua lsp_declarations jump_to_single_result=true ignore_current_line=true<cr>',
+    '<cmd>FzfLua lsp_declarations jump1=true ignore_current_line=true<cr>',
     { desc = 'Goto declaration' }
   )
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
