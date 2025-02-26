@@ -1,6 +1,6 @@
 # zmodload zsh/zprof
 # environment
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:/opt/nvim-linux64/bin:/usr/local/go/bin:$HOME/go/bin:$PATH
+export PATH=${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/bin:/usr/local/bin:$HOME/.local/bin:/opt/nvim-linux64/bin:/usr/local/go/bin:$HOME/go/bin:$PATH
 
 # text editor
 export EDITOR=nvim
