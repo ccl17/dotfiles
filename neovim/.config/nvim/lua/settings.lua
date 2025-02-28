@@ -5,9 +5,6 @@ vim.opt.modelines = 0
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- hide buffers, not close them
--- vim.opt.hidden = true
-
 -- maintain undo history between sessions
 vim.opt.swapfile = false
 vim.opt.undofile = true
@@ -18,10 +15,11 @@ vim.opt.sidescroll = 8
 
 -- scrolling
 vim.opt.mouse = 'a'
+-- disable horizontal scrolling
+vim.o.mousescroll = 'ver:3,hor:0'
 
 -- fuzzy find
 vim.opt.path:append('**')
--- lazy file name tab completion
 vim.opt.wildmode = 'list:longest,list:full'
 vim.opt.wildmenu = true
 vim.opt.wildignorecase = true
@@ -37,6 +35,8 @@ vim.opt.wildignore:append('.doc,*.pdf,*.cbr,*.cbz')
 vim.opt.wildignore:append('.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb')
 vim.opt.wildignore:append('.swp,.lock,.DS_Store,._*')
 vim.opt.wildignore:append('.,..')
+vim.o.completeopt = 'menuone,noselect,noinsert'
+vim.o.pumheight = 15
 
 -- case insensitive search
 vim.opt.ignorecase = true
@@ -45,8 +45,9 @@ vim.opt.infercase = true
 
 vim.opt.grepprg = 'rg --vimgrep'
 vim.opt.virtualedit = 'block'
-vim.opt.updatetime = 200
-vim.opt.timeoutlen = 300
+vim.o.updatetime = 300
+vim.o.timeoutlen = 500
+vim.o.ttimeoutlen = 10
 
 -- make backspace behave in a sane manner
 vim.opt.backspace = 'indent,eol,start'
@@ -90,11 +91,8 @@ vim.opt.wrap = false
 -- set indents when wrapped
 vim.opt.breakindent = true
 
--- cursorline
-vim.opt.cursorline = true
-
 -- show invisibles
-vim.opt.listchars = { tab = '▸ ', trail = '·', extends = '»', precedes = '«', nbsp = '░' }
+vim.opt.listchars = { tab = '  ▸', trail = '·', extends = '»', precedes = '«', nbsp = '░' }
 vim.opt.list = true
 
 -- split style
@@ -107,3 +105,9 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- don't announce modes
 vim.opt.showmode = false
+
+-- Disable health checks for these providers.
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0

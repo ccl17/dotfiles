@@ -41,9 +41,6 @@ return {
       },
       documentation = { auto_show = true, auto_show_delay_ms = 500 },
     },
-    cmdline = {
-      enabled = false,
-    },
+    cmdline = { completion = { menu = { auto_show = true } } },
   },
-  opts_extend = { 'sources.default' },
 }
