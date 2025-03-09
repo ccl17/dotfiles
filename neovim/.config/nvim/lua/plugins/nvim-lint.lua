@@ -26,6 +26,9 @@ return {
       yaml = { 'yamllint' },
       zsh = { 'shellcheck' },
     }
+    local golangcilint = lint.linters.golangcilint
+    golangcilint.ignore_exitcode = true
+
     local try_lint = util.debounce(200, function() lint.try_lint() end)
     vim.api.nvim_create_autocmd(
       { 'BufWritePost', 'BufReadPost', 'InsertLeave', 'TextChanged', 'TextChangedI', 'CursorMoved', 'CursorMovedI' },
