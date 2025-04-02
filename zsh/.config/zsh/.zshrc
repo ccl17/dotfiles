@@ -1,13 +1,14 @@
-# zmodload zsh/zprof
+autoload -Uz compinit && compinit
+
 # environment
-export PATH=${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/bin:/usr/local/bin:$HOME/.local/bin:/opt/nvim-linux64/bin:/usr/local/go/bin:$HOME/go/bin:$PATH
+export PATH=${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/bin:/usr/local/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/go/bin:$PATH
 
 # text editor
 export EDITOR=nvim
 export VISUAL=nvim
 
 # aliases
-alias vim=nvim
+alias v=nvim
 alias t=tmux
 
 # ripgrep
@@ -150,4 +151,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# zprof
