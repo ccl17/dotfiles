@@ -42,6 +42,7 @@
   "persistence.nvim": { "branch": "main", "commit": "166a79a55bfa7a4db3e26fc031b4d92af71d0b51" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "schemastore.nvim": { "branch": "main", "commit": "e659e0c6ca06727ed898aaaeea3850f528898684" },
+  "scratch.nvim": { "branch": "main", "commit": "0e3ee1fe64023efe9459a361401a48017d34349e" },
   "tmux.nvim": { "branch": "main", "commit": "2c1c3be0ef287073cef963f2aefa31a15c8b9cd8" },
   "treesj": { "branch": "main", "commit": "f4049f8ba2177e7c5c03fb9e34d4e039c685d744" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" }
