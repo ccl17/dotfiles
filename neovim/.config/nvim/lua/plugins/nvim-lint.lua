@@ -10,7 +10,7 @@ return {
         opts.ensure_installed = opts.ensure_installed or {}
         vim.list_extend(
           opts.ensure_installed,
-          { 'golangci-lint', 'hadolint', 'shellcheck', 'tflint', 'tfsec', 'yamllint' }
+          { 'golangci-lint@v1.64.8', 'hadolint', 'shellcheck', 'tflint', 'tfsec', 'yamllint' }
         )
       end,
     },

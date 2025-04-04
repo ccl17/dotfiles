@@ -98,9 +98,30 @@ return {
             registry.refresh(function()
               if opts.ensure_installed == nil then return end
 
-              for _, pkg_name in ipairs(opts.ensure_installed) do
+              for _, ensure_install in ipairs(opts.ensure_installed) do
+                local parts = {}
+                for part in string.gmatch(ensure_install, '([^@]+)') do
+                  table.insert(parts, part)
+                end
+
+                local pkg_name = parts[1]
+                local pkg_opts = parts[2] and { version = parts[2] } or nil
+
                 local pkg = registry.get_package(pkg_name)
-                if not pkg:is_installed() then pkg:install() end
+                local installed = pkg:is_installed()
+
+                if pkg_opts and pkg_opts.version then
+                  for _, p in ipairs(registry.get_installed_packages()) do
+                    if p.name == pkg_name then
+                      p:get_installed_version(function(success, version_or_err)
+                        if not success then return end
+                        installed = installed and success and version_or_err == pkg_opts.version
+                      end)
+                    end
+                  end
+                end
+
+                if not installed then pkg:install(pkg_opts) end
               end
             end)
           end,
@@ -213,13 +234,11 @@ return {
     })
 
     local mlsp, lspconfig = require('mason-lspconfig'), require('lspconfig')
-    local ensure_installed = vim.tbl_keys(opts.servers or {})
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
     mlsp.setup({
-      ensure_installed = ensure_installed,
       handlers = {
         function(server_name)
           local server = opts.servers[server_name] or {}
