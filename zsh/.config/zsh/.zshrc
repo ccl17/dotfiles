@@ -7,10 +7,6 @@ export PATH=${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/bin:/usr/local/bin:$HOME/.
 export EDITOR=nvim
 export VISUAL=nvim
 
-# aliases
-alias v=nvim
-alias t=tmux
-
 # ripgrep
 export RIPGREP_CONFIG_PATH="$HOME/.config/.ripgreprc"
 
@@ -151,3 +147,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# aliases
+alias v=nvim
+alias t=tmux
+
+tt() {
+  local session=$(tmux ls | fzf --height=~100%)
+  [[ $session ]] && tmux a -t ${session%%:*}
+}
