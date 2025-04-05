@@ -40,6 +40,36 @@ local on_attach = function(client, buffer)
   vim.keymap.set('n', 'ga', '<cmd>FzfLua lsp_code_actions<cr>', { desc = 'Code action' })
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename' })
 
+  -- document highlight
+  if client:supports_method(methods.textDocument_documentHighlight) then
+    local document_highlight_group = vim.api.nvim_create_augroup('sc/document_highlight', { clear = false })
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'InsertLeave', 'FocusGained' }, {
+      group = document_highlight_group,
+      desc = 'Highlight document references under the cursor',
+      buffer = buffer,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd({ 'CursorMoved', 'InsertEnter', 'BufLeave', 'FocusLost' }, {
+      group = document_highlight_group,
+      desc = 'Clear highlight references',
+      buffer = buffer,
+      callback = vim.lsp.buf.clear_references,
+    })
+  end
+
+  -- signature help
+  if client:supports_method(methods.textDocument_signatureHelp) then
+    local blink_window = require('blink.cmp.completion.windows.menu')
+    local blink = require('blink.cmp')
+
+    vim.keymap.set('i', '<c-k>', function()
+      -- Close the completion menu first (if open).
+      if blink_window.win:is_open() then blink.hide() end
+
+      vim.lsp.buf.signature_help()
+    end, { desc = 'Signature help' })
+  end
+
   -- inlay hint
   if client:supports_method(methods.textDocument_inlayHint) and vim.g.inlay_hints then
     local inlay_hints_group = vim.api.nvim_create_augroup('sc/inlay_hints', { clear = false })
