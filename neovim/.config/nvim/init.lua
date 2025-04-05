@@ -21,6 +21,7 @@ require('settings')
 require('keymaps')
 require('commands')
 require('autocmds')
+require('diagnostic')
 
 require('lazy').setup(plugins, {
   install = { missing = false },
