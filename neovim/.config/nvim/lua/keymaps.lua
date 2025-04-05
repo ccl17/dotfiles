@@ -52,6 +52,21 @@ vim.keymap.set('n', '<leader>xi', '<cmd>ToggleInlayHints<cr>', { desc = 'Toggle 
 -- disable vim command history
 vim.keymap.set('n', 'q:', '<nop>', { desc = 'Disable cmd history', noremap = true })
 
+-- error diagnostics
+vim.keymap.set(
+  'n',
+  '[e',
+  function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
+  { desc = 'Previous error' }
+)
+
+vim.keymap.set(
+  'n',
+  ']e',
+  function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
+  { desc = 'Next error' }
+)
+
 -- neovim
 -- vim.keymap.set('n', '<space><space>x', '<cmd>source %<cr>')
 -- vim.keymap.set('n', '<space>x', ':.lua<cr>')
