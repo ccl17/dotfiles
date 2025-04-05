@@ -61,6 +61,13 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+vim.api.nvim_create_autocmd('CmdLineLeave', {
+  group = vim.api.nvim_create_augroup('sc/clear_cmdline', { clear = true }),
+  callback = function()
+    vim.fn.timer_start(3000, function() vim.cmd("echon ''") end)
+  end,
+})
+
 -- sessions
 vim.api.nvim_create_autocmd('VimEnter', {
   group = vim.api.nvim_create_augroup('sc/load_session', { clear = true }),

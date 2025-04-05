@@ -1,6 +1,4 @@
 -- buffers
-vim.keymap.set('n', '<tab>', ':bn<cr>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<s-tab>', ':bp<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', '<leader>bd', '<cmd>%bd!<cr>', { desc = 'Close all buffers' })
 vim.keymap.set('n', '<leader>fy', '<cmd>Cppath<cr>', { desc = 'Yank current buffer relative path' })
 
@@ -50,6 +48,9 @@ vim.keymap.set('n', '<leader>xF', '<cmd>ToggleFormat!<cr>', { desc = 'Toggle glo
 
 -- inlay hints
 vim.keymap.set('n', '<leader>xi', '<cmd>ToggleInlayHints<cr>', { desc = 'Toggle inlay hints' })
+
+-- disable vim command history
+vim.keymap.set('n', 'q:', '<nop>', { desc = 'Disable cmd history', noremap = true })
 
 -- neovim
 -- vim.keymap.set('n', '<space><space>x', '<cmd>source %<cr>')
