@@ -234,11 +234,13 @@ return {
     })
 
     local mlsp, lspconfig = require('mason-lspconfig'), require('lspconfig')
+    local ensure_installed = vim.tbl_keys(opts.servers or {})
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
     mlsp.setup({
+      ensure_installed = ensure_installed,
       handlers = {
         function(server_name)
           local server = opts.servers[server_name] or {}
