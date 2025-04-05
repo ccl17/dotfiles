@@ -41,7 +41,7 @@ local on_attach = function(client, buffer)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename' })
 
   -- inlay hint
-  if client.supports_method(methods.textDocument_inlayHint) then
+  if client:supports_method(methods.textDocument_inlayHint) then
     vim.g.inlay_hints = true
     local inlay_hints_group = vim.api.nvim_create_augroup('sc/inlay_hints', { clear = false })
 
