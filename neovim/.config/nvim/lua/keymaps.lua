@@ -69,7 +69,7 @@ vim.keymap.set(
 
 -- start/end of lines
 vim.keymap.set('n', 'H', '^', { desc = 'Goto start of line' })
-vim.keymap.set('n', 'L', '^', { desc = 'Goto end of line' })
+vim.keymap.set('n', 'L', '$', { desc = 'Goto end of line' })
 
 -- neovim
 -- vim.keymap.set('n', '<space><space>x', '<cmd>source %<cr>')
