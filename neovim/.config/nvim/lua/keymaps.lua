@@ -67,6 +67,10 @@ vim.keymap.set(
   { desc = 'Next error' }
 )
 
+-- start/end of lines
+vim.keymap.set('n', 'H', '^', { desc = 'Goto start of line' })
+vim.keymap.set('n', 'L', '^', { desc = 'Goto end of line' })
+
 -- neovim
 -- vim.keymap.set('n', '<space><space>x', '<cmd>source %<cr>')
 -- vim.keymap.set('n', '<space>x', ':.lua<cr>')
