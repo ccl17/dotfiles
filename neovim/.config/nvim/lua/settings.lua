@@ -57,7 +57,8 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = false
 vim.opt.inccommand = 'split'
 
--- enable auto indentation
+vim.opt.smarttab = true
+vim.opt.smartindent = true
 vim.opt.autoindent = true
 
 -- UI
