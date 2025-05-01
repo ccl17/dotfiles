@@ -188,7 +188,6 @@ return {
           settings = {
             gopls = {
               directoryFilters = { '-.git', '-node_modules', '-vendor' },
-              gofumpt = false,
               semanticTokens = true,
               usePlaceholders = true,
               analyses = { unusedparams = true },

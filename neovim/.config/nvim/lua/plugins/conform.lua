@@ -18,8 +18,13 @@ return {
   },
   config = function()
     require('conform').setup({
+      formatters = {
+        jq = {
+          args = { '--indent', '4' },
+        },
+      },
       formatters_by_ft = {
-        go = { 'goimports', lsp_format = 'last' },
+        go = { 'goimports', lsp_format = 'first' },
         javascript = { 'prettier' },
         json = { 'jq' },
         lua = { 'stylua' },
