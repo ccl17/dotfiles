@@ -7,7 +7,7 @@ return {
     { 'onsails/lspkind.nvim' },
   },
   keys = {
-    -- find
+    -- files
     { '<leader>fg', function() require('fzf-lua').live_grep_glob() end, desc = 'grep' },
     { '<leader>fg', function() require('fzf-lua').grep_visual() end, mode = 'x', desc = 'grep visual selection' },
     { '<leader>ff', function() require('fzf-lua').files() end, desc = 'find files' },
@@ -24,6 +24,7 @@ return {
     { '<leader>sD', function() require('fzf-lua').diagnostics_workspace() end, desc = 'lsp workspace diagnostics' },
     { '<leader>sk', function() require('fzf-lua').keymaps() end, desc = 'Keymaps' },
     { '<leader>sh', function() require('fzf-lua').highlights() end, desc = 'search highlights' },
+    { '<leader>sB', function() require('fzf-lua').dap_breakpoints() end, desc = 'search breakpoints' },
   },
   config = function()
     local fzf = require('fzf-lua')
