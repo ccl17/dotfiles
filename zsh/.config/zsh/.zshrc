@@ -23,7 +23,12 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
+# search backward
+bindkey '^R' history-incremental-search-backward
+
 # aliases
+alias vim='nvim'
+
 alias ls='ls --color=auto'
 alias ll='ls -la'
 
@@ -32,6 +37,10 @@ alias ga='git add'
 alias gc='git commit'
 alias gp='git push'
 alias gl='git pull'
+alias gco='git checkout'
+alias gb='git branch'
+alias glo='git log'
+alias grs='git restore'
 
 alias t='tmux'
 alias ts='tmux new -s'
@@ -39,3 +48,5 @@ alias ta='tmux attach -t'
 alias tl='tmux list-sessions'
 alias tkss='tmux kill-session -t'
 alias tksv='tmux kill-server'
+
+source "$ZDOTDIR/macos.zsh"
