@@ -17,3 +17,6 @@ export PATH=${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/bin:/usr/local/bin:$HOME/.
 export STARSHIP_HOME="$HOME/.config/starship"
 export STARSHIP_CONFIG="$STARSHIP_HOME/starship.toml"
 export STARSHIP_CACHE="$STARSHIP_HOME/cache"
+
+# ripgrep
+export RIPGREP_CONFIG_PATH="$HOME/.config/.ripgreprc"

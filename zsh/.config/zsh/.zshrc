@@ -41,6 +41,8 @@ alias gco='git checkout'
 alias gb='git branch'
 alias glo='git log'
 alias grs='git restore'
+alias gd='git diff'
+alias grb='git rebase'
 
 alias t='tmux'
 alias ts='tmux new -s'

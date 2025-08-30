@@ -29,7 +29,7 @@ return {
     local golangcilint = lint.linters.golangcilint
     golangcilint.ignore_exitcode = true
 
-    local try_lint = util.debounce(200, function() lint.try_lint() end)
+    local try_lint = util.debounce(100, function() lint.try_lint() end)
     vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave', 'TextChanged' }, {
       group = vim.api.nvim_create_augroup('sc/lint', { clear = true }),
       callback = try_lint,
