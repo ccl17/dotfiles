@@ -11,3 +11,4 @@ zsh/.config/zsh/.zcompdump*
 zsh/.config/zsh/*.zsh
 zsh/.config/zsh/.zsh_sessions/
 zsh/.config/zsh/.local/
+zsh/.config/zsh/.zcompcache/

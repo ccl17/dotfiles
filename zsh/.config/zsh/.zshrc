@@ -1,6 +1,5 @@
 autoload -U compinit; compinit
-
-zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 setopt auto_cd # auto cd if command is a directory and not executable
 
@@ -22,9 +21,6 @@ export KEYTIMEOUT=1
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
-
-# search backward
-bindkey '^R' history-incremental-search-backward
 
 # aliases
 alias vim='nvim'
