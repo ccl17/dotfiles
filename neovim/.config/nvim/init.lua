@@ -16,6 +16,8 @@ vim.o.foldcolumn = '1'
 vim.o.foldlevelstart = 99
 vim.wo.foldtext = ''
 vim.opt.wrap = false
+vim.o.winborder = 'rounded'
+vim.o.termguicolors = true
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -68,6 +70,11 @@ vim.keymap.set('n', '<leader>wh', '<cmd>split<cr>', { desc = 'Horizontal Split' 
 vim.keymap.set('n', '<leader>wv', '<cmd>vsplit<cr>', { desc = 'Vertical split' })
 vim.keymap.set('n', '<leader>w=', '<cmd>wincmd =<cr>', { desc = 'Equalize size' })
 vim.keymap.set('n', '<c-q>', '<cmd>:close<cr>', { desc = 'Close current window' })
+vim.keymap.set('n', '<c-h>', '<c-w>h', { noremap = true, silent = true })
+vim.keymap.set('n', '<c-j>', '<c-w>j', { noremap = true, silent = true })
+vim.keymap.set('n', '<c-k>', '<c-w>k', { noremap = true, silent = true })
+vim.keymap.set('n', '<c-l>', '<c-w>l', { noremap = true, silent = true })
+vim.keymap.set({ 'i', 'c' }, '<c-l>', '<c-o>A', { desc = 'Go to the end of the line' })
 -- disable vim command history
 vim.keymap.set('n', 'q:', '<nop>', { desc = 'Disable cmd history', noremap = true })
 
@@ -128,14 +135,13 @@ require('lazy').setup({
 
     -- colortheme
     {
-      'rebelot/kanagawa.nvim',
+      'sainnhe/gruvbox-material',
+      lazy = false,
       priority = 1000,
       config = function()
-        require('kanagawa').setup({
-          transparent = true,
-          colors = { theme = { all = { ui = { bg_gutter = 'none' } } } },
-        })
-        vim.cmd('colorscheme kanagawa-dragon')
+        vim.g.gruvbox_material_enable_italic = true
+        vim.g.gruvbox_material_background = 'soft'
+        vim.cmd.colorscheme('gruvbox-material')
       end,
     },
 
@@ -173,54 +179,6 @@ require('lazy').setup({
       end,
     },
 
-    -- movements
-    {
-      'mrjones2014/smart-splits.nvim',
-      config = function()
-        require('smart-splits').setup({
-          ignored_buftypes = {
-            'nofile',
-            'quickfix',
-            'prompt',
-          },
-          default_amount = 5,
-          at_edge = 'stop',
-          float_win_behavior = 'previous',
-          move_cursor_same_row = false,
-          cursor_follows_swapped_bufs = false,
-          resize_mode = {
-            quit_key = '<ESC>',
-            resize_keys = { 'h', 'j', 'k', 'l' },
-            silent = false,
-            hooks = {
-              on_enter = nil,
-              on_leave = nil,
-            },
-          },
-          ignored_events = {
-            'BufEnter',
-            'WinEnter',
-          },
-          disable_multiplexer_nav_when_zoomed = true,
-          log_level = 'info',
-        })
-        vim.keymap.set('n', '<m-h>', require('smart-splits').resize_left)
-        vim.keymap.set('n', '<m-j>', require('smart-splits').resize_down)
-        vim.keymap.set('n', '<m-k>', require('smart-splits').resize_up)
-        vim.keymap.set('n', '<m-l>', require('smart-splits').resize_right)
-        -- moving between splits
-        vim.keymap.set('n', '<c-h>', require('smart-splits').move_cursor_left)
-        vim.keymap.set('n', '<c-j>', require('smart-splits').move_cursor_down)
-        vim.keymap.set('n', '<c-k>', require('smart-splits').move_cursor_up)
-        vim.keymap.set('n', '<c-l>', require('smart-splits').move_cursor_right)
-        -- swapping buffers between windows
-        vim.keymap.set('n', '<leader><leader>h', require('smart-splits').swap_buf_left)
-        vim.keymap.set('n', '<leader><leader>j', require('smart-splits').swap_buf_down)
-        vim.keymap.set('n', '<leader><leader>k', require('smart-splits').swap_buf_up)
-        vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
-      end,
-    },
-
     -- save window layout
     {
       'nvim-mini/mini.bufremove',
@@ -239,7 +197,10 @@ require('lazy').setup({
       'nvim-lualine/lualine.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       opts = {
-        options = { globalstatus = true },
+        options = {
+          globalstatus = true,
+          theme = 'gruvbox-material',
+        },
       },
     },
 
@@ -514,9 +475,17 @@ require('lazy').setup({
           -- ['<c-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
         },
         completion = {
-          documentation = { auto_show = true },
+          menu = {
+            border = 'rounded',
+            scrollbar = false,
+          },
+          documentation = {
+            auto_show = true,
+            window = {
+              border = 'rounded',
+            },
+          },
           list = { selection = { preselect = true, auto_insert = true } },
-          menu = { scrollbar = false },
           ghost_text = { enabled = true },
         },
         cmdline = { enabled = false },
@@ -568,6 +537,42 @@ require('lazy').setup({
           vim.g.skip_formatting = true
           return '<esc>:w<cr>'
         end, { desc = 'Exit insert mode and save changes (without formatting)', expr = true })
+      end,
+    },
+
+    -- linting
+    {
+      'mfussenegger/nvim-lint',
+      event = 'BufReadPre',
+      config = function()
+        local lint = require('lint')
+        lint.linters_by_ft = {
+          dockerfile = { 'hadolint' },
+          go = { 'golangcilint' },
+          -- sh = { 'shellcheck' },
+          -- terraform = { 'terraform_validate', 'tflint', 'tfsec' },
+          -- tf = { 'terraform_validate', 'tflint', 'tfsec' },
+          -- yaml = { 'yamllint' },
+          -- zsh = { 'shellcheck' },
+        }
+        local golangcilint = lint.linters.golangcilint
+        golangcilint.ignore_exitcode = true
+
+        local debounce = function(ms, fn)
+          local timer = vim.uv.new_timer()
+          return function(...)
+            local argv = { ... }
+            timer:start(ms, 0, function()
+              timer:stop()
+              vim.schedule_wrap(fn)(unpack(argv))
+            end)
+          end
+        end
+        local try_lint = debounce(100, function() lint.try_lint() end)
+        vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave', 'TextChanged' }, {
+          group = vim.api.nvim_create_augroup('lint-with-debounce', { clear = true }),
+          callback = try_lint,
+        })
       end,
     },
 
