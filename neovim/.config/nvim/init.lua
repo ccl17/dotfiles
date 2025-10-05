@@ -548,15 +548,15 @@ require('lazy').setup({
         local lint = require('lint')
         lint.linters_by_ft = {
           dockerfile = { 'hadolint' },
-          go = { 'golangcilint' },
+          -- go = { 'golangcilint' },
           -- sh = { 'shellcheck' },
           -- terraform = { 'terraform_validate', 'tflint', 'tfsec' },
           -- tf = { 'terraform_validate', 'tflint', 'tfsec' },
           -- yaml = { 'yamllint' },
           -- zsh = { 'shellcheck' },
         }
-        local golangcilint = lint.linters.golangcilint
-        golangcilint.ignore_exitcode = true
+        -- local golangcilint = lint.linters.golangcilint
+        -- golangcilint.ignore_exitcode = true
 
         local debounce = function(ms, fn)
           local timer = vim.uv.new_timer()
