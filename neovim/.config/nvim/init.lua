@@ -75,6 +75,9 @@ vim.keymap.set('n', '<c-j>', '<c-w>j', { noremap = true, silent = true })
 vim.keymap.set('n', '<c-k>', '<c-w>k', { noremap = true, silent = true })
 vim.keymap.set('n', '<c-l>', '<c-w>l', { noremap = true, silent = true })
 vim.keymap.set({ 'i', 'c' }, '<c-l>', '<c-o>A', { desc = 'Go to the end of the line' })
+-- buffers
+vim.keymap.set('n', '<leader>bD', '<cmd>%bd!<cr>', { desc = 'Close all buffers' })
+vim.keymap.set('n', '<leader>fy', '<cmd>Cppath<cr>', { desc = 'Yank current buffer relative path' })
 -- disable vim command history
 vim.keymap.set('n', 'q:', '<nop>', { desc = 'Disable cmd history', noremap = true })
 
@@ -200,6 +203,14 @@ require('lazy').setup({
         options = {
           globalstatus = true,
           theme = 'gruvbox-material',
+        },
+        sections = {
+          lualine_c = {
+            {
+              'filename',
+              path = 1,
+            },
+          },
         },
       },
     },
