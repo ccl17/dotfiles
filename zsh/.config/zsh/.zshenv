@@ -20,3 +20,5 @@ export STARSHIP_CACHE="$STARSHIP_HOME/cache"
 
 # ripgrep
 export RIPGREP_CONFIG_PATH="$HOME/.config/.ripgreprc"
+
+echo "zshenv"
