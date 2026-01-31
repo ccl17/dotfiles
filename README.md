@@ -1,8 +1,4 @@
-```
-stow kitty -t $HOME
-stow neovim -t $HOME
-stow starship -t $HOME
-stow tmux -t $HOME
-cp zsh/.config/zsh/.zshenv $HOME
-stow zsh -t $HOME
+```zsh
+stow <module> -t $HOME
+echo -e "ZDOTDIR=$HOME/.config/zsh\n. $ZDOTDIR/.zshenv" >> $HOME/.zshenv
 ```
