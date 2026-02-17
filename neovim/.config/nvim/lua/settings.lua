@@ -1,9 +1,11 @@
 vim.opt.breakindent = true
 vim.opt.clipboard = 'unnamedplus'
-vim.opt.completeopt = "menu,menuone,noinsert,popup,fuzzy"
+vim.o.cmdheight = 0
+vim.opt.laststatus = 3
+vim.opt.completeopt = 'menu,menuone,noinsert,popup,fuzzy'
 vim.opt.cursorline = true
-vim.opt.cursorlineopt = "number"
-vim.opt.foldlevelstart=99
+vim.opt.cursorlineopt = 'both'
+vim.opt.foldlevelstart = 99
 vim.opt.ignorecase = true
 vim.opt.linebreak = true
 vim.opt.list = true
@@ -16,9 +18,10 @@ vim.opt.smartcase = true
 vim.opt.softtabstop = -1
 vim.opt.splitright = true
 vim.opt.termguicolors = true
-vim.opt.wildignore:append({ ".DS_Store" })
+vim.opt.wildignore:append({ '.DS_Store' })
 vim.opt.wildignorecase = true
-vim.opt.wildmode = { "longest:full", "full" }
+vim.opt.wildmode = { 'longest:full', 'full' }
+vim.opt.winborder = 'single'
 vim.opt.undofile = true
 vim.opt.updatetime = 250
 vim.opt.smoothscroll = true

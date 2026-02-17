@@ -5,3 +5,5 @@ keybind = cmd+j=goto_split:bottom
 keybind = cmd+k=goto_split:top
 keybind = cmd+l=goto_split:right
 window-save-state = always
+background-opacity = 0.85
+background-blur = true
