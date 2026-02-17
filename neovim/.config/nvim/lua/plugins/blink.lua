@@ -40,9 +40,11 @@ return {
 		},
 		completion = {
 			documentation = {
-				border = 'single',
-				scrollbar = false,
-				winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
+				window = {
+					border = 'single',
+					scrollbar = false,
+					winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
+				},
 			},
 			ghost_text = {
 				enabled = true,
