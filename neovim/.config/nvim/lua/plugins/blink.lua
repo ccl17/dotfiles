@@ -40,12 +40,9 @@ return {
 		},
 		completion = {
 			documentation = {
-				window = {
-					border = 'single',
-					draw = { gap = 2 },
-					scrollbar = false,
-					winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
-				},
+				border = 'single',
+				scrollbar = false,
+				winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
 			},
 			ghost_text = {
 				enabled = true,
