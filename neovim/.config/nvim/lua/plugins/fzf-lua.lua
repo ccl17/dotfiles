@@ -20,6 +20,8 @@ return {
 		{ '<leader>fg', '<cmd>FzfLua live_grep<cr>', desc = 'Grep' },
 		{ '<leader>fg', '<cmd>FzfLua grep_visual<cr>', desc = 'Grep', mode = 'x' },
 		{ '<leader>p', '<cmd>FzfLua global<cr>', desc = 'Global' },
+		{ '<leader>fd', '<cmd>FzfLua diagnostics_document<cr>', desc = 'Document diagnostics' },
+		{ '<leader>fD', '<cmd>FzfLua diagnostics_workspace<cr>', desc = 'Workspace diagnostics' },
 	},
 	---@module "fzf-lua"
 	---@type fzf-lua.Config|{}

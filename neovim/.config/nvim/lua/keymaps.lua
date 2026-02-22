@@ -32,6 +32,10 @@ vim.keymap.set({ 'i', 'c' }, '<C-l>', '<C-o>A', { desc = 'Jump to the end of the
 vim.keymap.set('n', '<leader>wh', '<cmd>split<cr>', { desc = 'Horizontal Split' })
 vim.keymap.set('n', '<leader>wv', '<cmd>vsplit<cr>', { desc = 'Vertical split' })
 vim.keymap.set('n', '<leader>w=', '<cmd>wincmd =<cr>', { desc = 'Equalize size' })
+vim.keymap.set('n', '<A-h>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease window width' })
+vim.keymap.set('n', '<A-l>', '<cmd>vertical resize +2<cr>', { desc = 'Increase window width' })
+vim.keymap.set('n', '<A-j>', '<cmd>resize +2<cr>', { desc = 'Increase window height' })
+vim.keymap.set('n', '<A-k>', '<cmd>resize -2<cr>', { desc = 'Decrease window height' })
 vim.keymap.set('n', '<c-q>', '<cmd>:close<cr>', { desc = 'Close current window' })
 
 -- Save file
@@ -53,7 +57,7 @@ vim.keymap.set('i', '<tab>', function()
 end)
 
 vim.keymap.set('n', '<leader>yp', function()
-	local path = vim.fn.expand('%')
+	local path = vim.fn.expand('%:.')
 	vim.fn.setreg('+', path)
 	vim.notify('Copied: ' .. path)
 end, { desc = 'Copy relative path' })
