@@ -102,7 +102,7 @@ return {
 	{
 		'ruifm/gitlinker.nvim',
 		dependencies = { 'nvim-lua/plenary.nvim' },
-		opts = { mappings = '<leader>gc' },
+		opts = { mappings = '<leader>gy' },
 		config = function(_, opts)
 			require('gitlinker').setup(opts)
 			vim.api.nvim_set_keymap(

@@ -11,7 +11,12 @@ return {
 			},
 			{
 				'<leader>bD',
-				'<cmd>%bd<cr>',
+				function()
+					local bufremove = require('mini.bufremove')
+					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+						if vim.bo[buf].buftype ~= 'terminal' then bufremove.delete(buf, false) end
+					end
+				end,
 				desc = 'Delete all buffers',
 			},
 			{

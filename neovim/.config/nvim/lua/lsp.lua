@@ -96,11 +96,29 @@ end
 
 vim.diagnostic.config({
 	underline = true,
-	virtual_text = {
-		prefix = '',
-		spacing = 2,
-	},
+	signs = false,
+	virtual_text = false,
 })
+
+vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line diagnostic' })
+
+vim.keymap.set(
+	'n',
+	'[e',
+	function()
+		vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, float = true })
+	end,
+	{ desc = 'Previous error' }
+)
+
+vim.keymap.set(
+	'n',
+	']e',
+	function()
+		vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = true })
+	end,
+	{ desc = 'Next error' }
+)
 
 local register_capability = vim.lsp.handlers['client/registerCapability']
 vim.lsp.handlers['client/registerCapability'] = function(err, res, ctx)

@@ -1,6 +1,6 @@
 vim.opt.breakindent = true
 vim.opt.clipboard = 'unnamedplus'
-vim.o.cmdheight = 0
+vim.o.cmdheight = 1
 vim.opt.laststatus = 3
 vim.opt.completeopt = 'menu,menuone,noinsert,popup,fuzzy'
 vim.opt.cursorline = true
@@ -13,7 +13,7 @@ vim.opt.number = true
 vim.opt.pumheight = 10
 vim.opt.scrolloff = 2
 vim.opt.sidescrolloff = 5
-vim.opt.signcolumn = 'no'
+vim.opt.signcolumn = 'yes'
 vim.opt.smartcase = true
 vim.opt.softtabstop = -1
 vim.opt.splitright = true
