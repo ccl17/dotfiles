@@ -68,3 +68,9 @@ vim.keymap.set('n', 'q:', '<nop>', { desc = 'Disable cmd history', noremap = tru
 -- Jump list navigation
 vim.keymap.set('n', '[[', '<C-o>', { desc = 'Jump to previous location' })
 vim.keymap.set('n', ']]', '<C-i>', { desc = 'Jump to next location' })
+
+-- Esc key
+vim.keymap.set({ 'i', 's', 'n' }, '<esc>', function()
+	vim.cmd('noh')
+	return '<esc>'
+end, { desc = 'Escape', expr = true })

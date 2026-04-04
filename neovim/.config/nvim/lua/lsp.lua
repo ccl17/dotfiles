@@ -1,4 +1,6 @@
 local function on_attach(client, bufnr)
+	vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
+
 	if client:supports_method('textDocument/references') then
 		vim.keymap.set(
 			'n',

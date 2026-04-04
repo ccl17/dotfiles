@@ -19,21 +19,34 @@ return {
 		{ '<leader>ff', '<cmd>FzfLua files<cr>', desc = 'Find files' },
 		{ '<leader>fg', '<cmd>FzfLua live_grep<cr>', desc = 'Grep' },
 		{ '<leader>fg', '<cmd>FzfLua grep_visual<cr>', desc = 'Grep', mode = 'x' },
-		{ '<leader>p', '<cmd>FzfLua global<cr>', desc = 'Global' },
 		{ '<leader>fd', '<cmd>FzfLua diagnostics_document<cr>', desc = 'Document diagnostics' },
 		{ '<leader>fD', '<cmd>FzfLua diagnostics_workspace<cr>', desc = 'Workspace diagnostics' },
+		{ '<leader>fo', '<cmd>FzfLua buffers<cr>', desc = 'Buffers' },
+		{ '<leader>fz', '<cmd>FzfLua resume<cr>', desc = 'Resume last fzf command' },
+		{ '<leader>fs', '<cmd>FzfLua lsp_document_symbols<cr>', desc = 'Document symbols' },
 	},
 	---@module "fzf-lua"
 	---@type fzf-lua.Config|{}
 	---@diagnostic disable: missing-fields
 	opts = {
+		files = {
+			cwd_prompt = false,
+		},
+		grep = {
+			hidden = true,
+		},
+		keymap = {
+			builtin = {
+				['<C-q>'] = 'select-all+accept',
+			},
+			fzf = {
+				['ctrl-q'] = 'select-all+accept',
+			},
+		},
 		winopts = {
 			preview = {
 				wrap = 'wrap',
 			},
-		},
-		grep = {
-			hidden = true,
 		},
 	},
 	---@diagnostic enable: missing-fields
