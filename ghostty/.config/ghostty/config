@@ -5,3 +5,5 @@ keybind = cmd+j=goto_split:bottom
 keybind = cmd+k=goto_split:top
 keybind = cmd+l=goto_split:right
 window-save-state = always
+macos-icon = custom
+macos-custom-icon = ~/.config/ghostty/gruvbox-dark-hard.icns
