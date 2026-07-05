@@ -93,6 +93,13 @@ vim.keymap.set("n", "<A-j>", "<cmd>resize +2<cr>", { desc = "Increase window hei
 vim.keymap.set("n", "<A-k>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 vim.keymap.set("n", "<c-q>", "<cmd>:close<cr>", { desc = "Close current window" })
 
+-- Tabs
+vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close tab page" })
+vim.keymap.set("n", "<leader>tn", "<cmd>tabnext<cr>", { desc = "Next tab page" })
+
+-- Buffers
+vim.keymap.set("n", "<leader>bD", "<cmd>%bd", { desc = "Delete all open buffers" })
+
 -- Save file
 vim.keymap.set({ "n", "i", "v" }, "<c-s>", "<esc><cmd>w<cr><esc>", { desc = "Save File" })
 
@@ -133,7 +140,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("CmdWinEnter", {
+vim.api.nvim_create_autocmd("CmdwinEnter", {
 	group = init_group,
 	callback = function()
 		vim.keymap.set("n", "q", "<C-W>q", { buffer = true }) -- Tap 'q' to instantly drop out of history command window panes
@@ -158,7 +165,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("CmdLineLeave", {
+vim.api.nvim_create_autocmd("CmdlineLeave", {
 	group = init_group,
 	desc = "Clear cmdline on leave",
 	callback = function()
@@ -197,4 +204,57 @@ vim.api.nvim_create_autocmd({ "WinLeave", "FocusLost" }, {
 	callback = function()
 		vim.wo.cursorline = false
 	end,
+})
+
+vim.pack.add({
+	-- dependencies
+	{ src = "https://github.com/b0o/schemastore.nvim" },
+	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+	-- completion
+	{ src = "https://github.com/saghen/blink.lib" },
+	{ src = "https://github.com/saghen/blink.cmp" },
+	{
+		src = "https://github.com/L3MON4D3/LuaSnip",
+		module_name = "luasnip",
+	},
+	{ src = "https://github.com/rafamadriz/friendly-snippets" },
+	-- formatting
+	{ src = "https://github.com/stevearc/conform.nvim" },
+	-- fzf
+	{ src = "https://github.com/ibhagwan/fzf-lua" },
+	{ src = "https://github.com/elanmed/fzf-lua-frecency.nvim" },
+	-- treesitter
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
+	{ src = "https://github.com/Wansmer/treesj" },
+	-- lsp
+	{ src = "https://github.com/j-hui/fidget.nvim" },
+	-- lualine
+	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+	-- flash
+	{ src = "https://github.com/folke/flash.nvim" },
+	-- git
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/sindrets/diffview.nvim" },
+	-- theme
+	{ src = "https://github.com/sainnhe/gruvbox-material" },
+	-- indent
+	{
+		src = "https://github.com/lukas-reineke/indent-blankline.nvim",
+		module_name = "ibl",
+	},
+	-- buffers
+	{ src = "https://github.com/nvim-mini/mini.bufremove" },
+	{
+		src = "https://github.com/stevearc/oil.nvim",
+	},
+	{ src = "https://github.com/sphamba/smear-cursor.nvim" },
+	-- brackets
+	{ src = "https://github.com/windwp/nvim-autopairs" },
+	{
+		src = "https://github.com/kylechui/nvim-surround",
+		version = vim.version.range("4.x"),
+	},
+	-- sessions
+	{ src = "https://github.com/folke/persistence.nvim" },
 })

@@ -1,7 +1,3 @@
-vim.pack.add({
-	{ src = "https://github.com/folke/persistence.nvim" },
-})
-
 require("persistence").setup({ need = 1, branch = true })
 
 vim.api.nvim_create_autocmd("VimEnter", {

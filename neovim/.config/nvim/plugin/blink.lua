@@ -1,13 +1,3 @@
-vim.pack.add({
-	{ src = "https://github.com/saghen/blink.lib" },
-	{ src = "https://github.com/saghen/blink.cmp" },
-	{
-		src = "https://github.com/L3MON4D3/LuaSnip",
-		module_name = "luasnip",
-	},
-	{ src = "https://github.com/rafamadriz/friendly-snippets" },
-})
-
 require("luasnip.loaders.from_vscode").lazy_load()
 
 local blink = require("blink.cmp")

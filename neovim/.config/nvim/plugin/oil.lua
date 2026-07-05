@@ -1,9 +1,3 @@
-vim.pack.add({
-	{
-		src = "https://github.com/stevearc/oil.nvim",
-	},
-})
-
 -- Declare a global function to retrieve the current directory
 function _G.get_oil_winbar()
 	local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
@@ -45,5 +39,5 @@ require("oil").setup({
 })
 
 vim.keymap.set("n", "<leader>e", function()
-	require("oil").open(vim.fs.root(0, { ".git", "nvim-pack-lock.json" }))
+	require("oil").open(vim.fs.root(0, { ".git" }))
 end, { desc = "Opens Oil" })

@@ -1,9 +1,3 @@
-vim.pack.add({
-	{ src = "https://github.com/ibhagwan/fzf-lua" },
-	{ src = "https://github.com/elanmed/fzf-lua-frecency.nvim" },
-	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
-})
-
 local fzf = require("fzf-lua")
 fzf.setup({
 	files = {
@@ -11,6 +5,11 @@ fzf.setup({
 	},
 	grep = {
 		hidden = true,
+	},
+	keymap = {
+		fzf = {
+			["ctrl-q"] = "select-all+accept",
+		},
 	},
 })
 fzf.register_ui_select()
