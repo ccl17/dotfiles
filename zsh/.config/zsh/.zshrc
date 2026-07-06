@@ -21,20 +21,17 @@ SAVEHIST=1000000
 HISTFILE="$XDG_CACHE_HOME/zsh_history"
 HISTCONTROL=ignoreboth # consecutive duplicates & commands starting with space are not saved
 
+# binds
+bindkey "^a" beginning-of-line
+bindkey "^e" end-of-line
+bindkey "^j" backward-word
+bindkey "^k" forward-word
+
 # fzf setup
 source <(fzf --zsh)
 
 # zoxide
 eval "$(zoxide init zsh)"
-
-# vi mode
-bindkey -v
-export KEYTIMEOUT=1
-
-# edit commandline in editor
-autoload -Uz edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
 
 # aliases
 alias vim='nvim'
@@ -53,12 +50,5 @@ alias glo='git log'
 alias grs='git restore'
 alias gd='git diff'
 alias grb='git rebase'
-
-alias t='tmux'
-alias ts='tmux new -s'
-alias ta='tmux attach -t'
-alias tl='tmux list-sessions'
-alias tkss='tmux kill-session -t'
-alias tksv='tmux kill-server'
 
 source "$ZDOTDIR/macos.zsh"
