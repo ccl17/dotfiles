@@ -1,5 +1,5 @@
-# starship
-starship/.config/starship/cache
+# common
+.DS_Store
 
 # tmux
 tmux/.config/tmux/plugins/
@@ -12,3 +12,4 @@ zsh/.config/zsh/*.zsh
 zsh/.config/zsh/.zsh_sessions/
 zsh/.config/zsh/.local/
 zsh/.config/zsh/.zcompcache/
+
