@@ -1,12 +1,28 @@
-autoload -U compinit
-compinit
+# load modules
+zmodload zsh/complist
+autoload -U compinit && compinit
+autoload -U colors && colors
+
+# cmp options
+zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-setopt auto_cd # auto cd if command is a directory and not executable
+setopt append_history inc_append_history share_history
+setopt auto_menu menu_complete
+setopt auto_cd
+setopt auto_param_slash
+setopt no_case_glob no_case_match
+setopt globdots
+setopt extended_glob
+setopt interactive_comments
 
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt SHARE_HISTORY
+HISTSIZE=1000000
+SAVEHIST=1000000
+HISTFILE="$XDG_CACHE_HOME/zsh_history"
+HISTCONTROL=ignoreboth # consecutive duplicates & commands starting with space are not saved
+
+# fzf setup
+source <(fzf --zsh)
 
 # zoxide
 eval "$(zoxide init zsh)"
