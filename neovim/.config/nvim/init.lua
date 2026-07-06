@@ -98,7 +98,7 @@ vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close tab page"
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnext<cr>", { desc = "Next tab page" })
 
 -- Buffers
-vim.keymap.set("n", "<leader>bD", "<cmd>%bd", { desc = "Delete all open buffers" })
+vim.keymap.set("n", "<leader>bD", "<cmd>%bd<cr>", { desc = "Delete all open buffers" })
 
 -- Save file
 vim.keymap.set({ "n", "i", "v" }, "<c-s>", "<esc><cmd>w<cr><esc>", { desc = "Save File" })

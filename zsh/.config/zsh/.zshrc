@@ -1,4 +1,5 @@
-autoload -U compinit; compinit
+autoload -U compinit
+compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 setopt auto_cd # auto cd if command is a directory and not executable
@@ -6,9 +7,6 @@ setopt auto_cd # auto cd if command is a directory and not executable
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt SHARE_HISTORY
-
-# starship
-eval "$(starship init zsh)"
 
 # zoxide
 eval "$(zoxide init zsh)"
