@@ -21,8 +21,6 @@ SAVEHIST=1000000
 HISTFILE="$XDG_CACHE_HOME/zsh_history"
 HISTCONTROL=ignoreboth # consecutive duplicates & commands starting with space are not saved
 
-PROMPT="  %1~ $ "
-
 # binds
 bindkey "^a" beginning-of-line
 bindkey "^e" end-of-line
@@ -31,6 +29,11 @@ bindkey "^k" forward-word
 
 # fzf setup
 source <(fzf --zsh)
+
+# starship
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
+export STARSHIP_CACHE="$XDG_CACHE_HOME/.starship/cache"
+eval "$(starship init zsh)"
 
 # zoxide
 eval "$(zoxide init zsh)"
