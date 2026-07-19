@@ -6,6 +6,7 @@ keybind = cmd+l=goto_split:right
 window-save-state = always
 macos-icon = custom
 macos-custom-icon = ~/.config/ghostty/gruvbox-dark-hard.icns
+unfocused-split-opacity = 0.60
 
 # Vim-mode keybindings for Ghostty.
 #
