@@ -20,6 +20,3 @@ export WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # environment
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:/usr/local/go/bin:$HOME/go/bin:$PATH
-
-# ripgrep
-export RIPGREP_CONFIG_PATH="$HOME/.config/.ripgreprc"
