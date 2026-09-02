@@ -27,6 +27,7 @@ vim.o.undofile = true
 vim.o.updatetime = 250
 
 vim.opt.mouse = ""
+vim.opt.swapfile = false
 vim.opt.title = true
 vim.opt.wildignore:append({ ".DS_Store" })
 
@@ -210,6 +211,7 @@ vim.pack.add({
 	-- dependencies
 	{ src = "https://github.com/b0o/schemastore.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	-- completion
 	{ src = "https://github.com/saghen/blink.lib" },
 	{ src = "https://github.com/saghen/blink.cmp" },
@@ -236,6 +238,7 @@ vim.pack.add({
 	-- git
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/sindrets/diffview.nvim" },
+	{ src = "https://github.com/ruifm/gitlinker.nvim" },
 	-- theme
 	{ src = "https://github.com/sainnhe/gruvbox-material" },
 	-- indent
@@ -257,4 +260,6 @@ vim.pack.add({
 	},
 	-- sessions
 	{ src = "https://github.com/folke/persistence.nvim" },
+	-- keymaps hint
+	{ src = "https://github.com/folke/which-key.nvim" },
 })
