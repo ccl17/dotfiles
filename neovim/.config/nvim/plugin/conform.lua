@@ -2,8 +2,11 @@ require("conform").setup({
 	formatters_by_ft = {
 		go = { "goimports" },
 		javascript = { "prettierd" },
+		javascriptreact = { "prettierd" },
 		json = { "prettierd" },
 		lua = { "stylua" },
+		typescript = { "prettierd" },
+		typescriptreact = { "prettierd" },
 	},
 	format_on_save = function(bufnr)
 		if not vim.g.autoformat then

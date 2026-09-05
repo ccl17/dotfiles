@@ -3,6 +3,7 @@ return {
 	filetypes = { "yaml" },
 	settings = {
 		yaml = {
+			format = { enable = false },
 			schemastore = { enable = false, url = "" },
 			schemas = require("schemastore").yaml.schemas(),
 		},
