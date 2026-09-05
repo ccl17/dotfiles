@@ -4,7 +4,6 @@ require("conform").setup({
 		javascript = { "prettierd" },
 		json = { "prettierd" },
 		lua = { "stylua" },
-		yaml = { "prettierd" },
 	},
 	format_on_save = function(bufnr)
 		if not vim.g.autoformat then
