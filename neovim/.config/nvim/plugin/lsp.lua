@@ -1,11 +1,13 @@
-vim.g.inlay_hints = false
+vim.g.inlay_hints = true
 
-require("fidget").setup()
+require("fidget").setup({
+	notification = { override_vim_notify = true },
+})
 
 local function on_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 
-	vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { buf = bufnr, desc = "Line diagnostic" })
+	vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { buf = bufnr, desc = "Line diagnostic" })
 
 	vim.keymap.set("n", "[d", function()
 		vim.diagnostic.jump({ count = -1, float = true })
@@ -144,6 +146,8 @@ local function on_attach(client, bufnr)
 				end
 			end,
 		})
+
+		vim.keymap.set("n", "<leader>hh", "<cmd>ToggleInlayHints<cr>", { desc = "Toggle inlay hints", buf = bufnr })
 	end
 end
 

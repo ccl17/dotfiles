@@ -7,27 +7,29 @@ vim.g.loaded_node_provider = 0
 
 vim.o.autoread = true
 vim.o.clipboard = "unnamedplus"
-vim.o.completeopt = "menuone,noinsert,noselect"
 vim.o.cmdheight = 0
+vim.o.completeopt = "menuone,noinsert,noselect"
 vim.o.cursorline = true
 vim.o.exrc = true
 vim.o.foldlevelstart = 99
 vim.o.ignorecase = true
-vim.o.smartcase = true
 vim.o.laststatus = 3
 vim.o.linebreak = true
-vim.o.mouse = ""
 vim.o.mousescroll = "ver:0,hor:0"
+vim.o.mouse = ""
 vim.o.number = true
+vim.o.pumborder = "rounded"
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 5
+vim.o.smartcase = true
 vim.o.smoothscroll = true
-vim.o.splitright = true
 vim.o.splitbelow = true
-vim.o.ttimeoutlen = 10
+vim.o.splitright = true
 vim.o.timeoutlen = 500
+vim.o.ttimeoutlen = 10
 vim.o.undofile = true
 vim.o.updatetime = 250
+vim.o.winborder = "rounded"
 
 vim.opt.mouse = ""
 vim.opt.swapfile = false
@@ -210,6 +212,38 @@ vim.api.nvim_create_autocmd({ "WinLeave", "FocusLost" }, {
 	end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
+	desc = "Close with <q>",
+	pattern = {
+		"git",
+		"help",
+		"man",
+		"qf",
+	},
+	callback = function(args)
+		if args.match ~= "help" or not vim.bo[args.buf].modifiable then
+			vim.keymap.set("n", "q", "<cmd>quit<cr>", { buffer = args.buf })
+		end
+	end,
+})
+
+-- user commands
+vim.api.nvim_create_user_command("ToggleFormat", function()
+	vim.g.autoformat = not vim.g.autoformat
+	vim.notify(string.format("%s formatting...", vim.g.autoformat and "Enabling" or "Disabling"), vim.log.levels.INFO)
+end, { desc = "Toggle conform.nvim auto-formatting", nargs = 0 })
+
+vim.api.nvim_create_user_command("ToggleInlayHints", function()
+	vim.g.inlay_hints = not vim.g.inlay_hints
+	vim.notify(string.format("%s inlay hints...", vim.g.inlay_hints and "Enabling" or "Disabling"), vim.log.levels.INFO)
+
+	local mode = vim.api.nvim_get_mode().mode
+	vim.lsp.inlay_hint.enable(vim.g.inlay_hints and (mode == "n" or mode == "v"))
+end, { desc = "Toggle inlay hints", nargs = 0 })
+
+vim.api.nvim_create_user_command("ToggleDiagnostics", function() end, { desc = "Toggle diagnostics virtual text" })
+
 vim.pack.add({
 	-- dependencies
 	{ src = "https://github.com/b0o/schemastore.nvim" },
@@ -265,4 +299,6 @@ vim.pack.add({
 	{ src = "https://github.com/folke/persistence.nvim" },
 	-- keymaps hint
 	{ src = "https://github.com/folke/which-key.nvim" },
+	-- quickfix
+	{ src = "https://github.com/stevearc/quicker.nvim" },
 })

@@ -8,7 +8,7 @@ require("conform").setup({
 		typescript = { "prettierd" },
 		typescriptreact = { "prettierd" },
 	},
-	format_on_save = function(bufnr)
+	format_on_save = function(_)
 		if not vim.g.autoformat then
 			return nil
 		end
