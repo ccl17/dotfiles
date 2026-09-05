@@ -5,13 +5,16 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
 
+vim.o.autoread = true
 vim.o.clipboard = "unnamedplus"
 vim.o.completeopt = "menuone,noinsert,noselect"
+vim.o.cmdheight = 0
 vim.o.cursorline = true
 vim.o.exrc = true
 vim.o.foldlevelstart = 99
 vim.o.ignorecase = true
 vim.o.smartcase = true
+vim.o.laststatus = 3
 vim.o.linebreak = true
 vim.o.mouse = ""
 vim.o.mousescroll = "ver:0,hor:0"
@@ -251,7 +254,6 @@ vim.pack.add({
 	{
 		src = "https://github.com/stevearc/oil.nvim",
 	},
-	{ src = "https://github.com/sphamba/smear-cursor.nvim" },
 	-- brackets
 	{ src = "https://github.com/windwp/nvim-autopairs" },
 	{
