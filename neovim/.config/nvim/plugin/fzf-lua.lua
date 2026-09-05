@@ -16,12 +16,7 @@ fzf.register_ui_select()
 require("fzf-lua-frecency").setup({})
 
 vim.keymap.set("n", "<leader>\\", "<cmd>FzfLua frecency cwd_only=true display_score=false<cr>", { desc = "Files" })
-vim.keymap.set(
-	"n",
-	"<leader>ff",
-	"<cmd>FzfLua combine pickers=buffers,files cwd_only=true<cr>",
-	{ desc = "Files and Buffers" }
-)
+vim.keymap.set("n", "<leader>ff", "<cmd>FzfLua files<cr>", { desc = "Files and Buffers" })
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "Register search in buffer",
 	callback = function(args)

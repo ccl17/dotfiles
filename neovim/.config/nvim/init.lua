@@ -102,7 +102,7 @@ vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Close tab page"
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnext<cr>", { desc = "Next tab page" })
 
 -- Buffers
-vim.keymap.set("n", "<leader>bD", "<cmd>%bd<cr>", { desc = "Delete all open buffers" })
+vim.keymap.set("n", "<leader>bD", "<cmd>%bd!<cr>", { desc = "Delete all open buffers" })
 
 -- Save file
 vim.keymap.set({ "n", "i", "v" }, "<c-s>", "<esc><cmd>w<cr><esc>", { desc = "Save File" })
@@ -233,7 +233,10 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
 	{ src = "https://github.com/Wansmer/treesj" },
 	-- lsp
-	{ src = "https://github.com/j-hui/fidget.nvim" },
+	{
+		src = "https://github.com/j-hui/fidget.nvim",
+		version = vim.version.range("*"),
+	},
 	-- lualine
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	-- flash
@@ -242,8 +245,6 @@ vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/sindrets/diffview.nvim" },
 	{ src = "https://github.com/ruifm/gitlinker.nvim" },
-	-- theme
-	{ src = "https://github.com/sainnhe/gruvbox-material" },
 	-- indent
 	{
 		src = "https://github.com/lukas-reineke/indent-blankline.nvim",

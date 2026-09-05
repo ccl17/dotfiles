@@ -1,5 +1,7 @@
 vim.g.inlay_hints = false
 
+require("fidget").setup()
+
 local function on_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
 
@@ -150,7 +152,7 @@ vim.diagnostic.config({
 	signs = false,
 	underline = true,
 	update_in_insert = true,
-	virtual_text = false,
+	virtual_text = true,
 })
 
 local register_capability = vim.lsp.handlers["client/registerCapability"]

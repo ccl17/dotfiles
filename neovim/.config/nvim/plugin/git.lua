@@ -17,6 +17,11 @@ require("gitsigns").setup({
 
 require("diffview").setup({
 	default_args = { DiffviewFileHistory = { "%" } },
+	keymaps = {
+		view = { q = "<cmd>DiffviewClose<cr>" },
+		file_panel = { q = "<cmd>DiffviewClose<cr>" },
+		file_history_panel = { q = "<cmd>DiffviewClose<cr>" },
+	},
 })
 
 vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Diffview" })
