@@ -227,6 +227,15 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function(ev)
+		local d = ev.data
+		if d.spec.name == "backend-ghostty" and (d.kind == "install" or d.kind == "update") then
+			local r = vim.system({ "make", "bridge" }, { cwd = d.path, text = true }):wait()
+			assert(r.code == 0, r.stderr or "bridge build failed")
+		end
+	end,
+})
 
 -- user commands
 vim.api.nvim_create_user_command("ToggleFormat", function()
@@ -301,4 +310,7 @@ vim.pack.add({
 	{ src = "https://github.com/folke/which-key.nvim" },
 	-- quickfix
 	{ src = "https://github.com/stevearc/quicker.nvim" },
+	-- split navigation
+	{ src = "https://github.com/smart-splits-nvim/smart-splits.nvim" },
+	{ src = "https://github.com/smart-splits-nvim/backend-ghostty" },
 })
