@@ -12,4 +12,5 @@ wk.add({
 	{ "<leader>g", group = "Git" },
 	{ "<leader>t", group = "Tab" },
 	{ "<leader>w", group = "Window" },
+	{ "g", group = "Goto" },
 })

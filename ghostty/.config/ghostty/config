@@ -3,6 +3,7 @@ window-save-state = never
 macos-icon = custom
 macos-custom-icon = ~/.config/ghostty/icon.icns
 unfocused-split-opacity = 0.60
+custom-shader = shaders/cursor_warp.glsl
 
 # Move
 keybind = performable:ctrl+h=goto_split:left

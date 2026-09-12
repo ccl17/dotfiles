@@ -116,11 +116,11 @@ end, { desc = "Escape", expr = true })
 vim.keymap.set("i", "jk", "<esc>", { desc = "escape" })
 
 -- Copy relative file path
-vim.keymap.set("n", "<leader>yp", function()
+vim.keymap.set("n", "<leader>Y", function()
 	local path = vim.fn.expand("%:.")
 	vim.fn.setreg("+", path)
 	vim.notify("Copied: " .. path)
-end, { desc = "Copy relative path" })
+end, { desc = "Copy file path" })
 
 -- Formatting.
 vim.keymap.set("n", "gq", "mzgggqG`z<cmd>delmarks z<cr>zz", { desc = "Format buffer" })
