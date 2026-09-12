@@ -5,9 +5,13 @@ require("fidget").setup({
 })
 
 local function on_attach(client, bufnr)
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
+	vim.keymap.set("n", "<leader>grn", vim.lsp.buf.rename)
 
-	vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { buf = bufnr, desc = "Line diagnostic" })
+	vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { buf = bufnr, desc = "Line diagnostic" })
+
+	vim.keymap.set("n", "<leader>fd", "<cmd>FzfLua diagnostics_document<cr>", { desc = "Document diagnostics" })
+
+	vim.keymap.set("n", "<leader>fD", "<cmd>FzfLua diagnostics_workspace<cr>", { desc = "Workspace diagnostics" })
 
 	vim.keymap.set("n", "[d", function()
 		vim.diagnostic.jump({ count = -1, float = true })
@@ -25,11 +29,20 @@ local function on_attach(client, bufnr)
 		vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = true })
 	end, { buf = bufnr, desc = "Next error" })
 
+	vim.keymap.set("n", "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", { desc = "LSP document symbols" })
+
+	vim.keymap.set(
+		"n",
+		"<leader>fS",
+		"<cmd>FzfLua lsp_workspace_symbols<cr>",
+		{ desc = "LSP workspace document symbols" }
+	)
+
 	if client:supports_method("textDocument/references") then
 		vim.keymap.set(
 			"n",
 			"gr",
-			"<cmd>FzfLua lsp_references jump1=true ignore_current_line=true<cr>",
+			"<cmd>FzfLua lsp_references ignore_current_line=true<cr>",
 			{ buf = bufnr, desc = "LSP references" }
 		)
 	end
@@ -48,7 +61,7 @@ local function on_attach(client, bufnr)
 		vim.keymap.set(
 			"n",
 			"gt",
-			"<cmd>FzfLua lsp_typedefs jump1=true ignore_current_line=true<cr>",
+			"<cmd>FzfLua lsp_typedefs ignore_current_line=true<cr>",
 			{ buf = bufnr, desc = "Go to type definition" }
 		)
 	end
@@ -57,7 +70,7 @@ local function on_attach(client, bufnr)
 		vim.keymap.set(
 			"n",
 			"gi",
-			"<cmd>FzfLua lsp_implementations jump1=true ignore_current_line=true<cr>",
+			"<cmd>FzfLua lsp_implementations ignore_current_line=true<cr>",
 			{ buf = bufnr, desc = "Go to implementations" }
 		)
 	end
@@ -147,10 +160,11 @@ local function on_attach(client, bufnr)
 			end,
 		})
 
-		vim.keymap.set("n", "<leader>hh", "<cmd>ToggleInlayHints<cr>", { desc = "Toggle inlay hints", buf = bufnr })
+		vim.keymap.set("n", "<leader>h", "<cmd>ToggleInlayHints<cr>", { desc = "Toggle inlay hints", buf = bufnr })
 	end
 end
 
+-- diagnostics
 vim.diagnostic.config({
 	severity_sort = true,
 	signs = false,

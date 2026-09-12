@@ -66,12 +66,6 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous result" })
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- Navigate between windows.
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to the left window", remap = true })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to the bottom window", remap = true })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to the top window", remap = true })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to the right window", remap = true })
-
 -- Jump to end of line in insert mode
 vim.keymap.set({ "i", "c" }, "<C-l>", "<C-o>A", { desc = "Jump to the end of the line" })
 
@@ -93,10 +87,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>wh", "<cmd>split<cr>", { desc = "Horizontal Split" })
 vim.keymap.set("n", "<leader>wv", "<cmd>vsplit<cr>", { desc = "Vertical split" })
 vim.keymap.set("n", "<leader>w=", "<cmd>wincmd =<cr>", { desc = "Equalize size" })
-vim.keymap.set("n", "<A-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-vim.keymap.set("n", "<A-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
-vim.keymap.set("n", "<A-j>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-vim.keymap.set("n", "<A-k>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 vim.keymap.set("n", "<c-q>", "<cmd>:close<cr>", { desc = "Close current window" })
 
 -- Tabs
@@ -123,6 +113,7 @@ vim.keymap.set({ "i", "s", "n" }, "<esc>", function()
 	vim.cmd("noh")
 	return "<esc>"
 end, { desc = "Escape", expr = true })
+vim.keymap.set("i", "jk", "<esc>", { desc = "escape" })
 
 -- Copy relative file path
 vim.keymap.set("n", "<leader>yp", function()
