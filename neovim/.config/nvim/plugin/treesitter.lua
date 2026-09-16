@@ -1,6 +1,7 @@
 local langs = {
 	"bash",
 	"go",
+	"graphql",
 	"javascript",
 	"json",
 	"json5",
