@@ -5,7 +5,7 @@ splits.setup({
 })
 require("ghostty-smart-splits").setup({
 	key_table = "nvim",
-	bridge = true,
+	transport = "persistent",
 })
 
 vim.keymap.set("n", "<C-h>", splits.move_cursor_left)

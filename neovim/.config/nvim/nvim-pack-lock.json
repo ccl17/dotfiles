@@ -5,7 +5,7 @@
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "backend-ghostty": {
-      "rev": "6a37d657f10d09df2c66f004a3889d139fa88d3b",
+      "rev": "02afb3e48a426221043c4b6d8c08dd874e27a9ce",
       "src": "https://github.com/smart-splits-nvim/backend-ghostty"
     },
     "blink.cmp": {
@@ -38,7 +38,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "05e44d38de0a79c11fba5f7bf8138791b1dbdd1e",
+      "rev": "02bc882f208f3481aa959dbbee8ce5edad2fd8b2",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "fzf-lua-frecency.nvim": {
@@ -50,7 +50,7 @@
       "src": "https://github.com/ruifm/gitlinker.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "5eb287fdbd523c3a1b3d01f304f43570e73e259b",
+      "rev": "8d79f2410c76e62b92e51c28c82e28c1c5a3daeb",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "gruvbox-material": {
@@ -111,7 +111,7 @@
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "schemastore.nvim": {
-      "rev": "71cd0300fcf13179978e6a6b1f2fc2db677f9c94",
+      "rev": "ab094b7f788231fe9b68deac78c3d512302c58a6",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "smart-splits.nvim": {

@@ -1,6 +1,7 @@
 require("luasnip.loaders.from_vscode").lazy_load()
 
 local blink = require("blink.cmp")
+blink.build():pwait()
 blink.setup({
 	cmdline = { enabled = false },
 	completion = {
