@@ -10,6 +10,7 @@ wk.add({
 	{ "<leader>b", group = "Buffer" },
 	{ "<leader>f", group = "Find" },
 	{ "<leader>g", group = "Git" },
+	{ "<leader>p", group = "VimPack" },
 	{ "<leader>t", group = "Tab" },
 	{ "<leader>w", group = "Window" },
 	{ "g", group = "Goto" },

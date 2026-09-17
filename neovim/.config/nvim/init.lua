@@ -244,6 +244,15 @@ end, { desc = "Toggle inlay hints", nargs = 0 })
 
 vim.api.nvim_create_user_command("ToggleDiagnostics", function() end, { desc = "Toggle diagnostics virtual text" })
 
+-- vim pack
+
+vim.keymap.set("n", "<leader>pu", function()
+	vim.pack.update(nil, { force = true })
+end, { desc = "VimPack Update" })
+vim.keymap.set("n", "<leader>ps", function()
+	vim.pack.update(nil, { target = "lockfile" })
+end, { desc = "VimPack Sync Lockfile" })
+
 vim.pack.add({
 	-- dependencies
 	{ src = "https://github.com/b0o/schemastore.nvim" },
