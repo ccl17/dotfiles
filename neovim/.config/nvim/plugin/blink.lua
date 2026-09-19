@@ -29,7 +29,7 @@ blink.setup({
 			},
 		},
 	},
-	fuzzy = { implementation = "prefer_rust_with_warning" },
+	fuzzy = { implementation = "rust" },
 	keymap = {
 		["<cr>"] = { "accept", "fallback" },
 		["<tab>"] = { "snippet_forward", "fallback" },
