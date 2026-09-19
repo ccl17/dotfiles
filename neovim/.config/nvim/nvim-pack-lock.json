@@ -11,7 +11,7 @@
     "blink.cmp": {
       "rev": "473c928d8b9b5b3f638cd085a01899972cf205c6",
       "src": "https://github.com/saghen/blink.cmp",
-      "version": "2.0.0 - 3.0.0"
+      "version": "1.0.0 - 2.0.0"
     },
     "blink.lib": {
       "rev": "fd9a48ebbe6ec30d5dfcc5b42c243941ccdca1aa",

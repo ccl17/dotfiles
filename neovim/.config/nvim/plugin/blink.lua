@@ -1,4 +1,17 @@
 require("luasnip.loaders.from_vscode").lazy_load()
+local luasnip = require("luasnip")
+local types = require("luasnip.util.types")
+luasnip.setup({
+	history = true,
+	update_events = { "TextChanged", "TextChangedI" },
+	ext_opts = {
+		[types.choiceNode] = {
+			active = {
+				virt_text = { { "<-", "Error" } },
+			},
+		},
+	},
+})
 
 local blink = require("blink.cmp")
 blink.build():pwait()
@@ -10,6 +23,7 @@ blink.setup({
 				columns = {
 					{ "label", "label_description", gap = 1 },
 					{ "kind_icon", "kind", gap = 1 },
+					{ "source_name", gap = 1 },
 				},
 			},
 		},
@@ -32,15 +46,16 @@ blink.setup({
 	fuzzy = { implementation = "rust" },
 	keymap = {
 		["<cr>"] = { "accept", "fallback" },
-		["<tab>"] = { "snippet_forward", "fallback" },
-		["<s-tab>"] = { "snippet_backward", "fallback" },
-		["<C-c>"] = { "show" },
-		["<C-d>"] = { "show_documentation", "hide_documentation" },
-		["<C-e>"] = { "hide", "fallback" },
-		["<C-j>"] = { "select_next", "fallback" },
-		["<C-k>"] = { "select_prev", "fallback" },
+		["<c-n>"] = { "snippet_forward", "fallback" },
+		["<c-p>"] = { "snippet_backward", "fallback" },
+		["<c-c>"] = { "show" },
+		["<c-d>"] = { "show_documentation", "hide_documentation" },
+		["<c-e>"] = { "hide", "fallback" },
+		["<c-b>"] = { "scroll_documentation_up", "fallback" },
+		["<c-f>"] = { "scroll_documentation_down", "fallback" },
 	},
-	-- snippets = { preset = "luasnip" },
+	snippets = { preset = "luasnip" },
+	signature = { enabled = true },
 	sources = {
 		-- Disable some sources in comments and strings.
 		default = function()
