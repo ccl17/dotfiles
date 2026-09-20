@@ -24,8 +24,8 @@ HISTCONTROL=ignoreboth # consecutive duplicates & commands starting with space a
 # binds
 bindkey "^a" beginning-of-line
 bindkey "^e" end-of-line
-bindkey "^j" backward-word
-bindkey "^k" forward-word
+bindkey "^[f" forward-word
+bindkey "^[b" backward-word
 
 # fzf setup
 source <(fzf --zsh)

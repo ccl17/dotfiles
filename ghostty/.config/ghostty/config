@@ -5,7 +5,11 @@ macos-custom-icon = ~/.config/ghostty/icon.icns
 unfocused-split-opacity = 0.60
 custom-shader = shaders/cursor_warp.glsl
 
-# Move
+# Move cursor
+keybind = super+left=text:\x01
+keybind = super+right=text:\x05
+
+# Navigate
 keybind = performable:ctrl+h=goto_split:left
 keybind = performable:ctrl+j=goto_split:down
 keybind = performable:ctrl+k=goto_split:up
