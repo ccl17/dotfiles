@@ -6,7 +6,6 @@ luasnip.setup({
 })
 
 local blink = require("blink.cmp")
-blink.build():pwait()
 blink.setup({
 	cmdline = { enabled = false },
 	completion = {

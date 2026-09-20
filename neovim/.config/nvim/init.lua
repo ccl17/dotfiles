@@ -255,7 +255,6 @@ vim.pack.add({
 		src = "https://github.com/L3MON4D3/LuaSnip",
 		module_name = "luasnip",
 	},
-	{ src = "https://github.com/saghen/blink.lib" },
 	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
 	-- formatting
 	{ src = "https://github.com/stevearc/conform.nvim" },
