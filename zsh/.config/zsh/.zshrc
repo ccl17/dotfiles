@@ -27,6 +27,9 @@ bindkey "^e" end-of-line
 bindkey "^[f" forward-word
 bindkey "^[b" backward-word
 
+# disable normal mode
+bindkey -rM viins '\e'
+
 # fzf setup
 source <(fzf --zsh)
 

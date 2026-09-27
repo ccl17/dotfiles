@@ -21,6 +21,9 @@ keybind = performable:alt+j=resize_split:down,30
 keybind = performable:alt+k=resize_split:up,30
 keybind = performable:alt+l=resize_split:right,30
 
+# editing with zsh
+keybind = opt+backspace=text:\x17
+
 # Inside Neovim.
 keybind = nvim/
 # Move
