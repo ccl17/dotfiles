@@ -44,6 +44,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+require("treesitter-context").setup({
+	enable = true,
+	max_lines = 3,
+	trim_scope = "inner",
+	min_window_height = 20,
+})
+vim.keymap.set("n", "[c", function()
+	require("treesitter-context").go_to_context(vim.v.count1)
+end, { desc = "Jump to context", silent = true })
+
 require("nvim-treesitter-textobjects").setup({})
 vim.keymap.set({ "x", "o" }, "af", function()
 	require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")

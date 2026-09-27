@@ -263,6 +263,7 @@ vim.pack.add({
 	{ src = "https://github.com/elanmed/fzf-lua-frecency.nvim" },
 	-- treesitter
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
 	{ src = "https://github.com/Wansmer/treesj" },
 	-- lsp
