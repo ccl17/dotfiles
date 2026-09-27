@@ -1,6 +1,7 @@
 require("conform").setup({
 	formatters_by_ft = {
 		go = { "goimports" },
+		graphql = { "prettierd" },
 		javascript = { "prettierd" },
 		javascriptreact = { "prettierd" },
 		json = { "prettierd" },
